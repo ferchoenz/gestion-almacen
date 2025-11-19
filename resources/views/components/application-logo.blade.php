@@ -1,0 +1,1 @@
+<img {{ $attributes }} src="{{ asset('images/sempra_logo.png') }}" alt="Logo de la Empresa">
