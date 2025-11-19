@@ -54,18 +54,3 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 
 # Comando de arranque
 CMD ["apache2-foreground"]
-```
-
----
-
-### 📦 Paso 2: Subir el cambio a GitHub
-
-Ahora tenemos que enviar esta "receta" a tu repositorio para que Render la vea.
-
-1.  Abre tu **Terminal 1**.
-2.  Ejecuta estos 3 comandos:
-
-```bash
-git add .
-git commit -m "Agregar Dockerfile para deploy"
-git push
