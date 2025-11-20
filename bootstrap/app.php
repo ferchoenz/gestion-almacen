@@ -11,12 +11,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-    //
-    // 👇 ¡AÑADE ESTA LÍNEA AQUÍ DENTRO! 👇
-    $middleware->alias([
-        'role' => \App\Http\Middleware\CheckRole::class,
-    ]);
-})
-    ->withExceptions(function (Exceptions $exceptions): void {
+        
+        // 1. Registramos nuestro middleware de Roles (que ya tenías)
+        $middleware->alias([
+            'role' => \App\Http\Middleware\CheckRole::class,
+        ]);
+
+        // 2. ¡ESTA ES LA SOLUCIÓN AL ERROR DE SEGURIDAD!
+        // Le decimos a Laravel que confíe en el proxy de Render
+        $middleware->trustProxies(at: '*');
+    })
+    ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
