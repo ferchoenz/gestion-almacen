@@ -110,23 +110,55 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-// RUTA DE MIGRACIÓN DE EMERGENCIA (VERSIÓN BLINDADA)
-Route::get('/force-migrate', function () {
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\Role;
+
+// RUTA DE INSTALACIÓN DE EMERGENCIA
+Route::get('/instalar-todo', function () {
     try {
-        // Deshabilitamos el límite de tiempo de ejecución para evitar timeouts
-        set_time_limit(300);
+        // 1. Forzar la creación de las tablas (Migraciones)
+        Artisan::call('migrate', ['--force' => true]);
+        $migracion = Artisan::output();
+
+        // 2. Forzar el llenado de catálogos (Roles y Terminales)
+        // Usamos --force porque estamos en producción
+        Artisan::call('db:seed', ['--force' => true]);
+        $seeds = Artisan::output();
+
+        // 3. Crear el Usuario Administrador
+        // Primero buscamos el rol para no fallar
+        $role = Role::where('name', 'Administrador')->first();
         
-        // Ejecutamos migrate:fresh para borrar todo y empezar de cero (limpio)
-        // O solo migrate si quieres conservar datos (pero fresh es más seguro si está roto)
-        // Usaremos migrate normal con --force
-        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-        $migrateOutput = \Illuminate\Support\Facades\Artisan::output();
+        if (!$role) {
+            return "Error crítico: No se crearon los roles. Revisa los Seeders.";
+        }
 
-        // Ejecutamos los seeders para tener roles y terminales
-        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
-        $seedOutput = \Illuminate\Support\Facades\Artisan::output();
+        // Verificamos si ya existe para no duplicar
+        if (!User::where('email', 'admin@sempra.com')->exists()) {
+            User::create([
+                'name' => 'Admin General',
+                'email' => 'admin@sempra.com',
+                'password' => Hash::make('12345678'),
+                'role_id' => $role->id,
+                'terminal_id' => null
+            ]);
+            $userStatus = "Usuario Admin creado (admin@sempra.com / 12345678)";
+        } else {
+            $userStatus = "El usuario Admin ya existía.";
+        }
 
-        return "<h1>MIGRACIÓN EXITOSA</h1><pre>Migrate:\n$migrateOutput\n\nSeed:\n$seedOutput</pre>";
+        return "<h1>INSTALACIÓN COMPLETADA</h1>
+                <p><strong>Estado Usuario:</strong> $userStatus</p>
+                <hr>
+                <h3>Log de Migraciones:</h3>
+                <pre>$migracion</pre>
+                <h3>Log de Seeds:</h3>
+                <pre>$seeds</pre>
+                <br>
+                <a href='/login'>IR AL LOGIN</a>";
+
     } catch (\Exception $e) {
         return "<h1>ERROR FATAL</h1><pre>" . $e->getMessage() . "</pre>";
     }
