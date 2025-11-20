@@ -109,3 +109,40 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+// ============================================================================
+// RUTA TEMPORAL DE EMERGENCIA PARA CREAR ADMIN
+// (BORRAR ESTA RUTA INMEDIATAMENTE DESPUÉS DE USARLA)
+// ============================================================================
+Route::get('/crear-admin-de-emergencia', function () {
+    
+    try {
+        // 1. Buscamos el rol de Administrador
+        // Asegúrate de que el Seeder ya corrió. Si no, esta línea fallará.
+        $role = \App\Models\Role::where('name', 'Administrador')->first();
+        
+        if (!$role) {
+            return "ERROR CRÍTICO: No existe el rol 'Administrador'. ¿Ejecutaste los seeders?";
+        }
+
+        // 2. Verificamos si el usuario ya existe para no duplicarlo
+        $existingUser = \App\Models\User::where('email', 'lenzastiga@sempraglobal.com.mx')->first();
+        if ($existingUser) {
+            return "AVISO: El usuario lenzastiga@sempraglobal.com.mx YA EXISTE. No se hizo nada.";
+        }
+
+        // 3. Creamos el usuario
+        \App\Models\User::create([
+            'name' => 'Fernando Enzastiga',
+            'email' => 'lenzastiga@sempraglobal.com.mx', // <--- CÁMBIALO SI QUIERES
+            'password' => bcrypt('12345678'), // <--- CÁMBIALO SI QUIERES
+            'role_id' => $role->id,
+            'terminal_id' => null
+        ]);
+
+        return "¡ÉXITO! Usuario Administrador creado correctamente. Ahora ve al Login.";
+
+    } catch (\Exception $e) {
+        return "OCURRIÓ UN ERROR: " . $e->getMessage();
+    }
+});
