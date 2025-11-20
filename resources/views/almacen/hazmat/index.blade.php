@@ -127,7 +127,7 @@
                                     <td class="px-6 py-4 align-top">
                                         <div class="font-bold text-gray-900 dark:text-white text-base max-w-xs break-words">{{ $product->product_name }}</div>
                                         <div class="text-xs text-gray-500 mt-1 max-w-xs break-words">{{ $product->chemical_name }}</div>
-                                        <div class="text-xs text-gray-400 mt-1 max-w-xs break-words">CAS: {{ $product->cas_number }}</div>
+                                        <!--<div class="text-xs text-gray-400 mt-1 max-w-xs break-words">CAS: {{ $product->cas_number }}</div>-->
                                     </td>
                                     
                                     <td class="px-6 py-4 font-bold align-top">{{ $product->terminal->name ?? 'N/A' }}</td>
