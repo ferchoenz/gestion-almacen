@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use Barryvdh\DomPDF\Facade\Pdf;
-use App\Exports\HazmatProductsExport;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\HazmatProductsExport; // Importar Exportador
+use Maatwebsite\Excel\Facades\Excel;  // Facade Excel
+use Barryvdh\DomPDF\Facade\Pdf;       // Facade PDF
 
 class HazmatProductController extends Controller
 {
@@ -26,7 +26,7 @@ class HazmatProductController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-
+        
         // Filtros
         $search = $request->input('search');
         $filterTerminal = $request->input('terminal_id');
@@ -47,10 +47,10 @@ class HazmatProductController extends Controller
 
         // 2. Buscador de Texto
         if ($search) {
-            $query->where(function ($q) use ($search) {
+            $query->where(function($q) use ($search) {
                 $q->where('product_name', 'like', "%{$search}%")
-                    ->orWhere('chemical_name', 'like', "%{$search}%")
-                    ->orWhere('cas_number', 'like', "%{$search}%");
+                  ->orWhere('chemical_name', 'like', "%{$search}%")
+                  ->orWhere('cas_number', 'like', "%{$search}%");
             });
         }
 
@@ -64,7 +64,7 @@ class HazmatProductController extends Controller
 
         // Paginación (15 por página)
         $products = $query->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
-
+        
         // Datos para los selects de filtros
         $terminals = Terminal::all();
 
@@ -75,9 +75,9 @@ class HazmatProductController extends Controller
     {
         $user = Auth::user();
         // Pasamos terminales según rol
-        $terminals = $user->role->name === 'Administrador'
-            ? Terminal::all()
-            : Terminal::where('id', $user->terminal_id)->get();
+        $terminals = $user->role->name === 'Administrador' 
+                        ? Terminal::all() 
+                        : Terminal::where('id', $user->terminal_id)->get();
 
         return view('almacen.hazmat.create', compact('terminals'));
     }
@@ -91,7 +91,13 @@ class HazmatProductController extends Controller
             'terminal_id' => ['required', $user->role->name === 'Administrador' ? Rule::exists('terminals', 'id') : Rule::in([$user->terminal_id])],
             'product_name' => 'required|string|max:255',
             'chemical_name' => 'required|string|max:255',
-            'cas_number' => 'nullable|string|max:50',
+            'cas_number' => 'nullable|string|max:255',
+            
+            // Nuevos campos de fabricante
+            'manufacturer' => 'nullable|string|max:255',
+            'emergency_phone' => 'nullable|string|max:50',
+            'address' => 'nullable|string|max:500',
+
             'location' => 'required|string',
             'physical_state' => 'required|string',
             'max_quantity' => 'required|numeric',
@@ -106,7 +112,7 @@ class HazmatProductController extends Controller
         ]);
 
         if ($request->hasFile('hds_file')) {
-            $path = $request->file('hds_file')->store('hazmat/hds');
+            $path = $request->file('hds_file')->store('hazmat/hds'); 
             $validated['hds_path'] = $path;
         }
 
@@ -125,9 +131,7 @@ class HazmatProductController extends Controller
 
     public function show(HazmatProduct $hazmat)
     {
-        // Aquí podrías crear una vista 'show.blade.php' si quieres ver el detalle completo
-        // Por ahora reutilizamos edit o creamos una vista simple.
-        // Para simplificar, redirigiremos a Edit en modo lectura o usaremos Edit directamente.
+        // Reutilizamos la vista de edición en modo lectura o permitimos editar directamente
         return view('almacen.hazmat.edit', ['product' => $hazmat, 'terminals' => Terminal::all()]);
     }
 
@@ -135,19 +139,24 @@ class HazmatProductController extends Controller
     {
         $user = Auth::user();
         $terminals = $user->role->name === 'Administrador' ? Terminal::all() : Terminal::where('id', $user->terminal_id)->get();
-
+        
         return view('almacen.hazmat.edit', ['product' => $hazmat, 'terminals' => $terminals]);
     }
 
     public function update(Request $request, HazmatProduct $hazmat)
     {
         $user = Auth::user();
-
+        
         $validated = $request->validate([
             'terminal_id' => ['required', $user->role->name === 'Administrador' ? Rule::exists('terminals', 'id') : Rule::in([$user->terminal_id])],
             'product_name' => 'required|string|max:255',
             'chemical_name' => 'required|string|max:255',
-            'cas_number' => 'nullable|string|max:50',
+            'cas_number' => 'nullable|string|max:255',
+            
+            'manufacturer' => 'nullable|string|max:255',
+            'emergency_phone' => 'nullable|string|max:50',
+            'address' => 'nullable|string|max:500',
+
             'location' => 'required|string',
             'physical_state' => 'required|string',
             'max_quantity' => 'required|numeric',
@@ -180,6 +189,7 @@ class HazmatProductController extends Controller
 
             if (!$analysis) return response()->json(['error' => 'No se pudo analizar.'], 500);
             return response()->json($analysis);
+
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error: ' . $e->getMessage()], 500);
         }
@@ -205,6 +215,10 @@ class HazmatProductController extends Controller
         }
         return Storage::response($hazmat->hds_path);
     }
+
+    /**
+     * Exportar a Excel
+     */
     public function export(Request $request)
     {
         return Excel::download(new HazmatProductsExport($request), 'listado_maestro_hazmat.xlsx');

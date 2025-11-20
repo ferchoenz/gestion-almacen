@@ -16,6 +16,9 @@ class HazmatProduct extends Model
         'product_name',
         'chemical_name',
         'cas_number',
+        'manufacturer',     // NUEVO
+        'emergency_phone',  // NUEVO
+        'address',          // NUEVO
         'location',
         'physical_state',
         'max_quantity',

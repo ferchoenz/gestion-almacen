@@ -86,7 +86,7 @@ class MaterialReceptionController extends Controller
             'purchase_order' => ['required', 'string', 'max:100'],
             'reception_date' => ['required', 'date'],
             'quantity' => ['required', 'numeric', 'min:0'],
-            'sap_confirmation' => ['nullable', 'required_if:material_type,SPARE_PART', 'string', 'max:100'],
+            'sap_confirmation' => ['nullable', 'string', 'max:100'],
             'item_number' => ['nullable', 'required_if:material_type,SPARE_PART', 'string', 'max:100'],
             'storage_location' => ['nullable', 'string', 'max:255'],
             'quality_certificate' => ['nullable', 'boolean'], 

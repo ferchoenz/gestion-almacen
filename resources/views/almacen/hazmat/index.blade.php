@@ -114,6 +114,7 @@
                                         <div class="text-xs text-gray-500">{{ $product->chemical_name }}</div>
                                         <div class="text-xs text-gray-400">CAS: {{ $product->cas_number }}</div>
                                     </td>
+                                    
                                     <td class="px-6 py-4 font-bold">{{ $product->terminal->name ?? 'N/A' }}</td>
                                     <td class="px-6 py-4">{{ $product->location }}</td>
                                     
