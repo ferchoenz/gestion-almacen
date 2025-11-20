@@ -16,6 +16,7 @@
                     @endif
 
                     <div class="flex flex-col gap-4">
+                        
                         <!-- FILA 1 -->
                         <div class="flex flex-col md:flex-row justify-between gap-4">
                             <div class="relative flex-grow md:max-w-lg">
@@ -31,15 +32,14 @@
                                     Excel
                                 </a>
 
-                                <!-- BOTÓN ROJO PARA ELIMINADOS -->
+                                <!-- Toggle Papelera -->
                                 @if($viewDeleted)
                                     <a href="{{ route('hazmat.index') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                         Ver Activos
                                     </a>
                                 @else
-                                    <a href="{{ route('hazmat.index', ['view_deleted' => 1]) }}" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                                        Eliminados
+                                    <a href="{{ route('hazmat.index', ['view_deleted' => 1]) }}" class="inline-flex items-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                        Ver Eliminados
                                     </a>
                                 @endif
 
@@ -54,7 +54,7 @@
 
                         <!-- FILA 2 -->
                         <div class="flex flex-wrap items-center gap-2 bg-white dark:bg-gray-800 p-3 rounded-md shadow-sm border border-gray-200 dark:border-gray-600">
-                            <span class="text-xs font-bold text-gray-500 uppercase mr-2 hidden md:inline">Filtrar por:</span>
+                            <span class="text-xs font-bold text-gray-500 uppercase mr-2">Filtrar por:</span>
                             
                             @if(Auth::user()->role->name === 'Administrador')
                                 <select name="terminal_id" class="text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white h-9 py-1">
@@ -103,7 +103,7 @@
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th class="px-6 py-3 w-1/3">Producto</th> <!-- Ancho ajustado -->
+                                    <th class="px-6 py-3 w-1/3">Producto</th>
                                     <th class="px-6 py-3">Terminal</th>
                                     <th class="px-6 py-3">Ubicación</th>
                                     
@@ -122,7 +122,6 @@
                                 @forelse ($products as $product)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td class="px-6 py-4 align-top">
-                                        <!-- AJUSTE VISUAL: max-w-xs y break-words para evitar que se amontone -->
                                         <div class="font-bold text-gray-900 dark:text-white text-base max-w-xs break-words">{{ $product->product_name }}</div>
                                         <div class="text-xs text-gray-500 mt-1 max-w-xs break-words">{{ $product->chemical_name }}</div>
                                         <div class="text-xs text-gray-400 mt-1">CAS: {{ $product->cas_number }}</div>
@@ -134,6 +133,7 @@
                                     @if($viewDeleted)
                                         <td class="px-6 py-4 align-top">{{ $product->deleted_at->format('d/m/Y H:i') }}</td>
                                     @else
+                                        <!-- Status -->
                                         <td class="px-6 py-4 align-top">
                                             @if($product->is_active)
                                                 <span class="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
@@ -148,6 +148,7 @@
                                             @endif
                                         </td>
 
+                                        <!-- Palabra Advertencia -->
                                         <td class="px-6 py-4 align-top">
                                             @if($product->signal_word == 'PELIGRO')
                                                 <span class="bg-red-100 text-red-800 text-xs font-bold px-2 py-1 rounded border border-red-200">PELIGRO</span>
@@ -158,9 +159,10 @@
                                             @endif
                                         </td>
 
+                                        <!-- Pictogramas -->
                                         <td class="px-6 py-4 text-xl align-top">
                                             @if($product->pictograms)
-                                                <div class="flex flex-wrap gap-1 max-w-[100px]"> <!-- Contenedor flexible para pictogramas -->
+                                                <div class="flex flex-wrap gap-1 max-w-[100px]">
                                                     @foreach($product->pictograms as $pic)
                                                         @switch($pic)
                                                             @case('flame') <span title="Inflamable">🔥</span> @break
@@ -178,6 +180,7 @@
                                             @endif
                                         </td>
 
+                                        <!-- HDS Link -->
                                         <td class="px-6 py-4 align-top">
                                             @if($product->hds_path)
                                                 <a href="{{ route('hazmat.view-hds', $product) }}" target="_blank" class="text-blue-600 hover:underline flex items-center text-sm">
@@ -189,6 +192,7 @@
                                             @endif
                                         </td>
                                         
+                                        <!-- Acciones -->
                                         <td class="px-6 py-4 text-right whitespace-nowrap align-top">
                                             <div class="flex justify-end items-center gap-3">
                                                 <a href="{{ route('hazmat.label', $product) }}" target="_blank" class="text-purple-600 hover:text-purple-900" title="Etiqueta">
@@ -218,6 +222,7 @@
                         </table>
                     </div>
                     
+                    <!-- Paginación -->
                     <div class="mt-4">
                         {{ $products->links() }}
                     </div>
@@ -225,12 +230,12 @@
             </div>
         </div>
 
-        <!-- MODAL DE ELIMINACIÓN (ANIMADO) -->
+        <!-- MODAL DE ELIMINACIÓN (Con corrección x-bind) -->
         <div x-show="showCancelModal" class="fixed inset-0 z-50 overflow-y-auto" style="display: none;">
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div class="fixed inset-0 transition-opacity" @click="showCancelModal = false"><div class="absolute inset-0 bg-gray-500 opacity-75"></div></div>
                 
-                <!-- x-data local para manejar el estado de envío del formulario -->
+                <!-- Añadimos x-data local para controlar la animación de este formulario -->
                 <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                      x-data="{ submitting: false }">
                     
@@ -241,13 +246,15 @@
                         
                         <div class="mt-6">
                             <x-input-label for="cancellation_reason" value="{{ __('Motivo de Eliminación') }}" />
-                            <x-text-input id="cancellation_reason" name="cancellation_reason" type="text" class="mt-1 block w-full" placeholder="Ingresa el motivo..." required />
+                            <x-text-input id="cancellation_reason" name="cancellation_reason" type="text" class="mt-1 block w-full" placeholder="Motivo..." required />
                         </div>
 
                         <div class="mt-6 flex justify-end">
-                            <x-secondary-button type="button" @click="showCancelModal = false" :disabled="submitting">{{ __('Cancelar') }}</x-secondary-button>
+                            <!-- CORRECCIÓN AQUÍ: x-bind:disabled -->
+                            <x-secondary-button type="button" @click="showCancelModal = false" x-bind:disabled="submitting">{{ __('Cancelar') }}</x-secondary-button>
                             
-                            <x-danger-button class="ms-3" :class="{ 'opacity-50 cursor-not-allowed': submitting }" :disabled="submitting">
+                            <!-- CORRECCIÓN AQUÍ: x-bind:class y x-bind:disabled -->
+                            <x-danger-button class="ms-3" x-bind:class="{ 'opacity-50 cursor-not-allowed': submitting }" x-bind:disabled="submitting">
                                 <span x-show="!submitting">{{ __('Eliminar') }}</span>
                                 <span x-show="submitting" class="flex items-center">
                                     <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
