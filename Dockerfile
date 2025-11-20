@@ -1,5 +1,5 @@
 # Usamos PHP 8.2 con Apache
-FROM php:8.2-apache
+FROM php:8.3-apache
 
 # 1. Instalar dependencias del sistema
 # AGREGAMOS: libzip-dev (necesario para la extensión zip de PHP)
