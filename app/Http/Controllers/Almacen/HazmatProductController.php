@@ -35,7 +35,6 @@ class HazmatProductController extends Controller
 
         $query = HazmatProduct::with('terminal');
 
-        // Seguridad por Terminal
         if ($user->role->name !== 'Administrador') {
             $query->where('terminal_id', $user->terminal_id);
         } else {
@@ -44,7 +43,6 @@ class HazmatProductController extends Controller
             }
         }
 
-        // Buscador
         if ($search) {
             $query->where(function($q) use ($search) {
                 $q->where('product_name', 'like', "%{$search}%")
@@ -53,10 +51,10 @@ class HazmatProductController extends Controller
             });
         }
 
-        // Filtros
         if ($filterState) $query->where('physical_state', $filterState);
         if ($filterSignal) $query->where('signal_word', $filterSignal);
         
+        // Lógica para ver eliminados
         if ($viewDeleted) {
             $query->onlyTrashed();
         }
@@ -76,6 +74,9 @@ class HazmatProductController extends Controller
 
     public function store(Request $request)
     {
+        // Simulación de retardo (opcional, para ver la animación)
+        // sleep(1);
+
         $user = Auth::user();
         $validated = $request->validate([
             'terminal_id' => ['required', $user->role->name === 'Administrador' ? Rule::exists('terminals', 'id') : Rule::in([$user->terminal_id])],
@@ -109,7 +110,6 @@ class HazmatProductController extends Controller
         }
 
         $validated['is_active'] = $request->has('is_active');
-
         HazmatProduct::create($validated);
 
         return redirect()->route('hazmat.index')->with('success', 'Producto químico registrado correctamente.');
@@ -157,10 +157,15 @@ class HazmatProductController extends Controller
 
     public function destroy(Request $request, HazmatProduct $hazmat)
     {
-        $request->validate(['cancellation_reason' => 'required|string|max:255']);
+        // Validación estricta del motivo
+        $request->validate([
+            'cancellation_reason' => 'required|string|max:255',
+        ]);
+        
         $hazmat->cancellation_reason = $request->cancellation_reason;
         $hazmat->save();
         $hazmat->delete();
+
         return redirect()->route('hazmat.index')->with('success', 'Material eliminado correctamente.');
     }
 
@@ -180,27 +185,17 @@ class HazmatProductController extends Controller
 
     public function downloadLabel(HazmatProduct $hazmat)
     {
-        // IMPORTANTE: Pasamos la variable como 'product'
         $pdf = Pdf::loadView('almacen.hazmat.label_pdf', ['product' => $hazmat]);
         $pdf->setPaper('letter', 'landscape');
         return $pdf->stream('etiqueta.pdf');
     }
 
-    /**
-     * Ver HDS (FUNCIÓN CORREGIDA)
-     */
     public function viewHds(HazmatProduct $hazmat)
     {
-        // 1. Verificamos si existe en el disco 'public'
         if (!$hazmat->hds_path || !Storage::disk('public')->exists($hazmat->hds_path)) {
             abort(404, 'Archivo HDS no encontrado en el servidor.');
         }
-        
-        // 2. Obtenemos la ruta absoluta del sistema
-        $path = Storage::disk('public')->path($hazmat->hds_path);
-
-        // 3. Usamos response()->file() para servir el PDF correctamente
-        return response()->file($path);
+        return response()->file(Storage::disk('public')->path($hazmat->hds_path));
     }
 
     public function export(Request $request)
