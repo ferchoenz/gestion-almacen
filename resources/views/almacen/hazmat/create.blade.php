@@ -5,10 +5,13 @@
         </h2>
     </x-slot>
 
+    <!-- x-data controla el estado del formulario y la notificación -->
     <div class="py-12" x-data="hazmatForm()">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 relative">
             
-            <!-- TOAST DE ÉXITO -->
+            <!-- ========================================== -->
+            <!-- NOTIFICACIÓN FLOTANTE (TOAST) DE ÉXITO -->
+            <!-- ========================================== -->
             <div x-show="showSuccess" 
                  x-transition:enter="transform ease-out duration-300 transition"
                  x-transition:enter-start="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
@@ -21,31 +24,40 @@
                 <div class="p-4">
                     <div class="flex items-start">
                         <div class="flex-shrink-0">
+                            <!-- Icono Check Verde -->
                             <svg class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </div>
                         <div class="ml-3 w-0 flex-1 pt-0.5">
-                            <p class="text-sm font-medium text-gray-900 dark:text-gray-100">¡Análisis Completado!</p>
-                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">La IA ha llenado el formulario. Por favor revisa los datos.</p>
+                            <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
+                                ¡Análisis Completado!
+                            </p>
+                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                El sistema ha llenado el formulario. Por favor revisa los datos antes de guardar.
+                            </p>
                         </div>
                         <div class="ml-4 flex-shrink-0 flex">
                             <button @click="showSuccess = false" class="bg-white dark:bg-gray-800 rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none">
                                 <span class="sr-only">Cerrar</span>
-                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SECCIÓN IA -->
+            <!-- SECCIÓN DE ANÁLISIS CON IA -->
             <div class="bg-indigo-50 dark:bg-indigo-900 p-6 rounded-lg mb-6 border border-indigo-200 dark:border-indigo-700 shadow-sm">
                 <h3 class="text-lg font-bold text-indigo-800 dark:text-indigo-200 mb-2 flex items-center">
                     <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    Autocompletar con nuestra IA
+                    Autocompletar datos automaticamente
                 </h3>
-                <p class="text-sm text-indigo-600 dark:text-indigo-300 mb-4">Sube la Hoja de Datos de Seguridad (HDS) en PDF.</p>
+                <p class="text-sm text-indigo-600 dark:text-indigo-300 mb-4">
+                    Sube la Hoja de Datos de Seguridad (HDS) en PDF y el sistema extraerá la información automáticamente.
+                </p>
 
                 <div class="flex gap-4 items-center">
                     <input type="file" x-ref="hdsInput" accept=".pdf" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
@@ -60,28 +72,32 @@
                 <p x-show="errorMessage" x-text="errorMessage" class="text-red-600 text-sm mt-2 font-bold"></p>
             </div>
 
-            <!-- FORMULARIO -->
+            <!-- FORMULARIO PRINCIPAL -->
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     
                     <form method="POST" action="{{ route('hazmat.store') }}" enctype="multipart/form-data">
                         @csrf
 
-                        <!-- SWITCH DE STATUS -->
+                        <!-- SWITCH DE STATUS (Activo por defecto) -->
                         <div class="flex justify-end mb-6 border-b border-gray-200 dark:border-gray-700 pb-4">
                             <label class="inline-flex items-center cursor-pointer">
                                 <input type="checkbox" name="is_active" value="1" class="sr-only peer" checked>
                                 <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
-                                <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Material Activo</span>
+                                <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Material Activo
+                                </span>
                             </label>
                         </div>
 
-                        <!-- CAMPO TERMINAL (NUEVO) -->
+                        <!-- CAMPO TERMINAL -->
                         <div class="mb-6">
                             <x-input-label for="terminal_id" :value="__('Terminal')" />
                             <select id="terminal_id" name="terminal_id" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm font-bold bg-gray-50 dark:bg-gray-700" required>
                                 @foreach($terminals as $terminal)
-                                    <option value="{{ $terminal->id }}" {{ count($terminals) == 1 ? 'selected' : '' }}>{{ $terminal->name }}</option>
+                                    <option value="{{ $terminal->id }}" {{ count($terminals) == 1 ? 'selected' : '' }}>
+                                        {{ $terminal->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -89,20 +105,38 @@
                         <!-- DATOS DEL PRODUCTO -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <div>
-                                <x-input-label for="product_name" :value="__('Nombre Comercial')" />
+                                <x-input-label for="product_name" :value="__('Nombre Comercial del Producto')" />
                                 <x-text-input id="product_name" class="block mt-1 w-full bg-indigo-50 dark:bg-gray-700" type="text" name="product_name" x-model="form.product_name" required />
                             </div>
                             <div>
-                                <x-input-label for="chemical_name" :value="__('Nombre Químico')" />
+                                <x-input-label for="chemical_name" :value="__('Nombre Químico / Técnico')" />
                                 <x-text-input id="chemical_name" class="block mt-1 w-full bg-indigo-50 dark:bg-gray-700" type="text" name="chemical_name" x-model="form.chemical_name" required />
                             </div>
                         </div>
 
+                        <!-- DATOS DEL FABRICANTE (NUEVOS) -->
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                             <div>
-                                <x-input-label for="cas_number" :value="__('No. CAS')" />
+                                <x-input-label for="manufacturer" :value="__('Fabricante / Proveedor')" />
+                                <x-text-input id="manufacturer" class="block mt-1 w-full bg-indigo-50 dark:bg-gray-700" type="text" name="manufacturer" x-model="form.manufacturer" />
+                            </div>
+                            <div>
+                                <x-input-label for="emergency_phone" :value="__('Teléfono de Emergencia')" />
+                                <x-text-input id="emergency_phone" class="block mt-1 w-full bg-indigo-50 dark:bg-gray-700" type="text" name="emergency_phone" x-model="form.emergency_phone" />
+                            </div>
+                            <div>
+                                <x-input-label for="cas_number" :value="__('No. CAS (Uno o varios)')" />
                                 <x-text-input id="cas_number" class="block mt-1 w-full bg-indigo-50 dark:bg-gray-700" type="text" name="cas_number" x-model="form.cas_number" />
                             </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <x-input-label for="address" :value="__('Dirección del Fabricante')" />
+                            <x-text-input id="address" class="block mt-1 w-full bg-indigo-50 dark:bg-gray-700" type="text" name="address" x-model="form.address" />
+                        </div>
+
+                        <!-- DATOS OPERATIVOS -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                             <div>
                                 <x-input-label for="physical_state" :value="__('Estado Físico')" />
                                 <select id="physical_state" name="physical_state" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 rounded-md shadow-sm" required>
@@ -117,11 +151,8 @@
                                 <x-input-label for="max_quantity" :value="__('Cantidad Máxima (Kg/L)')" />
                                 <x-text-input id="max_quantity" class="block mt-1 w-full" type="number" step="0.01" name="max_quantity" required />
                             </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                             <div>
-                                <x-input-label for="location" :value="__('Ubicación')" />
+                            <div>
+                                <x-input-label for="location" :value="__('Ubicación de Almacenamiento')" />
                                 <select id="location" name="location" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 rounded-md shadow-sm" required>
                                     <option value="">-- Seleccionar --</option>
                                     <option value="Almacen Hazmat">Almacén Hazmat</option>
@@ -131,10 +162,11 @@
                                     <option value="Cuarto Baterias">Cuarto de Baterías</option>
                                 </select>
                             </div>
-                            <div>
-                                <x-input-label for="department" :value="__('Departamento')" />
-                                <x-text-input id="department" class="block mt-1 w-full" type="text" name="department" required />
-                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <x-input-label for="department" :value="__('Departamento que usa')" />
+                            <x-text-input id="department" class="block mt-1 w-full" type="text" name="department" required />
                         </div>
 
                         <!-- SECCIÓN NOM-018 -->
@@ -152,11 +184,11 @@
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                 <div>
-                                    <x-input-label for="hazard_statements" :value="__('Indicaciones de Peligro (H)')" />
+                                    <x-input-label for="hazard_statements" :value="__('Indicaciones de Peligro (Códigos H)')" />
                                     <textarea id="hazard_statements" name="hazard_statements" x-model="form.hazard_statements" rows="4" class="block mt-1 w-full bg-indigo-50 dark:bg-gray-700 border-gray-300 dark:border-gray-700 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 rounded-md shadow-sm"></textarea>
                                 </div>
                                 <div>
-                                    <x-input-label for="precautionary_statements" :value="__('Consejos de Prudencia (P)')" />
+                                    <x-input-label for="precautionary_statements" :value="__('Consejos de Prudencia (Códigos P)')" />
                                     <textarea id="precautionary_statements" name="precautionary_statements" x-model="form.precautionary_statements" rows="4" class="block mt-1 w-full bg-indigo-50 dark:bg-gray-700 border-gray-300 dark:border-gray-700 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 rounded-md shadow-sm"></textarea>
                                 </div>
                             </div>
@@ -183,6 +215,7 @@
                                         <label class="flex flex-col items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                                                :class="form.pictograms.includes('{{ $key }}') ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900' : 'border-gray-200 dark:border-gray-700'">
                                             <input type="checkbox" name="pictograms[]" value="{{ $key }}" class="sr-only" x-model="form.pictograms">
+                                            <!-- Emojis (se reemplazarán por imágenes en el PDF) -->
                                             <span class="text-2xl mb-1">
                                                 @switch($key)
                                                     @case('flame') 🔥 @break
@@ -229,6 +262,7 @@
         </div>
     </div>
 
+    <!-- SCRIPT DE ALPINE.JS PARA LA LÓGICA DE IA -->
     <script>
         function hazmatForm() {
             return {
@@ -239,6 +273,9 @@
                     product_name: '',
                     chemical_name: '',
                     cas_number: '',
+                    manufacturer: '',     // NUEVO
+                    emergency_phone: '',  // NUEVO
+                    address: '',          // NUEVO
                     signal_word: 'SIN PALABRA',
                     hazard_statements: '',
                     precautionary_statements: '',
@@ -265,10 +302,17 @@
                         });
                         
                         const data = response.data;
+                        console.log("IA Response:", data);
+
                         if(data) {
                             this.form.product_name = data.product_name || '';
                             this.form.chemical_name = data.chemical_name || '';
                             this.form.cas_number = data.cas_number || '';
+                            
+                            // NUEVO: Datos de fabricante
+                            this.form.manufacturer = data.manufacturer || '';
+                            this.form.emergency_phone = data.emergency_phone || '';
+                            this.form.address = data.address || '';
                             
                             if (['PELIGRO', 'ATENCION', 'SIN PALABRA'].includes(data.signal_word)) {
                                 this.form.signal_word = data.signal_word;
