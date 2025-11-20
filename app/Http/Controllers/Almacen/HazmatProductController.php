@@ -32,6 +32,9 @@ class HazmatProductController extends Controller
         $filterTerminal = $request->input('terminal_id');
         $filterState = $request->input('physical_state');
         $filterSignal = $request->input('signal_word');
+        
+        // Filtro especial: ¿Ver cancelados?
+        $viewDeleted = $request->boolean('view_deleted');
 
         $query = HazmatProduct::with('terminal'); // Carga optimizada
 
@@ -61,6 +64,11 @@ class HazmatProductController extends Controller
         if ($filterSignal) {
             $query->where('signal_word', $filterSignal);
         }
+        
+        // Lógica de Cancelados
+        if ($viewDeleted) {
+            $query->onlyTrashed();
+        }
 
         // Paginación (15 por página)
         $products = $query->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
@@ -68,7 +76,7 @@ class HazmatProductController extends Controller
         // Datos para los selects de filtros
         $terminals = Terminal::all();
 
-        return view('almacen.hazmat.index', compact('products', 'terminals', 'search', 'filterTerminal', 'filterState', 'filterSignal'));
+        return view('almacen.hazmat.index', compact('products', 'terminals', 'search', 'filterTerminal', 'filterState', 'filterSignal', 'viewDeleted'));
     }
 
     public function create()
@@ -173,6 +181,26 @@ class HazmatProductController extends Controller
         $hazmat->update($validated);
 
         return redirect()->route('hazmat.index')->with('success', 'Producto actualizado correctamente.');
+    }
+
+    /**
+     * ELIMINAR (CANCELAR) MATERIAL PELIGROSO
+     */
+    public function destroy(Request $request, HazmatProduct $hazmat)
+    {
+        // Validamos que venga un motivo
+        // IMPORTANTE: Asegúrate de haber corrido la migración para añadir 'cancellation_reason' a la tabla 'hazmat_products'
+        // Si no la has corrido, comenta estas líneas de validación y guardado del motivo.
+        $request->validate([
+            'cancellation_reason' => 'required|string|max:255',
+        ]);
+        
+        $hazmat->cancellation_reason = $request->cancellation_reason;
+        $hazmat->save();
+
+        $hazmat->delete(); // Soft Delete
+
+        return redirect()->route('hazmat.index')->with('success', 'Material eliminado correctamente.');
     }
 
     /**
