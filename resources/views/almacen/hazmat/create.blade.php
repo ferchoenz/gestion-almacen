@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <!-- Añadimos la variable global 'submitting' para el formulario principal -->
+    <!-- x-data extendido para el estado de guardado -->
     <div class="py-12" x-data="{ ...hazmatForm(), submitting: false }">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 relative">
             
@@ -28,7 +28,7 @@
                         </div>
                         <div class="ml-3 w-0 flex-1 pt-0.5">
                             <p class="text-sm font-medium text-gray-900 dark:text-gray-100">¡Análisis Completado!</p>
-                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">La IA ha llenado el formulario.</p>
+                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Nuestro sistema ha llenado los datos de forma automatica.</p>
                         </div>
                         <div class="ml-4 flex-shrink-0 flex">
                             <button @click="showSuccess = false" class="bg-white dark:bg-gray-800 rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none">
@@ -44,10 +44,10 @@
             <div class="bg-indigo-50 dark:bg-indigo-900 p-6 rounded-lg mb-6 border border-indigo-200 dark:border-indigo-700 shadow-sm">
                 <h3 class="text-lg font-bold text-indigo-800 dark:text-indigo-200 mb-2 flex items-center">
                     <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    Autocompletar con IA (Gemini)
+                    Autocompletar los campos automaticamente
                 </h3>
                 <p class="text-sm text-indigo-600 dark:text-indigo-300 mb-4">
-                    Sube la Hoja de Datos de Seguridad (HDS) en PDF y la IA extraerá la información automáticamente.
+                    Sube la Hoja de Datos de Seguridad (HDS) en PDF.
                 </p>
 
                 <div class="flex gap-4 items-center">
@@ -67,7 +67,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     
-                    <!-- Agregamos @submit="submitting = true" para activar la animación -->
+                    <!-- FORMULARIO CON ANIMACIÓN DE GUARDADO -->
                     <form method="POST" action="{{ route('hazmat.store') }}" enctype="multipart/form-data" @submit="submitting = true">
                         @csrf
 
@@ -115,7 +115,7 @@
                                 <x-text-input id="emergency_phone" class="block mt-1 w-full bg-indigo-50 dark:bg-gray-700" type="text" name="emergency_phone" x-model="form.emergency_phone" />
                             </div>
                             <div>
-                                <x-input-label for="cas_number" :value="__('No. CAS')" />
+                                <x-input-label for="cas_number" :value="__('No. CAS (Uno o varios)')" />
                                 <x-text-input id="cas_number" class="block mt-1 w-full bg-indigo-50 dark:bg-gray-700" type="text" name="cas_number" x-model="form.cas_number" />
                             </div>
                         </div>
@@ -159,7 +159,7 @@
                             <x-text-input id="department" class="block mt-1 w-full" type="text" name="department" required />
                         </div>
 
-                        <!-- CLASIFICACIÓN NOM-018 -->
+                        <!-- CLASIFICACIÓN -->
                         <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mt-6">
                             <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Clasificación NOM-018-STPS-2015</h3>
                             
@@ -242,9 +242,10 @@
 
                         <div class="flex items-center justify-end mt-6">
                             <!-- BOTÓN GUARDAR ANIMADO -->
-                            <x-primary-button class="ml-4" :class="{ 'opacity-50 cursor-not-allowed': submitting }" :disabled="submitting">
+                            <!-- Usamos x-bind para evitar conflicto con Blade -->
+                            <x-primary-button class="ml-4" x-bind:class="{ 'opacity-50 cursor-not-allowed': submitting }" x-bind:disabled="submitting">
                                 <span x-show="!submitting">{{ __('Guardar en Listado Maestro') }}</span>
-                                <span x-show="submitting" class="flex items-center">
+                                <span x-show="submitting" class="flex items-center" style="display: none;">
                                     <svg class="animate-spin -ml-1 mr-3 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                                     Guardando...
                                 </span>
@@ -256,6 +257,7 @@
         </div>
     </div>
 
+    <!-- Script de Alpine -->
     <script>
         function hazmatForm() {
             return {

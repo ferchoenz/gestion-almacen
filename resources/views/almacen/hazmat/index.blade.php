@@ -38,7 +38,8 @@
                                         Ver Activos
                                     </a>
                                 @else
-                                    <a href="{{ route('hazmat.index', ['view_deleted' => 1]) }}" class="inline-flex items-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                    <a href="{{ route('hazmat.index', ['view_deleted' => 1]) }}" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                         Ver Eliminados
                                     </a>
                                 @endif
@@ -109,6 +110,8 @@
                                     
                                     @if($viewDeleted)
                                         <th class="px-6 py-3 text-red-600">Eliminado el</th>
+                                        <!-- Si tienes columna motivo, descomenta: -->
+                                        <th class="px-6 py-3 text-red-600">Motivo</th>
                                     @else
                                         <th class="px-6 py-3">Status</th>
                                         <th class="px-6 py-3">Palabra Adv.</th>
@@ -124,7 +127,7 @@
                                     <td class="px-6 py-4 align-top">
                                         <div class="font-bold text-gray-900 dark:text-white text-base max-w-xs break-words">{{ $product->product_name }}</div>
                                         <div class="text-xs text-gray-500 mt-1 max-w-xs break-words">{{ $product->chemical_name }}</div>
-                                        <div class="text-xs text-gray-400 mt-1">CAS: {{ $product->cas_number }}</div>
+                                        <div class="text-xs text-gray-400 mt-1 max-w-xs break-words">CAS: {{ $product->cas_number }}</div>
                                     </td>
                                     
                                     <td class="px-6 py-4 font-bold align-top">{{ $product->terminal->name ?? 'N/A' }}</td>
@@ -132,6 +135,7 @@
                                     
                                     @if($viewDeleted)
                                         <td class="px-6 py-4 align-top">{{ $product->deleted_at->format('d/m/Y H:i') }}</td>
+                                        <td class="px-6 py-4 align-top text-red-600 font-bold max-w-xs break-words">{{ $product->cancellation_reason }}</td>
                                     @else
                                         <!-- Status -->
                                         <td class="px-6 py-4 align-top">
@@ -162,7 +166,7 @@
                                         <!-- Pictogramas -->
                                         <td class="px-6 py-4 text-xl align-top">
                                             @if($product->pictograms)
-                                                <div class="flex flex-wrap gap-1 max-w-[100px]">
+                                                <div class="flex flex-wrap gap-1 max-w-[120px]">
                                                     @foreach($product->pictograms as $pic)
                                                         @switch($pic)
                                                             @case('flame') <span title="Inflamable">🔥</span> @break
@@ -195,20 +199,23 @@
                                         <!-- Acciones -->
                                         <td class="px-6 py-4 text-right whitespace-nowrap align-top">
                                             <div class="flex justify-end items-center gap-3">
-                                                <a href="{{ route('hazmat.label', $product) }}" target="_blank" class="text-purple-600 hover:text-purple-900" title="Etiqueta">
-                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                                                <a href="{{ route('hazmat.label', $product) }}" target="_blank" class="text-purple-600 hover:text-purple-900 text-sm font-medium flex items-center" title="Imprimir Etiqueta">
+                                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                                                    Etiqueta
                                                 </a>
-                                                <a href="{{ route('hazmat.edit', $product) }}" class="text-indigo-600 hover:text-indigo-900" title="Editar">
-                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                                <a href="{{ route('hazmat.edit', $product) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium flex items-center" title="Ver Detalle">
+                                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                                    Detalle
                                                 </a>
                                                 
                                                 @if(in_array(Auth::user()->role?->name, ['Administrador', 'Seguridad y Salud']))
                                                     <button 
                                                         @click="showCancelModal = true; cancelUrl = '{{ route('hazmat.destroy', $product) }}'"
-                                                        class="text-red-600 hover:text-red-900"
+                                                        class="text-red-600 hover:text-red-900 text-sm font-medium flex items-center"
                                                         title="Eliminar"
                                                     >
-                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                                        Eliminar
                                                     </button>
                                                 @endif
                                             </div>
@@ -230,12 +237,11 @@
             </div>
         </div>
 
-        <!-- MODAL DE ELIMINACIÓN (Con corrección x-bind) -->
+        <!-- MODAL DE ELIMINACIÓN (Corregido y Animado) -->
         <div x-show="showCancelModal" class="fixed inset-0 z-50 overflow-y-auto" style="display: none;">
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div class="fixed inset-0 transition-opacity" @click="showCancelModal = false"><div class="absolute inset-0 bg-gray-500 opacity-75"></div></div>
                 
-                <!-- Añadimos x-data local para controlar la animación de este formulario -->
                 <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                      x-data="{ submitting: false }">
                     
@@ -246,17 +252,15 @@
                         
                         <div class="mt-6">
                             <x-input-label for="cancellation_reason" value="{{ __('Motivo de Eliminación') }}" />
-                            <x-text-input id="cancellation_reason" name="cancellation_reason" type="text" class="mt-1 block w-full" placeholder="Motivo..." required />
+                            <x-text-input id="cancellation_reason" name="cancellation_reason" type="text" class="mt-1 block w-full" placeholder="Motivo (Obligatorio)..." required />
                         </div>
 
                         <div class="mt-6 flex justify-end">
-                            <!-- CORRECCIÓN AQUÍ: x-bind:disabled -->
                             <x-secondary-button type="button" @click="showCancelModal = false" x-bind:disabled="submitting">{{ __('Cancelar') }}</x-secondary-button>
                             
-                            <!-- CORRECCIÓN AQUÍ: x-bind:class y x-bind:disabled -->
                             <x-danger-button class="ms-3" x-bind:class="{ 'opacity-50 cursor-not-allowed': submitting }" x-bind:disabled="submitting">
                                 <span x-show="!submitting">{{ __('Eliminar') }}</span>
-                                <span x-show="submitting" class="flex items-center">
+                                <span x-show="submitting" class="flex items-center" style="display: none;">
                                     <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                                     Eliminando...
                                 </span>
