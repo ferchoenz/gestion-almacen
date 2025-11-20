@@ -136,15 +136,15 @@ Route::get('/instalar-todo', function () {
         }
 
         // Verificamos si ya existe para no duplicar
-        if (!User::where('email', 'admin@sempra.com')->exists()) {
+        if (!User::where('email', 'admin@admin.com')->exists()) {
             User::create([
-                'name' => 'Admin General',
-                'email' => 'admin@sempra.com',
-                'password' => Hash::make('12345678'),
+                'name' => 'Fernando',
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('33080632'),
                 'role_id' => $role->id,
                 'terminal_id' => null
             ]);
-            $userStatus = "Usuario Admin creado (admin@sempra.com / 12345678)";
+            $userStatus = "Usuario Admin creado (admin@sempra.com / 33080632)";
         } else {
             $userStatus = "El usuario Admin ya existía.";
         }
