@@ -110,20 +110,24 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-// ============================================================================
-// RUTA DE EMERGENCIA PARA CORRER MIGRACIONES
-// (USAR SOLO UNA VEZ Y LUEGO BORRAR)
-// ============================================================================
-Route::get('/reparar-base-de-datos', function () {
+// RUTA DE MIGRACIÓN DE EMERGENCIA (VERSIÓN BLINDADA)
+Route::get('/force-migrate', function () {
     try {
-        // Forzamos la migración de la tabla de sesiones y otras faltantes
-        \Illuminate\Support\Facades\Artisan::call('migrate', [
-            '--force' => true, // Necesario en producción
-        ]);
+        // Deshabilitamos el límite de tiempo de ejecución para evitar timeouts
+        set_time_limit(300);
         
-        return "¡ÉXITO! Las tablas se crearon correctamente. Output: " . \Illuminate\Support\Facades\Artisan::output();
+        // Ejecutamos migrate:fresh para borrar todo y empezar de cero (limpio)
+        // O solo migrate si quieres conservar datos (pero fresh es más seguro si está roto)
+        // Usaremos migrate normal con --force
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        $migrateOutput = \Illuminate\Support\Facades\Artisan::output();
 
+        // Ejecutamos los seeders para tener roles y terminales
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+        $seedOutput = \Illuminate\Support\Facades\Artisan::output();
+
+        return "<h1>MIGRACIÓN EXITOSA</h1><pre>Migrate:\n$migrateOutput\n\nSeed:\n$seedOutput</pre>";
     } catch (\Exception $e) {
-        return "ERROR AL MIGRAR: " . $e->getMessage();
+        return "<h1>ERROR FATAL</h1><pre>" . $e->getMessage() . "</pre>";
     }
 });
