@@ -32,7 +32,7 @@
                                     Excel
                                 </a>
 
-                                <!-- Toggle Papelera -->
+                                <!-- Toggle Papelera (Rojo) -->
                                 @if($viewDeleted)
                                     <a href="{{ route('hazmat.index') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                         Ver Activos
@@ -55,7 +55,7 @@
 
                         <!-- FILA 2 -->
                         <div class="flex flex-wrap items-center gap-2 bg-white dark:bg-gray-800 p-3 rounded-md shadow-sm border border-gray-200 dark:border-gray-600">
-                            <span class="text-xs font-bold text-gray-500 uppercase mr-2">Filtrar por:</span>
+                            <span class="text-xs font-bold text-gray-500 uppercase mr-2 hidden md:inline">Filtrar por:</span>
                             
                             @if(Auth::user()->role->name === 'Administrador')
                                 <select name="terminal_id" class="text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white h-9 py-1">
@@ -104,13 +104,12 @@
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th class="px-6 py-3 w-1/3">Producto</th>
+                                    <th class="px-6 py-3 w-1/3">Producto</th> <!-- Más ancho -->
                                     <th class="px-6 py-3">Terminal</th>
                                     <th class="px-6 py-3">Ubicación</th>
                                     
                                     @if($viewDeleted)
                                         <th class="px-6 py-3 text-red-600">Eliminado el</th>
-                                        <!-- Si tienes columna motivo, descomenta: -->
                                         <th class="px-6 py-3 text-red-600">Motivo</th>
                                     @else
                                         <th class="px-6 py-3">Status</th>
@@ -125,9 +124,10 @@
                                 @forelse ($products as $product)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td class="px-6 py-4 align-top">
+                                        <!-- AJUSTE VISUAL: max-w-xs y break-words para evitar que se amontone -->
                                         <div class="font-bold text-gray-900 dark:text-white text-base max-w-xs break-words">{{ $product->product_name }}</div>
                                         <div class="text-xs text-gray-500 mt-1 max-w-xs break-words">{{ $product->chemical_name }}</div>
-                                        <!--<div class="text-xs text-gray-400 mt-1 max-w-xs break-words">CAS: {{ $product->cas_number }}</div>-->
+                                        <div class="text-xs text-gray-400 mt-1 max-w-xs break-words">CAS: {{ $product->cas_number }}</div>
                                     </td>
                                     
                                     <td class="px-6 py-4 font-bold align-top">{{ $product->terminal->name ?? 'N/A' }}</td>
@@ -163,10 +163,10 @@
                                             @endif
                                         </td>
 
-                                        <!-- Pictogramas -->
+                                        <!-- Pictogramas (Mejorados con flex-wrap) -->
                                         <td class="px-6 py-4 text-xl align-top">
                                             @if($product->pictograms)
-                                                <div class="flex flex-wrap gap-1 max-w-[120px]">
+                                                <div class="flex flex-wrap gap-1 max-w-[100px]">
                                                     @foreach($product->pictograms as $pic)
                                                         @switch($pic)
                                                             @case('flame') <span title="Inflamable">🔥</span> @break
@@ -229,7 +229,6 @@
                         </table>
                     </div>
                     
-                    <!-- Paginación -->
                     <div class="mt-4">
                         {{ $products->links() }}
                     </div>
@@ -251,8 +250,8 @@
                         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">{{ __('¿Estás seguro de que deseas eliminar este material del listado maestro?') }}</p>
                         
                         <div class="mt-6">
-                            <x-input-label for="cancellation_reason" value="{{ __('Motivo de Eliminación') }}" />
-                            <x-text-input id="cancellation_reason" name="cancellation_reason" type="text" class="mt-1 block w-full" placeholder="Motivo (Obligatorio)..." required />
+                            <x-input-label for="cancellation_reason" value="{{ __('Motivo de Eliminación (Obligatorio)') }}" />
+                            <x-text-input id="cancellation_reason" name="cancellation_reason" type="text" class="mt-1 block w-full" placeholder="Escribe el motivo..." required />
                         </div>
 
                         <div class="mt-6 flex justify-end">

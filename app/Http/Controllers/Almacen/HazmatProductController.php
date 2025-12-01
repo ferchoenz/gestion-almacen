@@ -35,7 +35,6 @@ class HazmatProductController extends Controller
 
         $query = HazmatProduct::with('terminal');
 
-        // Seguridad por Terminal
         if ($user->role->name !== 'Administrador') {
             $query->where('terminal_id', $user->terminal_id);
         } else {
@@ -44,7 +43,6 @@ class HazmatProductController extends Controller
             }
         }
 
-        // Buscador
         if ($search) {
             $query->where(function($q) use ($search) {
                 $q->where('product_name', 'like', "%{$search}%")
@@ -53,11 +51,9 @@ class HazmatProductController extends Controller
             });
         }
 
-        // Filtros
         if ($filterState) $query->where('physical_state', $filterState);
         if ($filterSignal) $query->where('signal_word', $filterSignal);
         
-        // Ver eliminados
         if ($viewDeleted) {
             $query->onlyTrashed();
         }
@@ -93,6 +89,7 @@ class HazmatProductController extends Controller
             'signal_word' => 'required|in:PELIGRO,ATENCION,SIN PALABRA',
             'hazard_statements' => 'nullable|string',
             'precautionary_statements' => 'nullable|string',
+            'epp' => 'nullable|string',
             'pictograms' => 'nullable|array',
             'hds_file' => 'nullable|file|mimes:pdf|max:10240',
             'product_image' => 'nullable|image|max:5120',
@@ -110,7 +107,6 @@ class HazmatProductController extends Controller
         }
 
         $validated['is_active'] = $request->has('is_active');
-
         HazmatProduct::create($validated);
 
         return redirect()->route('hazmat.index')->with('success', 'Producto químico registrado correctamente.');
@@ -146,11 +142,15 @@ class HazmatProductController extends Controller
             'signal_word' => 'required|in:PELIGRO,ATENCION,SIN PALABRA',
             'hazard_statements' => 'nullable|string',
             'precautionary_statements' => 'nullable|string',
+            'epp' => 'nullable|string',
             'pictograms' => 'nullable|array',
             'is_active' => 'nullable|boolean',
         ]);
 
         $validated['is_active'] = $request->has('is_active');
+        
+        // (Aquí podrías agregar lógica para actualizar la imagen si se sube una nueva)
+        
         $hazmat->update($validated);
 
         return redirect()->route('hazmat.index')->with('success', 'Producto actualizado correctamente.');
@@ -158,15 +158,10 @@ class HazmatProductController extends Controller
 
     public function destroy(Request $request, HazmatProduct $hazmat)
     {
-        // Validación estricta del motivo
-        $request->validate([
-            'cancellation_reason' => 'required|string|max:255',
-        ]);
-        
+        $request->validate(['cancellation_reason' => 'required|string|max:255']);
         $hazmat->cancellation_reason = $request->cancellation_reason;
         $hazmat->save();
         $hazmat->delete();
-
         return redirect()->route('hazmat.index')->with('success', 'Material eliminado correctamente.');
     }
 
@@ -177,7 +172,14 @@ class HazmatProductController extends Controller
             $file = $request->file('hds_analyze');
             $base64Pdf = base64_encode(file_get_contents($file->getRealPath()));
             $analysis = $this->gemini->analyzeHdsPdf($base64Pdf);
-            if (!$analysis) return response()->json(['error' => 'No se pudo analizar.'], 500);
+            
+            // Validamos si la IA dice que NO es una HDS
+            if (isset($analysis['is_valid_hds']) && $analysis['is_valid_hds'] === false) {
+                return response()->json([
+                    'error' => $analysis['error_msg'] ?? 'El documento no parece ser una HDS válida.'
+                ], 422);
+            }
+
             return response()->json($analysis);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error: ' . $e->getMessage()], 500);
@@ -196,7 +198,6 @@ class HazmatProductController extends Controller
         if (!$hazmat->hds_path || !Storage::disk('public')->exists($hazmat->hds_path)) {
             abort(404, 'Archivo HDS no encontrado en el servidor.');
         }
-        // Usamos response()->file() para servir el PDF correctamente
         return response()->file(Storage::disk('public')->path($hazmat->hds_path));
     }
 

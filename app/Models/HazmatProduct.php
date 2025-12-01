@@ -30,6 +30,7 @@ class HazmatProduct extends Model
         'hds_path',
         'image_path',
         'is_active',
+        'epp',
     ];
 
     protected $casts = [

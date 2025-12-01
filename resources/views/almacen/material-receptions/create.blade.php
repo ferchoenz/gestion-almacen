@@ -132,6 +132,24 @@
                             <x-input-error :messages="$errors->get('quality_certificate')" class="mt-2" />
                         </div>
 
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4 border-t pt-4">
+                            <div>
+                                <x-input-label for="invoice_file" :value="__('Factura (PDF)')" />
+                                <input id="invoice_file" type="file" name="invoice_file" accept=".pdf"
+                                    class="block w-full text-sm border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
+                            </div>
+                            <div>
+                                <x-input-label for="remission_file" :value="__('Remisión (PDF)')" />
+                                <input id="remission_file" type="file" name="remission_file" accept=".pdf"
+                                    class="block w-full text-sm border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
+                            </div>
+                            <div>
+                                <x-input-label for="certificate_file" :value="__('Certificado Calidad (PDF)')" />
+                                <input id="certificate_file" type="file" name="certificate_file" accept=".pdf"
+                                    class="block w-full text-sm border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
+                            </div>
+                        </div>
+
 
                         <!-- Botones de Acción -->
                         <div
