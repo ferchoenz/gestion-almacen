@@ -345,9 +345,8 @@
         function hazmatForm() {
             return {
                 loading: false,
-                showSuccess: false,
-                showErrorToast: false,
                 errorMessage: '',
+                showSuccess: false,
                 form: {
                     product_name: '',
                     chemical_name: '',
@@ -361,6 +360,7 @@
                     epp: '',
                     pictograms: []
                 },
+
                 async analyzePdf() {
                     const fileInput = this.$refs.hdsInput;
                     if (!fileInput.files.length) {
@@ -382,19 +382,39 @@
                                 'Content-Type': 'multipart/form-data'
                             }
                         });
+
                         const data = response.data;
+                        if (data) {
+                            this.form.product_name = data.product_name || '';
+                            this.form.chemical_name = data.chemical_name || '';
+                            this.form.cas_number = data.cas_number || '';
+                            this.form.manufacturer = data.manufacturer || '';
+                            this.form.emergency_phone = data.emergency_phone || '';
+                            this.form.address = data.address || '';
 
-                        // Llenado de datos
-                        this.form.product_name = data.product_name || '';
-                        // ... (resto de asignaciones) ...
-                        this.form.epp = data.epp || ''; // NUEVO
+                            if (['PELIGRO', 'ATENCION', 'SIN PALABRA'].includes(data.signal_word)) {
+                                this.form.signal_word = data.signal_word;
+                            }
 
-                        this.showSuccess = true;
-                        setTimeout(() => this.showSuccess = false, 4000);
+                            this.form.hazard_statements = data.hazard_statements || '';
+                            this.form.precautionary_statements = data.precautionary_statements || '';
+
+                            if (Array.isArray(data.pictograms)) {
+                                this.form.pictograms = data.pictograms;
+                            }
+                            this.form.epp = data.epp || '';
+
+                            this.showSuccess = true;
+                            setTimeout(() => {
+                                this.showSuccess = false;
+                            }, 4000);
+                        }
+
                     } catch (error) {
                         this.errorMessage = error.response?.data?.error || 'Error al analizar el documento.';
                         this.showErrorToast = true;
                         setTimeout(() => this.showErrorToast = false, 5000);
+
                     } finally {
                         this.loading = false;
                     }
