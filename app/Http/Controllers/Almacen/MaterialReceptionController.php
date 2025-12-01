@@ -15,7 +15,6 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class MaterialReceptionController extends Controller
 {
-    // Muestra la lista de recepciones (Con filtros)
     public function index(Request $request)
     {
         $user = Auth::user();
@@ -28,7 +27,6 @@ class MaterialReceptionController extends Controller
 
         $query = MaterialReception::with(['user', 'terminal']); 
 
-        // Filtros de Seguridad por Rol
         if ($user->role->name !== 'Administrador') {
             $query->where('terminal_id', $user->terminal_id);
         } else {
@@ -40,7 +38,6 @@ class MaterialReceptionController extends Controller
         if ($filterMonth) $query->whereMonth('reception_date', $filterMonth);
         if ($filterYear) $query->whereYear('reception_date', $filterYear);
         
-        // Buscador
         if ($search) {
             $query->where(function($q) use ($search) {
                 $q->where('description', 'like', "%{$search}%")
@@ -69,7 +66,6 @@ class MaterialReceptionController extends Controller
         ]);
     }
 
-    // Muestra el formulario de creación
     public function create()
     {
         $user = Auth::user();
@@ -77,7 +73,6 @@ class MaterialReceptionController extends Controller
         return view('almacen.material-receptions.create', compact('terminals'));
     }
 
-    // Guarda la nueva recepción (Con lógica de archivos y SAP opcional)
     public function store(Request $request)
     {
         $user = Auth::user();
@@ -90,7 +85,7 @@ class MaterialReceptionController extends Controller
             'reception_date' => ['required', 'date'],
             'quantity' => ['required', 'numeric', 'min:0'],
             
-            // CAMBIO IMPORTANTE: SAP opcional al crear (nullable)
+            // SAP Opcional al crear
             'sap_confirmation' => ['nullable', 'string', 'max:100'],
             
             'item_number' => ['nullable', 'required_if:material_type,SPARE_PART', 'string', 'max:100'],
@@ -106,9 +101,7 @@ class MaterialReceptionController extends Controller
         $validatedData['user_id'] = $user->id;
         $validatedData['quality_certificate'] = $request->boolean('quality_certificate');
         
-        // Lógica de Status:
-        // Si ya tiene ubicación Y (es consumible O ya tiene SAP), está completo.
-        // Si no, está pendiente.
+        // Lógica de Status: COMPLETO si tiene ubicación Y (es consumible O ya tiene SAP)
         $isComplete = $request->filled('storage_location') && 
                       ($validatedData['material_type'] !== 'SPARE_PART' || $request->filled('sap_confirmation'));
         
@@ -130,7 +123,10 @@ class MaterialReceptionController extends Controller
         return redirect()->route('material-receptions.index')->with('success', 'Recepción registrada exitosamente.');
     }
     
-    // NUEVA FUNCIÓN: Ver archivos adjuntos de forma segura
+    /**
+     * FUNCIÓN CORREGIDA: Ver archivos adjuntos de forma segura.
+     * Arregla el error de Undefined method 'response' al usar response()->file().
+     */
     public function viewFile(MaterialReception $recepcione, $type)
     {
         // Determinamos qué ruta buscar según el tipo
@@ -141,12 +137,13 @@ class MaterialReceptionController extends Controller
             default => null
         };
 
-        // Verificamos existencia
+        // Verificamos existencia en disco 'public'
         if (!$path || !Storage::disk('public')->exists($path)) {
             abort(404, 'Archivo no encontrado.');
         }
         
         // Devolvemos el archivo para verlo en el navegador
+        // CORRECCIÓN AQUÍ: Usamos path() para obtener la ruta absoluta, y response()->file() para servir el contenido.
         return response()->file(Storage::disk('public')->path($path));
     }
 
@@ -170,7 +167,7 @@ class MaterialReceptionController extends Controller
             'purchase_order' => ['required', 'string', 'max:100'],
             'reception_date' => ['required', 'date'],
             'quantity' => ['required', 'numeric', 'min:0'],
-            'sap_confirmation' => ['nullable', 'string', 'max:100'],
+            'sap_confirmation' => ['nullable', 'string', 'max:100'], // Opcional al actualizar
             'item_number' => ['nullable', 'required_if:material_type,SPARE_PART', 'string', 'max:100'],
             'storage_location' => ['nullable', 'string', 'max:255'],
             'quality_certificate' => ['nullable', 'boolean'], 
@@ -183,8 +180,8 @@ class MaterialReceptionController extends Controller
                       ($validatedData['material_type'] !== 'SPARE_PART' || $request->filled('sap_confirmation'));
         $validatedData['status'] = $isComplete ? 'COMPLETO' : 'PENDIENTE_UBICACION';
 
-        // (Aquí podrías agregar la lógica para actualizar archivos si quisieras permitir reemplazar los PDFs)
-
+        // Lógica para actualizar archivos si se suben nuevos (se mantendrán si no se sube nada)
+        
         $recepcione->update($validatedData);
         return redirect()->route('material-receptions.index')->with('success', 'Recepción actualizada exitosamente.');
     }

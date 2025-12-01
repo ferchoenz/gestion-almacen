@@ -81,7 +81,7 @@
                                 @endfor
                             </select>
 
-                            <button type="submit" class="ml-auto text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xs px-4 py-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+                            <button type="submit" class="ml-auto text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xs px-4 py-2 dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-700 dark:border-gray-700">
                                 APLICAR
                             </button>
                             <a href="{{ route('material-receptions.index') }}" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-4 py-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
@@ -135,10 +135,10 @@
                                     
                                     <!-- CELDAS DE ARCHIVOS -->
                                     <td class="px-6 py-4">
-                                        <div class="flex gap-2">
+                                        <div class="flex gap-2 items-center">
                                             @if($reception->invoice_path)
                                                 <a href="{{ route('material-receptions.file', [$reception, 'invoice']) }}" target="_blank" class="text-blue-600 hover:scale-110 transition-transform" title="Ver Factura">
-                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414A1 1 0 0112.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2h8.586a1 1 0 00.707-.293l.001-.001M9 12h6m-6 4h6M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
                                                 </a>
                                             @endif
                                             @if($reception->remission_path)
@@ -207,12 +207,12 @@
             </div>
         </div>
 
-        <!-- MODAL DE CANCELACIÓN (IDÉNTICO AL DE HAZMAT) -->
+        <!-- MODAL -->
         <div x-show="showCancelModal" class="fixed inset-0 z-50 overflow-y-auto" style="display: none;">
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div class="fixed inset-0 transition-opacity" @click="showCancelModal = false"><div class="absolute inset-0 bg-gray-500 opacity-75"></div></div>
-                <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" x-data="{ submitting: false }">
-                    <form :action="cancelUrl" method="POST" class="p-6" @submit="submitting = true">
+                <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                    <form :action="cancelUrl" method="POST" class="p-6">
                         @csrf @method('DELETE')
                         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ __('Cancelar Registro') }}</h2>
                         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">{{ __('Ingresa el motivo de la cancelación.') }}</p>
@@ -221,8 +221,8 @@
                             <x-text-input id="cancellation_reason" name="cancellation_reason" type="text" class="mt-1 block w-full" placeholder="Motivo..." required />
                         </div>
                         <div class="mt-6 flex justify-end">
-                            <x-secondary-button type="button" @click="showCancelModal = false" x-bind:disabled="submitting">{{ __('Cerrar') }}</x-secondary-button>
-                            <x-danger-button class="ms-3" x-bind:class="{ 'opacity-50 cursor-not-allowed': submitting }" x-bind:disabled="submitting">{{ __('Confirmar') }}</x-danger-button>
+                            <x-secondary-button type="button" @click="showCancelModal = false">{{ __('Cerrar') }}</x-secondary-button>
+                            <x-danger-button class="ms-3">{{ __('Confirmar') }}</x-danger-button>
                         </div>
                     </form>
                 </div>
