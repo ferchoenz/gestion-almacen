@@ -51,20 +51,27 @@
                     </svg></button>
             </div>
 
-            <!-- SECCIÓN IA -->
-            <div class="bg-indigo-50 dark:bg-indigo-900 p-6 rounded-lg mb-6 border border-indigo-200 shadow-sm">
-                <h3 class="text-lg font-bold text-indigo-800 dark:text-indigo-200 mb-2 flex items-center">Autocompletar
-                    con IA</h3>
+            <!-- SECCIÓN DE ANÁLISIS CON IA -->
+            <div class="bg-indigo-50 dark:bg-indigo-900 p-6 rounded-lg mb-6 border border-indigo-200 dark:border-indigo-700 shadow-sm">
+                <h3 class="text-lg font-bold text-indigo-800 dark:text-indigo-200 mb-2 flex items-center">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    Autocompletar con IA (Gemini)
+                </h3>
+                <p class="text-sm text-indigo-600 dark:text-indigo-300 mb-4">
+                    Sube la Hoja de Datos de Seguridad (HDS) en PDF y el sistema extraerá la información automáticamente.
+                </p>
+
                 <div class="flex gap-4 items-center">
-                    <input type="file" x-ref="hdsInput" accept=".pdf"
-                        class="block w-full text-sm border-gray-300 rounded-lg cursor-pointer bg-white">
-                    <button type="button" @click="analyzePdf"
-                        class="text-white bg-indigo-600 hover:bg-indigo-700 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center"
-                        :disabled="loading">
-                        <span x-show="!loading">Analizar PDF</span>
-                        <span x-show="loading">Analizando...</span>
+                    <input type="file" x-ref="hdsInput" accept=".pdf" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                    
+                    <button type="button" @click="analyzePdf" 
+                            class="text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
+                            :disabled="loading">
+                        <svg x-show="loading" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        <span x-text="loading ? 'Analizando...' : 'Analizar PDF'"></span>
                     </button>
                 </div>
+                <p x-show="errorMessage" x-text="errorMessage" class="text-red-600 text-sm mt-2 font-bold"></p>
             </div>
 
 
