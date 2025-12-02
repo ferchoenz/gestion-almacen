@@ -55,7 +55,7 @@
             <div class="bg-indigo-50 dark:bg-indigo-900 p-6 rounded-lg mb-6 border border-indigo-200 dark:border-indigo-700 shadow-sm">
                 <h3 class="text-lg font-bold text-indigo-800 dark:text-indigo-200 mb-2 flex items-center">
                     <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    Autocompletar con IA (Gemini)
+                    Autocompletar información
                 </h3>
                 <p class="text-sm text-indigo-600 dark:text-indigo-300 mb-4">
                     Sube la Hoja de Datos de Seguridad (HDS) en PDF y el sistema extraerá la información automáticamente.
