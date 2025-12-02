@@ -30,6 +30,10 @@ class MaterialReception extends Model
         'storage_location',
         'status',
         'cancellation_reason',
+        // Rutas de archivos adjuntos
+        'invoice_path',
+        'remission_path',
+        'certificate_path',
     ];
 
     /**

@@ -73,43 +73,69 @@ class HazmatProductController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-        $validated = $request->validate([
-            'terminal_id' => ['required', $user->role->name === 'Administrador' ? Rule::exists('terminals', 'id') : Rule::in([$user->terminal_id])],
-            'product_name' => 'required|string|max:255',
-            'chemical_name' => 'required|string|max:255',
-            'cas_number' => 'nullable|string|max:255',
-            'manufacturer' => 'nullable|string|max:255',
-            'emergency_phone' => 'nullable|string|max:50',
-            'address' => 'nullable|string|max:500',
-            'location' => 'required|string',
-            'physical_state' => 'required|string',
-            'max_quantity' => 'required|numeric',
-            'department' => 'required|string',
-            'signal_word' => 'required|in:PELIGRO,ATENCION,SIN PALABRA',
-            'hazard_statements' => 'nullable|string',
-            'precautionary_statements' => 'nullable|string',
-            'epp' => 'nullable|string',
-            'pictograms' => 'nullable|array',
-            'hds_file' => 'nullable|file|mimes:pdf|max:10240',
-            'product_image' => 'nullable|image|max:5120',
-            'is_active' => 'nullable|boolean',
-        ]);
+        try {
+            $user = Auth::user();
+            
+            // Log para depuración
+            \Log::info('Hazmat Store Request Data:', $request->all());
+            
+            $validated = $request->validate([
+                'terminal_id' => ['required', $user->role->name === 'Administrador' ? Rule::exists('terminals', 'id') : Rule::in([$user->terminal_id])],
+                'product_name' => 'required|string|max:255',
+                'chemical_name' => 'required|string|max:255',
+                'cas_number' => 'nullable|string|max:255',
+                'manufacturer' => 'nullable|string|max:255',
+                'emergency_phone' => 'nullable|string|max:50',
+                'address' => 'nullable|string|max:500',
+                'location' => 'required|string',
+                'physical_state' => 'required|string',
+                'max_quantity' => 'required|numeric',
+                'department' => 'required|string',
+                'signal_word' => 'required|in:PELIGRO,ATENCION,SIN PALABRA',
+                'hazard_statements' => 'nullable|string',
+                'precautionary_statements' => 'nullable|string',
+                'epp' => 'nullable|string',
+                'pictograms' => 'nullable|array',
+                'hds_file' => 'nullable|file|mimes:pdf|max:10240',
+                'product_image' => 'nullable|image|max:5120',
+                'is_active' => 'nullable',
+            ]);
 
-        if ($request->hasFile('hds_file')) {
-            $path = $request->file('hds_file')->store('hazmat/hds', 'public');
-            $validated['hds_path'] = $path;
+            if ($request->hasFile('hds_file')) {
+                $path = $request->file('hds_file')->store('hazmat/hds', 'public');
+                $validated['hds_path'] = $path;
+            }
+
+            if ($request->hasFile('product_image')) {
+                $path = $request->file('product_image')->store('hazmat/images', 'public');
+                $validated['image_path'] = $path;
+            }
+
+            // Convertir is_active a boolean correctamente
+            $validated['is_active'] = $request->has('is_active') && $request->input('is_active') == '1';
+            
+            \Log::info('Validated Data:', $validated);
+            
+            $product = HazmatProduct::create($validated);
+            
+            \Log::info('Product Created:', ['id' => $product->id]);
+
+            return redirect()->route('hazmat.index')->with('success', 'Producto químico registrado correctamente.');
+            
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            \Log::error('Validation Error in Hazmat Store:', [
+                'errors' => $e->errors(),
+                'request' => $request->all()
+            ]);
+            return redirect()->back()->withErrors($e->errors())->withInput();
+            
+        } catch (\Exception $e) {
+            \Log::error('Error in Hazmat Store:', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return redirect()->back()->with('error', 'Error al guardar: ' . $e->getMessage())->withInput();
         }
-
-        if ($request->hasFile('product_image')) {
-            $path = $request->file('product_image')->store('hazmat/images', 'public');
-            $validated['image_path'] = $path;
-        }
-
-        $validated['is_active'] = $request->has('is_active');
-        HazmatProduct::create($validated);
-
-        return redirect()->route('hazmat.index')->with('success', 'Producto químico registrado correctamente.');
     }
 
     public function show(HazmatProduct $hazmat)
