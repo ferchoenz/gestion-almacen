@@ -82,7 +82,7 @@
                     <!-- FORMULARIO CON ANIMACIÓN DE GUARDADO -->
                     <!-- Usamos @submit para activar la bandera 'submitting' -->
                     <form method="POST" action="{{ route('hazmat.store') }}" enctype="multipart/form-data"
-                        @submit="submitting = true">
+                        @submit="serializePictograms(); submitting = true">
                         @csrf
 
                         <!-- SWITCH DE STATUS (Activo por defecto) -->
@@ -354,6 +354,7 @@
                 loading: false,
                 errorMessage: '',
                 showSuccess: false,
+                showErrorToast: false,
                 form: {
                     product_name: '',
                     chemical_name: '',
@@ -425,6 +426,25 @@
                     } finally {
                         this.loading = false;
                     }
+                },
+
+                // Función para serializar pictogramas antes de enviar
+                serializePictograms() {
+                    // Crear un campo oculto con los pictogramas como JSON
+                    const form = document.querySelector('form');
+                    
+                    // Remover checkboxes de pictogramas existentes para evitar duplicados
+                    const existingCheckboxes = form.querySelectorAll('input[name="pictograms[]"]');
+                    existingCheckboxes.forEach(cb => cb.disabled = true);
+                    
+                    // Agregar los pictogramas seleccionados como campos ocultos
+                    this.form.pictograms.forEach((pictogram, index) => {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = `pictograms[${index}]`;
+                        input.value = pictogram;
+                        form.appendChild(input);
+                    });
                 }
             }
         }
