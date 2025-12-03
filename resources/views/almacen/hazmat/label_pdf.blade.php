@@ -113,7 +113,7 @@
             border-color: #f57c00 !important;
         }
 
-        /* --- SECCIÓN EPP (NUEVO) --- */
+        /* --- SECCIÓN EPP --- */
         .epp-section {
             margin-top: 12px;
             padding: 8px;
@@ -277,10 +277,10 @@
                         </div>
                     @endif
 
-                    <!-- EPP RECOMENDADO (NUEVO) -->
+                    <!-- EPP RECOMENDADO -->
                     @if($product->epp)
                         <div class="epp-section">
-                            <div class="epp-title">🛡️ EPP Recomendado</div>
+                            <div class="epp-title">EPP RECOMENDADO</div>
                             <div class="epp-content">
                                 {{ $product->epp }}
                             </div>
@@ -292,7 +292,7 @@
                 <td class="col-right">
                     <!-- Indicaciones de Peligro -->
                     @if($product->hazard_statements)
-                        <div class="section-title">⚠️ INDICACIONES DE PELIGRO (H)</div>
+                        <div class="section-title">INDICACIONES DE PELIGRO (H)</div>
                         <ul class="statement-list">
                             @foreach(explode("\n", $product->hazard_statements) as $statement)
                                 @if(trim($statement) !== '')
@@ -304,7 +304,7 @@
 
                     <!-- Consejos de Prudencia -->
                     @if($product->precautionary_statements)
-                        <div class="section-title" style="margin-top: 10px;">✓ CONSEJOS DE PRUDENCIA (P)</div>
+                        <div class="section-title" style="margin-top: 10px;">CONSEJOS DE PRUDENCIA (P)</div>
                         <ul class="statement-list">
                             @foreach(explode("\n", $product->precautionary_statements) as $statement)
                                 @if(trim($statement) !== '')
@@ -342,7 +342,7 @@
                     <td class="footer-right">
                         <strong>TELÉFONO DE EMERGENCIA 24H:</strong><br>
                         <span class="emergency-phone">
-                            📞 {{ $product->emergency_phone ?? '911' }}
+                            {{ $product->emergency_phone ?? '911' }}
                         </span>
                     </td>
                 </tr>
