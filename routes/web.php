@@ -94,6 +94,22 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('hazmat', HazmatProductController::class)
          ->middleware('role:Administrador,Seguridad y Salud');
+
+    // ============================================================================
+    // CONSUMIBLES (INVENTARIO)
+    // ============================================================================
+    
+    // API endpoint for consumable search (for select2)
+    Route::get('consumables/api/search', [\App\Http\Controllers\Almacen\ConsumableController::class, 'search'])
+         ->name('consumables.search')
+         ->middleware('role:Administrador,Gerencia,Almacenista');
+
+    Route::get('consumables/exportar', [\App\Http\Controllers\Almacen\ConsumableController::class, 'export'])
+         ->name('consumables.export')
+         ->middleware('role:Administrador,Gerencia');
+
+    Route::resource('consumables', \App\Http\Controllers\Almacen\ConsumableController::class)
+         ->middleware('role:Administrador,Almacenista');
 });
 
 require __DIR__.'/auth.php';
