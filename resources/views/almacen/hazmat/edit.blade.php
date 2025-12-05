@@ -68,6 +68,13 @@
                             <x-text-input id="address" class="block mt-1 w-full" type="text" name="address" :value="$product->address" />
                         </div>
 
+                        <!-- NUEVO CAMPO EP P -->
+                        <div class="mb-6">
+                            <x-input-label for="epp" :value="__('Equipo de Protección Personal (EPP) Sugerido')" />
+                            <textarea id="epp" name="epp" rows="3"
+                                class="block mt-1 w-full border-gray-300 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 rounded-md shadow-sm">{{ $product->epp }}</textarea>
+                        </div>
+
                         <!-- DATOS OPERATIVOS -->
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                             <div>

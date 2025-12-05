@@ -104,9 +104,10 @@
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th class="px-6 py-3 w-1/3">Producto</th> <!-- Más ancho -->
-                                    <th class="px-6 py-3">Terminal</th>
-                                    <th class="px-6 py-3">Ubicación</th>
+                                    <th class="px-3 py-3 w-16">Imagen</th>
+                                    <th class="px-4 py-3">Producto</th>
+                                    <th class="px-4 py-3">Terminal</th>
+                                    <th class="px-4 py-3">Ubicación</th>
                                     
                                     @if($viewDeleted)
                                         <th class="px-6 py-3 text-red-600">Eliminado el</th>
@@ -123,15 +124,30 @@
                             <tbody>
                                 @forelse ($products as $product)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td class="px-6 py-4 align-top">
-                                        <!-- AJUSTE VISUAL: max-w-xs y break-words para evitar que se amontone -->
-                                        <div class="font-bold text-gray-900 dark:text-white text-base max-w-xs break-words">{{ $product->product_name }}</div>
-                                        <div class="text-xs text-gray-500 mt-1 max-w-xs break-words">{{ $product->chemical_name }}</div>
-                                        <div class="text-xs text-gray-400 mt-1 max-w-xs break-words">CAS: {{ $product->cas_number }}</div>
+                                    <!-- Imagen del Producto -->
+                                    <td class="px-3 py-4 align-top">
+                                        @if($product->image_path && Storage::disk('public')->exists($product->image_path))
+                                            <img src="{{ asset('storage/' . $product->image_path) }}" 
+                                                 alt="{{ $product->product_name }}" 
+                                                 class="w-12 h-12 object-cover rounded border border-gray-300 dark:border-gray-600">
+                                        @else
+                                            <div class="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center">
+                                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                </svg>
+                                            </div>
+                                        @endif
                                     </td>
                                     
-                                    <td class="px-6 py-4 font-bold align-top">{{ $product->terminal->name ?? 'N/A' }}</td>
-                                    <td class="px-6 py-4 align-top">{{ $product->location }}</td>
+                                    <!-- Datos del Producto -->
+                                    <td class="px-4 py-4 align-top">
+                                        <div class="font-bold text-gray-900 dark:text-white text-sm">{{ $product->product_name }}</div>
+                                        <div class="text-xs text-gray-500 mt-1">{{ $product->chemical_name }}</div>
+                                        <div class="text-xs text-gray-400 mt-1">CAS: {{ $product->cas_number }}</div>
+                                    </td>
+                                    
+                                    <td class="px-4 py-4 font-bold align-top text-sm">{{ $product->terminal->name ?? 'N/A' }}</td>
+                                    <td class="px-4 py-4 align-top text-sm">{{ $product->location }}</td>
                                     
                                     @if($viewDeleted)
                                         <td class="px-6 py-4 align-top">{{ $product->deleted_at->format('d/m/Y H:i') }}</td>
@@ -223,7 +239,7 @@
                                     @endif
                                 </tr>
                                 @empty
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"><td colspan="9" class="px-6 py-4 text-center">No hay materiales registrados.</td></tr>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"><td colspan="10" class="px-6 py-4 text-center">No hay materiales registrados.</td></tr>
                                 @endforelse
                             </tbody>
                         </table>
