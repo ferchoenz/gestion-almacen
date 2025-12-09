@@ -43,32 +43,6 @@
                                 <x-input-error :messages="$errors->get('material_type')" class="mt-2" />
                             </div>
                             <div>
-                                <x-input-label for="item_number" :value="__('No. de Item (Obligatorio si es Spare Part)')" />
-                                <x-text-input id="item_number" class="block mt-1 w-full" type="text" name="item_number" :value="old('item_number')" />
-                                <x-input-error :messages="$errors->get('item_number')" class="mt-2" />
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                            <div>
-                                <x-input-label for="description" :value="__('Descripción o Nombre del Material')" />
-                                <x-text-input id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" required />
-                                <x-input-error :messages="$errors->get('description')" class="mt-2" />
-                            </div>
-                            <div>
-                                <x-input-label for="quantity" :value="__('Cantidad (unidades retiradas)')" />
-                                <x-text-input id="quantity" class="block mt-1 w-full" type="number" step="0.01" name="quantity" :value="old('quantity')" required />
-                                <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                            <div>
-                                <x-input-label for="receiver_name" :value="__('Nombre de la persona que recibe')" />
-                                <x-text-input id="receiver_name" class="block mt-1 w-full" type="text" name="receiver_name" :value="old('receiver_name')" required />
-                                <x-input-error :messages="$errors->get('receiver_name')" class="mt-2" />
-                            </div>
-                            <div>
                                 <x-input-label for="work_order" :value="__('Orden de Trabajo (OT) (Opcional)')" />
                                 <x-text-input id="work_order" class="block mt-1 w-full" type="text" name="work_order" :value="old('work_order')" />
                                 <x-input-error :messages="$errors->get('work_order')" class="mt-2" />

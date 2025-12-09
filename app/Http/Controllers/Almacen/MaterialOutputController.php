@@ -81,7 +81,14 @@ class MaterialOutputController extends Controller
                         ? Terminal::all() 
                         : Terminal::where('id', $user->terminal_id)->get();
 
-        return view('almacen.material-outputs.create', compact('terminals'));
+        // Cargar consumibles activos con stock disponible
+        $consumables = \App\Models\Consumable::where('terminal_id', $user->terminal_id)
+                                              ->where('is_active', true)
+                                              ->where('current_stock', '>', 0)
+                                              ->orderBy('name')
+                                              ->get();
+
+        return view('almacen.material-outputs.create', compact('terminals', 'consumables'));
     }
 
     public function store(Request $request)
@@ -90,7 +97,11 @@ class MaterialOutputController extends Controller
         $validatedData = $request->validate([
             'terminal_id' => ['required', $user->role->name === 'Administrador' ? Rule::exists('terminals', 'id') : Rule::in([$user->terminal_id])],
             'material_type' => ['required', Rule::in(['CONSUMIBLE', 'SPARE_PART'])],
-            'description' => ['required', 'string', 'max:255'],
+            
+            // NUEVO: consumable_id es opcional
+            'consumable_id' => ['nullable', 'exists:consumables,id'],
+            'description' => ['nullable', 'required_without:consumable_id', 'string', 'max:255'],
+            
             'output_date' => ['required', 'date'],
             'quantity' => ['required', 'numeric', 'min:0'],
             'receiver_name' => ['required', 'string', 'max:255'],
@@ -100,12 +111,37 @@ class MaterialOutputController extends Controller
             'work_order' => ['nullable', 'string', 'max:100'],
         ]);
 
+        // Si seleccionó consumible, sincronizar descripción y VALIDAR STOCK
+        if ($validatedData['consumable_id']) {
+            $consumable = \App\Models\Consumable::findOrFail($validatedData['consumable_id']);
+            $validatedData['description'] = $consumable->name;
+            
+            // 🔒 VALIDACIÓN DE STOCK DISPONIBLE
+            if ($consumable->current_stock < $validatedData['quantity']) {
+                return back()->withErrors([
+                    'quantity' => "Stock insuficiente. Disponible: {$consumable->current_stock} {$consumable->unit_of_measure}"
+                ])->withInput();
+            }
+        }
+
         $validatedData['user_id'] = $user->id;
         $validatedData['status'] = $request->filled('work_order') ? 'PENDIENTE_SAP' : 'PENDIENTE_OT';
 
-        MaterialOutput::create($validatedData);
+        $output = MaterialOutput::create($validatedData);
 
-        return redirect()->route('material-outputs.index')->with('success', 'Salida de material registrada exitosamente.');
+        // 🔥 REDUCIR STOCK DEL INVENTARIO (Si hay consumible vinculado)
+        if ($output->consumable_id) {
+            $consumable = \App\Models\Consumable::find($output->consumable_id);
+            $consumable->removeStock(
+                quantity: $output->quantity,
+                referenceType: MaterialOutput::class,
+                referenceId: $output->id,
+                notes: "Salida - Receptor: {$output->receiver_name}" . ($output->work_order ? " - OT: {$output->work_order}" : "")
+            );
+        }
+
+        return redirect()->route('material-outputs.index')
+                        ->with('success', 'Salida de material registrada exitosamente. ' . ($output->consumable_id ? 'Inventario actualizado.' : ''));
     }
 
     public function edit(MaterialOutput $salida)

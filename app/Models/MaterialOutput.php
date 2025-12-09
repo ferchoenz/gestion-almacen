@@ -18,6 +18,7 @@ class MaterialOutput extends Model
     protected $fillable = [
         'terminal_id',
         'user_id',
+        'consumable_id',  // NUEVO: Para vincular con inventario
         'material_type',
         'item_number',
         'description',
@@ -47,5 +48,13 @@ class MaterialOutput extends Model
     public function terminal(): BelongsTo
     {
         return $this->belongsTo(Terminal::class);
+    }
+
+    /**
+     * Relación: Una salida puede estar vinculada a un Consumible (inventario).
+     */
+    public function consumable(): BelongsTo
+    {
+        return $this->belongsTo(\App\Models\Consumable::class);
     }
 }
