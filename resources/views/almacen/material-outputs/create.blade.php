@@ -49,6 +49,88 @@
                             </div>
                         </div>
 
+                        <!-- SECCIÓN CONDICIONAL: SPARE PART -->
+                        <div id="spare-part-section" style="display:none;" class="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded-lg">
+                            <h3 class="text-sm font-semibold text-yellow-800 dark:text-yellow-200 mb-3">🔧 Spare Part</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <x-input-label for="item_number" :value="__('No. de Item (Requerido)')" />
+                                    <x-text-input id="item_number" class="block mt-1 w-full" type="text" name="item_number" :value="old('item_number')" />
+                                    <x-input-error :messages="$errors->get('item_number')" class="mt-2" />
+                                </div>
+                                <div>
+                                    <x-input-label for="description" :value="__('Descripción del Material')" />
+                                    <x-text-input id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" />
+                                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                <div>
+                                    <x-input-label for="quantity" :value="__('Cantidad')" />
+                                    <x-text-input id="quantity" class="block mt-1 w-full" type="number" step="0.01" name="quantity" :value="old('quantity')" />
+                                    <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
+                                </div>
+                                <div>
+                                    <x-input-label for="receiver_name" :value="__('Nombre de quien recibe')" />
+                                    <x-text-input id="receiver_name" class="block mt-1 w-full" type="text" name="receiver_name" :value="old('receiver_name')" />
+                                    <x-input-error :messages="$errors->get('receiver_name')" class="mt-2" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SECCIÓN CONDICIONAL: CONSUMIBLE -->
+                        <div id="consumible-section" style="display:none;" class="mt-4 p-4 bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded-lg" x-data="{ selectedStock: 0 }">
+                            <h3 class="text-sm font-semibold text-green-800 dark:text-green-200 mb-3">📦 Consumible - Inventario</h3>
+                            
+                            <div class="mb-4">
+                                <x-input-label for="consumable_id" :value="__('Seleccionar del Catálogo (Opcional)')" />
+                                <select id="consumable_id" name="consumable_id" 
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 rounded-md shadow-sm"
+                                        @change="if($event.target.value) { 
+                                            const text = $event.target.options[$event.target.selectedIndex].text;
+                                            const parts = text.split(' - ');
+                                            const name = parts[1] ? parts[1].split('(')[0].trim() : '';
+                                            const stockMatch = text.match(/Stock: ([\d.]+)/);
+                                            selectedStock = stockMatch ? parseFloat(stockMatch[1]) : 0;
+                                            document.getElementById('description_consumible').value = name;
+                                        } else {
+                                            selectedStock = 0;
+                                            document.getElementById('description_consumible').value = '';
+                                        }">
+                                    <option value="">-- Dejar vacío para salida manual --</option>
+                                    @foreach($consumables as $consumable)
+                                        <option value="{{ $consumable->id }}">
+                                            {{ $consumable->sku }} - {{ $consumable->name }} (Stock: {{ number_format($consumable->current_stock, 2) }} {{ $consumable->unit_of_measure }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <p class="mt-1 text-xs text-green-600 dark:text-green-300">
+                                    💡 Si seleccionas, el stock se reducirá automáticamente
+                                </p>
+                                <p x-show="selectedStock > 0" class="mt-1 text-sm font-bold text-green-700">
+                                    ✅ Stock disponible: <span x-text="selectedStock.toFixed(2)"></span> unidades
+                                </p>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <x-input-label for="description_consumible" :value="__('Descripción')" />
+                                    <x-text-input id="description_consumible" class="block mt-1 w-full" type="text" name="description" :value="old('description')" placeholder="Auto-completa o escribe manual" />
+                                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                                </div>
+                                <div>
+                                    <x-input-label for="quantity_consumible" :value="__('Cantidad')" />
+                                    <x-text-input id="quantity_consumible" class="block mt-1 w-full" type="number" step="0.01" name="quantity" :value="old('quantity')" />
+                                    <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <x-input-label for="receiver_name_consumible" :value="__('Nombre de quien recibe')" />
+                                <x-text-input id="receiver_name_consumible" class="block mt-1 w-full" type="text" name="receiver_name" :value="old('receiver_name')" />
+                                <x-input-error :messages="$errors->get('receiver_name')" class="mt-2" />
+                            </div>
+                        </div>
+
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
                             
                             <div>
@@ -173,6 +255,33 @@
                     });
                 } catch (error) {
                     console.error('Error al inicializar los pads de firma:', error);
+                }
+
+                // NUEVO: Lógica para mostrar/ocultar secciones según tipo de material
+                const materialTypeSelect = document.getElementById('material_type');
+                const sparePartSection = document.getElementById('spare-part-section');
+                const consumibleSection = document.getElementById('consumible-section');
+
+                if (materialTypeSelect) {
+                    materialTypeSelect.addEventListener('change', function() {
+                        const selectedType = this.value;
+                        
+                        if (selectedType === 'SPARE_PART') {
+                            sparePartSection.style.display = 'block';
+                            consumibleSection.style.display = 'none';
+                        } else if (selectedType === 'CONSUMIBLE') {
+                            sparePartSection.style.display = 'none';
+                            consumibleSection.style.display = 'block';
+                        } else {
+                            sparePartSection.style.display = 'none';
+                            consumibleSection.style.display = 'none';
+                        }
+                    });
+
+                    // Ejecutar al cargar para mantener estado si hay old() values
+                    if (materialTypeSelect.value) {
+                        materialTypeSelect.dispatchEvent(new Event('change'));
+                    }
                 }
             });
         </script>

@@ -53,7 +53,7 @@
                             <!-- Descripción -->
                             <!-- NUEVO: Producto del Inventario o Descripción Manual -->
                             <div>
-                                <x-input-label for="consumable_id" :value="__('Producto del Inventario (Opcional)')\" />
+                                <x-input-label for="consumable_id" :value="__('Producto del Inventario (Opcional)')" />
                                 <select id="consumable_id" name="consumable_id" 
                                         class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 rounded-md shadow-sm"
                                         onchange="if(this.value) { 
