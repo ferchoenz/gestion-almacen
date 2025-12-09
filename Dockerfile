@@ -60,5 +60,5 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # 11. Puerto dinámico de Render
 RUN sed -i "s/80/\${PORT}/g" /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 
-# Comando de inicio
-CMD ["sh", "-c", "php artisan migrate --force && php artisan db:seed --force && apache2-foreground"]
+# Comando de inicio (migrate solo ejecuta nuevas migraciones, no borra datos)
+CMD ["sh", "-c", "php artisan migrate --force && apache2-foreground"]
