@@ -74,7 +74,14 @@ class MaterialReceptionController extends Controller
     {
         $user = Auth::user();
         $terminals = $user->role->name === 'Administrador' ? Terminal::all() : Terminal::where('id', $user->terminal_id)->get();
-        return view('almacen.material-receptions.create', compact('terminals'));
+        
+        // Cargar consumibles activos de la terminal del usuario para inventario
+        $consumables = \App\Models\Consumable::where('terminal_id', $user->terminal_id)
+                                              ->where('is_active', true)
+                                              ->orderBy('name')
+                                              ->get();
+        
+        return view('almacen.material-receptions.create', compact('terminals', 'consumables'));
     }
 
     // Guarda la nueva recepción
@@ -86,7 +93,11 @@ class MaterialReceptionController extends Controller
         $validatedData = $request->validate([
             'terminal_id' => ['required', $user->role->name === 'Administrador' ? Rule::exists('terminals', 'id') : Rule::in([$user->terminal_id])],
             'material_type' => ['required', Rule::in(['CONSUMIBLE', 'SPARE_PART'])],
-            'description' => ['required', 'string', 'max:255'],
+            
+            // NUEVO: consumable_id es opcional, pero si se usa, description puede ser nullable
+            'consumable_id' => ['nullable', 'exists:consumables,id'],
+            'description' => ['nullable', 'required_without:consumable_id', 'string', 'max:255'],
+            
             'provider' => ['required', 'string', 'max:255'],
             'purchase_order' => ['required', 'string', 'max:100'],
             'reception_date' => ['required', 'date'],
@@ -104,6 +115,12 @@ class MaterialReceptionController extends Controller
             'remission_file' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
             'certificate_file' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
         ]);
+
+        // Si seleccionó consumible, sincronizar la descripción automáticamente
+        if ($validatedData['consumable_id']) {
+            $consumable = \App\Models\Consumable::find($validatedData['consumable_id']);
+            $validatedData['description'] = $consumable->name;
+        }
 
         $validatedData['user_id'] = $user->id;
         $validatedData['quality_certificate'] = $request->boolean('quality_certificate');
@@ -126,9 +143,20 @@ class MaterialReceptionController extends Controller
             $validatedData['certificate_path'] = $request->file('certificate_file')->store('receptions/certificates', 'public');
         }
 
-        MaterialReception::create($validatedData);
+        $reception = MaterialReception::create($validatedData);
 
-        return redirect()->route('material-receptions.index')->with('success', 'Recepción registrada exitosamente.');
+        // 🔥 ACTUALIZAR INVENTARIO: Si la recepción está vinculada a un consumible, sumar stock
+        if ($reception->consumable_id) {
+            $consumable = \App\Models\Consumable::find($reception->consumable_id);
+            $consumable->addStock(
+                quantity: $reception->quantity,
+                referenceType: MaterialReception::class,
+                referenceId: $reception->id,
+                notes: "Entrada de material - OC: {$reception->purchase_order} - Proveedor: {$reception->provider}"
+            );
+        }
+
+        return redirect()->route('material-receptions.index')->with('success', 'Recepción registrada exitosamente. ' . ($reception->consumable_id ? 'Inventario actualizado.' : ''));
     }
     
     // FUNCIÓN CORREGIDA: Ver archivos adjuntos

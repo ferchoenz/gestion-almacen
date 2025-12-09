@@ -51,9 +51,34 @@
                                 <x-input-error :messages="$errors->get('material_type')" class="mt-2" />
                             </div>
                             <!-- Descripción -->
+                            <!-- NUEVO: Producto del Inventario o Descripción Manual -->
                             <div>
-                                <x-input-label for="description" :value="__('Descripción o Nombre del Material')" />
-                                <x-text-input id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" required />
+                                <x-input-label for="consumable_id" :value="__('Producto del Inventario (Opcional)')\" />
+                                <select id="consumable_id" name="consumable_id" 
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 rounded-md shadow-sm"
+                                        onchange="if(this.value) { 
+                                            const text = this.options[this.selectedIndex].text;
+                                            const parts = text.split(' - ');
+                                            const name = parts[1] ? parts[1].split('(')[0].trim() : '';
+                                            document.getElementById('description').value = name;
+                                            document.getElementById('description').classList.add('bg-gray-100');
+                                            document.getElementById('desc-label').innerHTML = 'Descripción (Auto-completado)';
+                                        } else {
+                                            document.getElementById('description').value = '';
+                                            document.getElementById('description').classList.remove('bg-gray-100');
+                                            document.getElementById('desc-label').innerHTML = 'Descripción del Material';
+                                        }">
+                                    <option value="">-- Seleccionar del catálogo (opcional) --</option>
+                                    @foreach($consumables as $consumable)
+                                        <option value="{{ $consumable->id }}">
+                                            {{ $consumable->sku }} - {{ $consumable->name }} ({{ number_format($consumable->current_stock, 2) }} {{ $consumable->unit_of_measure }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <p class="mt-1 text-xs text-blue-600 dark:text-blue-400">💡 Si seleccionas un producto, el stock se actualizará automáticamente</p>
+                                
+                                <x-input-label for="description" class="mt-3" id="desc-label" :value="__('Descripción del Material')" />
+                                <x-text-input id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" placeholder="O escribe descripción manual si no seleccionaste del catálogo" />
                                 <x-input-error :messages="$errors->get('description')" class="mt-2" />
                             </div>
                         </div>

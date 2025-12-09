@@ -50,6 +50,13 @@
                             {{ __('Inventario') }}
                         </x-nav-link>
                     @endif
+
+                    <!-- SALIDAS DE INVENTARIO (Admin, Almacenista) -->
+                    @if(in_array(Auth::user()->role?->name, ['Administrador', 'Almacenista']))
+                        <x-nav-link :href="route('inventory-exits.index')" :active="request()->routeIs('inventory-exits.*')">
+                            {{ __('Salidas') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -133,6 +140,13 @@
             @if(in_array(Auth::user()->role?->name, ['Administrador', 'Almacenista']))
                 <x-responsive-nav-link :href="route('consumables.index')" :active="request()->routeIs('consumables.*')">
                     {{ __('Inventario') }}
+                </x-responsive-nav-link>
+            @endif
+
+            <!-- SALIDAS DE INVENTARIO RESPONSIVE -->
+            @if(in_array(Auth::user()->role?->name, ['Administrador', 'Almacenista']))
+                <x-responsive-nav-link :href="route('inventory-exits.index')" :active="request()->routeIs('inventory-exits.*')">
+                    {{ __('Salidas') }}
                 </x-responsive-nav-link>
             @endif
         </div>

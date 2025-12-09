@@ -110,6 +110,13 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('consumables', \App\Http\Controllers\Almacen\ConsumableController::class)
          ->middleware('role:Administrador,Almacenista');
+
+    // ============================================================================
+    // SALIDAS DE INVENTARIO
+    // ============================================================================
+    
+    Route::resource('inventory-exits', \App\Http\Controllers\Almacen\InventoryExitController::class)
+         ->middleware('role:Administrador,Almacenista');
 });
 
 require __DIR__.'/auth.php';
