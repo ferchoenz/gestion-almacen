@@ -17,7 +17,8 @@ class RoleSeeder extends Seeder
             'Administrador',
             'Seguridad y Salud',
             'Mantenimiento',
-            'Gerencia'
+            'Gerencia',
+            'Almacenista'  // Para gestión de inventario
         ];
 
         foreach ($roles as $roleName) {

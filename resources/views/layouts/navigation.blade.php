@@ -43,6 +43,13 @@
                             {{ __('Materiales Peligrosos') }}
                         </x-nav-link>
                     @endif
+
+                    <!-- CONSUMIBLES / INVENTARIO (Admin, Almacenista) -->
+                    @if(in_array(Auth::user()->role?->name, ['Administrador', 'Almacenista']))
+                        <x-nav-link :href="route('consumables.index')" :active="request()->routeIs('consumables.*')">
+                            {{ __('Inventario') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -119,6 +126,13 @@
             @if(in_array(Auth::user()->role?->name, ['Administrador', 'Seguridad y Salud']))
                 <x-responsive-nav-link :href="route('hazmat.index')" :active="request()->routeIs('hazmat.*')">
                     {{ __('Materiales Peligrosos') }}
+                </x-responsive-nav-link>
+            @endif
+
+            <!-- CONSUMIBLES / INVENTARIO RESPONSIVE -->
+            @if(in_array(Auth::user()->role?->name, ['Administrador', 'Almacenista']))
+                <x-responsive-nav-link :href="route('consumables.index')" :active="request()->routeIs('consumables.*')">
+                    {{ __('Inventario') }}
                 </x-responsive-nav-link>
             @endif
         </div>
