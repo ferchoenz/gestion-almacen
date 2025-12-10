@@ -131,7 +131,19 @@
                         </table>
                     </div>
 
-                    <div class="mt-4 flex justify-end gap-3">
+                    <div class="mt-4 flex justify-end gap-3 items-center flex-wrap">
+                        <!-- Imprimir Etiquetas -->
+                        <div class="flex items-center gap-2" x-data="{ quantity: 1 }">
+                            <a :href="'{{ route('consumables.labels', $consumable) }}?quantity=' + quantity" 
+                               class="inline-flex items-center px-4 py-2 bg-purple-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-purple-700 transition"
+                               target="_blank">
+                                🏷️ Imprimir
+                            </a>
+                            <input type="number" x-model="quantity" min="1" max="100" 
+                                   class="w-16 text-center border-gray-300 rounded-md text-sm">
+                            <span class="text-xs text-gray-500">etiquetas</span>
+                        </div>
+
                         <a href="{{ route('consumables.edit', $consumable) }}" class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 transition">
                             Editar Producto
                         </a>

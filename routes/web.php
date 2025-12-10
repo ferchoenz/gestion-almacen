@@ -108,6 +108,19 @@ Route::middleware('auth')->group(function () {
          ->name('consumables.export')
          ->middleware('role:Administrador,Gerencia');
 
+    // Rutas para etiquetas de consumibles
+    Route::get('consumables/{consumable}/label', [\App\Http\Controllers\Almacen\LabelController::class, 'single'])
+         ->name('consumables.label')
+         ->middleware('role:Administrador,Almacenista');
+
+    Route::get('consumables/{consumable}/labels', [\App\Http\Controllers\Almacen\LabelController::class, 'multiple'])
+         ->name('consumables.labels')
+         ->middleware('role:Administrador,Almacenista');
+
+    Route::post('consumables/labels/batch', [\App\Http\Controllers\Almacen\LabelController::class, 'batch'])
+         ->name('consumables.labels.batch')
+         ->middleware('role:Administrador,Almacenista');
+
     Route::resource('consumables', \App\Http\Controllers\Almacen\ConsumableController::class)
          ->middleware('role:Administrador,Almacenista');
 
