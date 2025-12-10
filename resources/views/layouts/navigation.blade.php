@@ -52,6 +52,10 @@
                                             <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
                                             Catálogo de Productos
                                         </a>
+                                        <a href="{{ route('inventory-locations.index') }}" class="group flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-indigo-50 dark:hover:bg-gray-700 {{ request()->routeIs('inventory-locations.*') ? 'bg-indigo-100 dark:bg-gray-700 font-semibold' : '' }}">
+                                            <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                            Ubicaciones
+                                        </a>
                                     </div>
                                 @endif
 
@@ -190,6 +194,9 @@
                             <div class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase">Inventario</div>
                             <x-responsive-nav-link :href="route('consumables.index')" :active="request()->routeIs('consumables.*')">
                                 📦 Catálogo de Productos
+                            </x-responsive-nav-link>
+                            <x-responsive-nav-link :href="route('inventory-locations.index')" :active="request()->routeIs('inventory-locations.*')">
+                                📍 Ubicaciones
                             </x-responsive-nav-link>
                         @endif
 

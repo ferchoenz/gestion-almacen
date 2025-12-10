@@ -110,6 +110,12 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('consumables', \App\Http\Controllers\Almacen\ConsumableController::class)
          ->middleware('role:Administrador,Almacenista');
+
+    // ============================================================================
+    // UBICACIONES DE INVENTARIO
+    // ============================================================================
+    Route::resource('inventory-locations', \App\Http\Controllers\Almacen\InventoryLocationController::class)
+         ->middleware('role:Administrador,Almacenista');
 });
 
 require __DIR__.'/auth.php';

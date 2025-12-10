@@ -171,9 +171,53 @@ class MaterialReceptionController extends Controller
         return redirect()->route('material-receptions.index')->with('success', 'Recepción registrada exitosamente. ' . ($reception->consumable_id ? 'Inventario actualizado.' : ''));
     }
     
-    // ... viewFile ...
+    public function viewFile(MaterialReception $recepcione, $type)
+    {
+        $user = Auth::user();
+        // Security check
+        if ($user->role->name !== 'Administrador' && $recepcione->terminal_id !== $user->terminal_id) {
+            abort(403);
+        }
 
-    // ... edit ...
+        $path = null;
+        switch ($type) {
+            case 'invoice': $path = $recepcione->invoice_path; break;
+            case 'remission': $path = $recepcione->remission_path; break;
+            case 'certificate': $path = $recepcione->certificate_path; break;
+        }
+
+        if (!$path || !Storage::disk('public')->exists($path)) {
+            abort(404, 'Archivo no encontrado.');
+        }
+
+        return Storage::disk('public')->response($path);
+    }
+
+    public function edit(MaterialReception $recepcione)
+    {
+        $user = Auth::user();
+        
+        // Security check
+        if ($user->role->name !== 'Administrador' && $recepcione->terminal_id !== $user->terminal_id) {
+            abort(403);
+        }
+
+        $terminals = $user->role->name === 'Administrador' ? Terminal::all() : Terminal::where('id', $user->terminal_id)->get();
+        
+        // Cargar consumibles y ubicaciones
+        $consumablesQuery = \App\Models\Consumable::where('is_active', true);
+        $locationsQuery = \App\Models\InventoryLocation::where('is_active', true);
+        
+        if ($user->role->name !== 'Administrador') {
+            $consumablesQuery->where('terminal_id', $user->terminal_id);
+            $locationsQuery->where('terminal_id', $user->terminal_id);
+        }
+        
+        $consumables = $consumablesQuery->orderBy('name')->get();
+        $inventoryLocations = $locationsQuery->orderBy('code')->get();
+
+        return view('almacen.material-receptions.edit', compact('recepcione', 'terminals', 'consumables', 'inventoryLocations'));
+    }
 
     // Actualiza la recepción
     public function update(Request $request, MaterialReception $recepcione)

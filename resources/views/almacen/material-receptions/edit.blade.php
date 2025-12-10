@@ -334,17 +334,17 @@
                                 <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">📎 Documentos Adjuntos</h3>
                                 <div class="flex flex-wrap gap-2">
                                     @if($recepcione->invoice_path)
-                                        <a href="{{ route('material-receptions.view-file', [$recepcione, 'invoice']) }}" target="_blank" class="inline-flex items-center px-3 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-full hover:bg-blue-200">
+                                        <a href="{{ route('material-receptions.file', [$recepcione, 'invoice']) }}" target="_blank" class="inline-flex items-center px-3 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-full hover:bg-blue-200">
                                             📄 Factura
                                         </a>
                                     @endif
                                     @if($recepcione->remission_path)
-                                        <a href="{{ route('material-receptions.view-file', [$recepcione, 'remission']) }}" target="_blank" class="inline-flex items-center px-3 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-full hover:bg-blue-200">
+                                        <a href="{{ route('material-receptions.file', [$recepcione, 'remission']) }}" target="_blank" class="inline-flex items-center px-3 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-full hover:bg-blue-200">
                                             📄 Remisión
                                         </a>
                                     @endif
                                     @if($recepcione->certificate_path)
-                                        <a href="{{ route('material-receptions.view-file', [$recepcione, 'certificate']) }}" target="_blank" class="inline-flex items-center px-3 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-full hover:bg-blue-200">
+                                        <a href="{{ route('material-receptions.file', [$recepcione, 'certificate']) }}" target="_blank" class="inline-flex items-center px-3 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-full hover:bg-blue-200">
                                             📄 Certificado
                                         </a>
                                     @endif
