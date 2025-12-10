@@ -122,6 +122,130 @@
                                                     </option>
                                                 @endforeach
                                             @endif
+<x-app-layout>
+    <x-slot name="header">
+        <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Editar Recepción de Material') }} (Folio: {{ $recepcione->id }})
+            </h2>
+            <!-- Status Badge -->
+            @if($recepcione->status === 'PENDIENTE_OT')
+                <span class="px-3 py-1 text-sm font-semibold text-yellow-800 bg-yellow-100 rounded-full">
+                    ⚠️ PENDIENTE OT/SAP
+                </span>
+            @elseif($recepcione->status === 'COMPLETO')
+                <span class="px-3 py-1 text-sm font-semibold text-green-800 bg-green-100 rounded-full">
+                    ✅ COMPLETO
+                </span>
+            @else
+                <span class="px-3 py-1 text-sm font-semibold text-gray-800 bg-gray-100 rounded-full">
+                    {{ $recepcione->status }}
+                </span>
+            @endif
+        </div>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+
+                    <!-- Alerta para PENDIENTE_OT -->
+                    @if($recepcione->status === 'PENDIENTE_OT')
+                        <div class="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 rounded-lg">
+                            <p class="text-sm text-yellow-800 dark:text-yellow-200">
+                                <strong>⚠️ Esta recepción está pendiente.</strong> Complete la Orden de Trabajo y/o Confirmación SAP para cambiar el estado a COMPLETO.
+                            </p>
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('material-receptions.update', $recepcione) }}" enctype="multipart/form-data"
+                          x-data="{ materialType: '{{ $recepcione->material_type }}' }">
+                        @csrf
+                        @method('PATCH')
+
+                        <!-- SECCIÓN BASE: Terminal, Fecha y Tipo (Solo lectura) -->
+                        <div class="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">📋 Información Base</h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <!-- Terminal -->
+                                <div>
+                                    <x-input-label for="terminal_id" :value="__('Terminal')" />
+                                    <select id="terminal_id" name="terminal_id" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 rounded-md shadow-sm" required>
+                                        @foreach($terminals as $terminal)
+                                            <option value="{{ $terminal->id }}" {{ old('terminal_id', $recepcione->terminal_id) == $terminal->id ? 'selected' : '' }}>
+                                                {{ $terminal->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- Fecha de Recepción -->
+                                <div>
+                                    <x-input-label for="reception_date" :value="__('Fecha de Recepción')" />
+                                    <x-text-input id="reception_date" class="block mt-1 w-full" type="date" name="reception_date" :value="old('reception_date', $recepcione->reception_date->format('Y-m-d'))" required />
+                                </div>
+
+                                <!-- Tipo de Material (Solo lectura) -->
+                                <div>
+                                    <x-input-label :value="__('Tipo de Material')" />
+                                    <div class="mt-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-md text-sm font-semibold">
+                                        @if($recepcione->material_type === 'CONSUMIBLE')
+                                            📦 CONSUMIBLE
+                                        @else
+                                            🔧 SPARE PART
+                                        @endif
+                                    </div>
+                                    <input type="hidden" name="material_type" value="{{ $recepcione->material_type }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SECCIÓN CONSUMIBLE -->
+                        @if($recepcione->material_type === 'CONSUMIBLE')
+                            <div class="mt-4 p-4 bg-green-50 dark:bg-green-900/30 rounded-lg border border-green-200 dark:border-green-700">
+                                <h3 class="text-sm font-semibold text-green-800 dark:text-green-200 mb-4">📦 Datos del Consumible</h3>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <!-- Descripción -->
+                                    <div>
+                                        <x-input-label for="description" :value="__('Descripción')" />
+                                        <x-text-input id="description" class="block mt-1 w-full bg-gray-100 dark:bg-gray-700" type="text" name="description" :value="old('description', $recepcione->description)" readonly />
+                                    </div>
+
+                                    <!-- Proveedor -->
+                                    <div>
+                                        <x-input-label for="provider" :value="__('Proveedor')" />
+                                        <x-text-input id="provider" class="block mt-1 w-full" type="text" name="provider" :value="old('provider', $recepcione->provider)" required />
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                                    <!-- Orden de Compra -->
+                                    <div>
+                                        <x-input-label for="purchase_order" :value="__('Orden de Compra')" />
+                                        <x-text-input id="purchase_order" class="block mt-1 w-full" type="text" name="purchase_order" :value="old('purchase_order', $recepcione->purchase_order)" required />
+                                    </div>
+
+                                    <!-- Cantidad -->
+                                    <div>
+                                        <x-input-label for="quantity" :value="__('Cantidad')" />
+                                        <x-text-input id="quantity" class="block mt-1 w-full" type="number" step="0.01" name="quantity" :value="old('quantity', $recepcione->quantity)" required />
+                                    </div>
+
+                                    <!-- Ubicación -->
+                                    <div>
+                                        <x-input-label for="inventory_location_id" :value="__('Ubicación')" />
+                                        <select id="inventory_location_id" name="inventory_location_id" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 rounded-md shadow-sm">
+                                            <option value="">-- Sin ubicación --</option>
+                                            @if(isset($inventoryLocations))
+                                                @foreach($inventoryLocations as $location)
+                                                    <option value="{{ $location->id }}" {{ old('inventory_location_id', $recepcione->inventory_location_id) == $location->id ? 'selected' : '' }}>
+                                                        {{ $location->code }} - {{ $location->name }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </div>
                                 </div>
@@ -176,16 +300,13 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <!-- Orden de Trabajo -->
                                         <div>
-                                            <x-input-label for="work_order_file" :value="__('Orden de Trabajo (PDF)')" />
-                                            @if($recepcione->work_order_path)
-                                                <p class="text-xs text-green-600 mb-1">✅ Archivo cargado</p>
-                                            @endif
-                                            <input id="work_order_file" type="file" name="work_order_file" accept=".pdf" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
+                                            <x-input-label for="work_order" :value="__('Orden de Trabajo (Opcional)')" />
+                                            <x-text-input id="work_order" class="block mt-1 w-full {{ !$recepcione->work_order ? 'border-yellow-400' : '' }}" type="text" name="work_order" :value="old('work_order', $recepcione->work_order)" placeholder="Ej: OT-12345" />
                                         </div>
 
                                         <!-- Confirmación SAP -->
                                         <div>
-                                            <x-input-label for="sap_confirmation" :value="__('Confirmación SAP')" />
+                                            <x-input-label for="sap_confirmation" :value="__('Confirmación SAP (Opcional)')" />
                                             <x-text-input id="sap_confirmation" class="block mt-1 w-full {{ !$recepcione->sap_confirmation ? 'border-yellow-400' : '' }}" type="text" name="sap_confirmation" :value="old('sap_confirmation', $recepcione->sap_confirmation)" placeholder="Ej: 4500012345" />
                                         </div>
                                     </div>
@@ -225,11 +346,6 @@
                                     @if($recepcione->certificate_path)
                                         <a href="{{ route('material-receptions.view-file', [$recepcione, 'certificate']) }}" target="_blank" class="inline-flex items-center px-3 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-full hover:bg-blue-200">
                                             📄 Certificado
-                                        </a>
-                                    @endif
-                                    @if($recepcione->work_order_path)
-                                        <a href="{{ route('material-receptions.view-file', [$recepcione, 'work_order']) }}" target="_blank" class="inline-flex items-center px-3 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-full hover:bg-blue-200">
-                                            📄 Orden de Trabajo
                                         </a>
                                     @endif
                                 </div>

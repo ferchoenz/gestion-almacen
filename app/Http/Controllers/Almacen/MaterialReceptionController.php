@@ -110,6 +110,7 @@ class MaterialReceptionController extends Controller
             // Campos SPARE_PART  
             'item_number' => ['nullable', 'required_if:material_type,SPARE_PART', 'string', 'max:100'],
             'sap_confirmation' => ['nullable', 'string', 'max:100'],
+            'work_order' => ['nullable', 'string', 'max:100'], // Ahora es texto
             
             // Campos comunes
             'description' => ['nullable', 'string', 'max:255'],
@@ -122,7 +123,6 @@ class MaterialReceptionController extends Controller
             'invoice_file' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
             'remission_file' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
             'certificate_file' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
-            'work_order_file' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
         ]);
 
         // Si seleccionó consumible, sincronizar descripción
@@ -136,17 +136,15 @@ class MaterialReceptionController extends Controller
         
         // LÓGICA DE STATUS según tipo de material
         if ($validatedData['material_type'] === 'CONSUMIBLE') {
-            // Consumibles siempre son COMPLETO
             $validatedData['status'] = 'COMPLETO';
         } else {
             // Spare Parts: PENDIENTE_OT si falta OT o SAP
-            $hasWorkOrder = $request->hasFile('work_order_file');
-            $hasSAP = $request->filled('sap_confirmation');
+            $hasWorkOrder = !empty($validatedData['work_order']);
+            $hasSAP = !empty($validatedData['sap_confirmation']);
             $validatedData['status'] = ($hasWorkOrder && $hasSAP) ? 'COMPLETO' : 'PENDIENTE_OT';
         }
         
-        // GUARDADO DE ARCHIVOS (CORREGIDO)
-        // Usamos el disco 'public' para facilitar el acceso luego
+        // GUARDADO DE ARCHIVOS
         if ($request->hasFile('invoice_file')) {
             $validatedData['invoice_path'] = $request->file('invoice_file')->store('receptions/invoices', 'public');
         }
@@ -156,13 +154,10 @@ class MaterialReceptionController extends Controller
         if ($request->hasFile('certificate_file')) {
             $validatedData['certificate_path'] = $request->file('certificate_file')->store('receptions/certificates', 'public');
         }
-        if ($request->hasFile('work_order_file')) {
-            $validatedData['work_order_path'] = $request->file('work_order_file')->store('receptions/work_orders', 'public');
-        }
 
         $reception = MaterialReception::create($validatedData);
 
-        // 🔥 ACTUALIZAR INVENTARIO: Si la recepción está vinculada a un consumible, sumar stock
+        // ACTUALIZAR INVENTARIO
         if ($reception->consumable_id) {
             $consumable = \App\Models\Consumable::find($reception->consumable_id);
             $consumable->addStock(
@@ -176,43 +171,9 @@ class MaterialReceptionController extends Controller
         return redirect()->route('material-receptions.index')->with('success', 'Recepción registrada exitosamente. ' . ($reception->consumable_id ? 'Inventario actualizado.' : ''));
     }
     
-    // FUNCIÓN CORREGIDA: Ver archivos adjuntos
-    public function viewFile(MaterialReception $recepcione, $type)
-    {
-        // Mapeamos el tipo de archivo a la columna de la base de datos
-        $path = match($type) {
-            'invoice' => $recepcione->invoice_path,
-            'remission' => $recepcione->remission_path,
-            'certificate' => $recepcione->certificate_path,
-            'work_order' => $recepcione->work_order_path,
-            default => null
-        };
+    // ... viewFile ...
 
-        // Verificamos si el archivo existe en el disco 'public'
-        if (!$path || !Storage::disk('public')->exists($path)) {
-            abort(404, 'Archivo no encontrado en el servidor.');
-        }
-        
-        // Servimos el archivo para visualización en el navegador
-        // Usamos el método 'path' para obtener la ruta absoluta del sistema
-        return response()->file(Storage::disk('public')->path($path));
-    }
-
-    // Muestra el formulario de edición
-    public function edit(MaterialReception $recepcione)
-    {
-        $user = Auth::user();
-        $terminals = $user->role->name === 'Administrador' ? Terminal::all() : Terminal::where('id', $user->terminal_id)->get();
-        
-        // Cargar ubicaciones de inventario
-        $locationsQuery = \App\Models\InventoryLocation::where('is_active', true);
-        if ($user->role->name !== 'Administrador') {
-            $locationsQuery->where('terminal_id', $user->terminal_id);
-        }
-        $inventoryLocations = $locationsQuery->orderBy('code')->get();
-        
-        return view('almacen.material-receptions.edit', compact('recepcione', 'terminals', 'inventoryLocations'));
-    }
+    // ... edit ...
 
     // Actualiza la recepción
     public function update(Request $request, MaterialReception $recepcione)
@@ -230,23 +191,18 @@ class MaterialReceptionController extends Controller
             'item_number' => ['nullable', 'required_if:material_type,SPARE_PART', 'string', 'max:100'],
             'inventory_location_id' => ['nullable', 'exists:inventory_locations,id'],
             'quality_certificate' => ['nullable', 'boolean'],
-            'work_order_file' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
+            'work_order' => ['nullable', 'string', 'max:100'], // Ahora texto
         ]);
 
         $validatedData['quality_certificate'] = $request->boolean('quality_certificate');
-        
-        // Guardar archivo de orden de trabajo si se subió
-        if ($request->hasFile('work_order_file')) {
-            $validatedData['work_order_path'] = $request->file('work_order_file')->store('receptions/work_orders', 'public');
-        }
         
         // LÓGICA DE STATUS según tipo de material
         if ($validatedData['material_type'] === 'CONSUMIBLE') {
             $validatedData['status'] = 'COMPLETO';
         } else {
             // Spare Parts: verificar OT y SAP
-            $hasWorkOrder = $recepcione->work_order_path || $request->hasFile('work_order_file');
-            $hasSAP = $request->filled('sap_confirmation');
+            $hasWorkOrder = !empty($validatedData['work_order']);
+            $hasSAP = !empty($validatedData['sap_confirmation']);
             $validatedData['status'] = ($hasWorkOrder && $hasSAP) ? 'COMPLETO' : 'PENDIENTE_OT';
         }
 

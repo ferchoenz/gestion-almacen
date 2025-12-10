@@ -14,8 +14,9 @@
                           x-data="{ 
                               materialType: '{{ old('material_type', '') }}',
                               hasCertificate: {{ old('quality_certificate') ? 'true' : 'false' }},
-                              selectedConsumable: null
-                          }">
+                              submitting: false
+                          }"
+                          @submit="submitting = true">
                         @csrf
 
                         <!-- SECCIÓN BASE: Terminal, Fecha y Tipo de Material -->
@@ -57,8 +58,11 @@
                         </div>
 
                         <!-- SECCIÓN CONSUMIBLE -->
-                        <div x-show="materialType === 'CONSUMIBLE'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" 
-                             class="mt-4 p-4 bg-green-50 dark:bg-green-900/30 rounded-lg border border-green-200 dark:border-green-700" style="display: none;">
+                        <!-- Usamos x-bind:disabled para deshabilitar todos los inputs dentro cuando no es visible -->
+                        <fieldset x-show="materialType === 'CONSUMIBLE'" x-bind:disabled="materialType !== 'CONSUMIBLE'"
+                                  x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" 
+                                  class="mt-4 p-4 bg-green-50 dark:bg-green-900/30 rounded-lg border border-green-200 dark:border-green-700" style="display: none;">
+                            
                             <h3 class="text-sm font-semibold text-green-800 dark:text-green-200 mb-4">📦 Entrada de Consumible</h3>
                             
                             <!-- Selector de Inventario -->
@@ -136,14 +140,13 @@
                                     <input id="remission_consumible" type="file" name="remission_file" accept=".pdf" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
                                 </div>
                             </div>
-
-                            <!-- Status para consumibles: siempre COMPLETO -->
-                            <input type="hidden" name="status" value="COMPLETO" x-bind:disabled="materialType !== 'CONSUMIBLE'">
-                        </div>
+                        </fieldset>
 
                         <!-- SECCIÓN SPARE PART -->
-                        <div x-show="materialType === 'SPARE_PART'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
-                             class="mt-4 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-700" style="display: none;">
+                        <fieldset x-show="materialType === 'SPARE_PART'" x-bind:disabled="materialType !== 'SPARE_PART'"
+                                  x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+                                  class="mt-4 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-700" style="display: none;">
+                            
                             <h3 class="text-sm font-semibold text-blue-800 dark:text-blue-200 mb-4">🔧 Entrada de Spare Part</h3>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -186,16 +189,16 @@
                                     <p class="text-xs text-yellow-700 dark:text-yellow-300 mb-2">⚠️ Campos opcionales - Si no se completan, el estado será "PENDIENTE_OT"</p>
                                 </div>
                                 
-                                <!-- Orden de Trabajo -->
+                                <!-- Orden de Trabajo (TEXTO) -->
                                 <div>
-                                    <x-input-label for="work_order_file" :value="__('Orden de Trabajo (PDF) - Opcional')" />
-                                    <input id="work_order_file" type="file" name="work_order_file" accept=".pdf" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
+                                    <x-input-label for="work_order" :value="__('Orden de Trabajo (Opcional)')" />
+                                    <x-text-input id="work_order" class="block mt-1 w-full" type="text" name="work_order" :value="old('work_order')" placeholder="Ej: OT-12345" />
                                 </div>
 
                                 <!-- Confirmación SAP -->
                                 <div>
                                     <x-input-label for="sap_confirmation" :value="__('Confirmación SAP (Opcional)')" />
-                                    <x-text-input id="sap_confirmation" class="block mt-1 w-full" type="text" name="sap_confirmation" :value="old('sap_confirmation')" />
+                                    <x-text-input id="sap_confirmation" class="block mt-1 w-full" type="text" name="sap_confirmation" :value="old('sap_confirmation')" placeholder="Ej: 45000..." />
                                 </div>
                             </div>
 
@@ -226,15 +229,20 @@
                                     <input id="invoice_spare" type="file" name="invoice_file" accept=".pdf" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
                                 </div>
                             </div>
-                        </div>
+                        </fieldset>
 
                         <!-- Botones de Acción -->
                         <div class="flex items-center justify-end mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
                             <a href="{{ route('material-receptions.index') }}" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
                                 {{ __('Cancelar') }}
                             </a>
-                            <x-primary-button class="ms-4" id="submit-form-btn" x-bind:disabled="!materialType">
-                                {{ __('Guardar Recepción') }}
+                            
+                            <x-primary-button class="ms-4 flex items-center" id="submit-form-btn" x-bind:disabled="!materialType || submitting">
+                                <svg x-show="submitting" class="animate-spin -ml-1 mr-3 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                <span x-text="submitting ? 'Guardando...' : 'Guardar Recepción'"></span>
                             </x-primary-button>
                         </div>
                     </form>

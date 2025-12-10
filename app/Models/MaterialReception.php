@@ -36,7 +36,7 @@ class MaterialReception extends Model
         'invoice_path',
         'remission_path',
         'certificate_path',
-        'work_order_path',  // Para orden de trabajo
+        'work_order',  // Para orden de trabajo (Texto)
     ];
 
     /**
