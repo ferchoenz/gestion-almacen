@@ -83,6 +83,14 @@
                             <h3 class="text-sm font-semibold text-green-800 dark:text-green-200 mb-3">📦 Consumible - Inventario</h3>
                             
                             <div class="mb-4">
+                                <!-- DEBUG: Mostrar cuántos consumibles hay -->
+                                <div class="mb-2 p-2 bg-yellow-100 dark:bg-yellow-800 rounded">
+                                    <strong>DEBUG:</strong> Consumibles cargados: {{ $consumables->count() }}
+                                    @if($consumables->count() > 0)
+                                        <br>Primer consumible: {{ $consumables->first()->name ?? 'N/A' }}
+                                    @endif
+                                </div>
+                                
                                 <x-input-label for="consumable_id" :value="__('Seleccionar del Catálogo (Opcional)')" />
                                 <select id="consumable_id" name="consumable_id" 
                                         class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 rounded-md shadow-sm"
