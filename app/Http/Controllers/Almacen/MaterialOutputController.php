@@ -91,8 +91,9 @@ class MaterialOutputController extends Controller
         }
         
         $consumables = $consumablesQuery->orderBy('name')->get();
+        $locations = \App\Models\InventoryLocation::where('is_active', true)->orderBy('code')->get();
 
-        return view('almacen.material-outputs.create', compact('terminals', 'consumables'));
+        return view('almacen.material-outputs.create', compact('terminals', 'consumables', 'locations'));
     }
 
     public function store(Request $request)

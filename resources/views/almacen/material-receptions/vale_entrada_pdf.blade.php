@@ -50,7 +50,14 @@
         <tr><th>Cantidad Recibida:</th><td>{{ $reception->quantity }}</td></tr>
         <tr><th>Certificado de Calidad:</th><td>{{ $reception->quality_certificate ? 'SÍ' : 'NO' }}</td></tr>
         <tr><th>Confirmación SAP:</th><td>{{ $reception->sap_confirmation ?? 'N/A' }}</td></tr>
-        <tr><th>Ubicación:</th><td>{{ $reception->storage_location ?? 'Pendiente' }}</td></tr>
+        @if($reception->consumable)
+            <tr><th>Almacén Destino:</th><td>{{ $reception->consumable->location?->name ?? 'Sin asignar' }}</td></tr>
+            @if($reception->consumable->specific_location)
+                <tr><th>Ubicación Exacta:</th><td>📍 {{ $reception->consumable->specific_location }}</td></tr>
+            @endif
+        @else
+            <tr><th>Ubicación:</th><td>{{ $reception->storage_location ?? 'Pendiente' }}</td></tr>
+        @endif
     </table>
 </body>
 </html>

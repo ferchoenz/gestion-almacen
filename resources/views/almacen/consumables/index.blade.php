@@ -126,7 +126,10 @@
 
                                     <!-- Ubicación -->
                                     <td class="px-4 py-4 text-sm">
-                                        {{ $item->location?->code ?? '-' }}
+                                        <div class="font-medium">{{ $item->location?->name ?? '-' }}</div>
+                                        @if($item->specific_location)
+                                            <div class="text-xs text-gray-500 mt-1">📍 {{ $item->specific_location }}</div>
+                                        @endif
                                     </td>
 
                                     <!-- Stock -->

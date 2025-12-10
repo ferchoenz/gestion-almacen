@@ -79,13 +79,29 @@
                         </div>
 
                         <!-- SECCIÓN CONDICIONAL: CONSUMIBLE -->
-                        <div id="consumible-section" style="display:none;" class="mt-4 p-4 bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded-lg" x-data="{ selectedStock: 0 }">
+                        <div id="consumible-section" style="display:none;" class="mt-4 p-4 bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded-lg" x-data="{ selectedStock: 0, warehouseId: '', filteredConsumables: [] }">
                             <h3 class="text-sm font-semibold text-green-800 dark:text-green-200 mb-3">📦 Consumible - Inventario</h3>
                             
+                            <!-- Selector de Almacén -->
+                            <div class="mb-4">
+                                <x-input-label for="warehouse_filter" :value="__('Almacén Origen')" />
+                                <select id="warehouse_filter" 
+                                        class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 rounded-md shadow-sm"
+                                        @change="warehouseId = $event.target.value; document.getElementById('consumable_id').value = ''; selectedStock = 0; document.getElementById('description_consumible').value = ''"
+                                        required>
+                                    <option value="">-- Seleccionar Almacén --</option>
+                                    @foreach($locations as $location)
+                                        <option value="{{ $location->id }}">{{ $location->code }} - {{ $location->name }}</option>
+                                    @endforeach
+                                </select>
+                                <p class="mt-1 text-xs text-gray-500">Primero selecciona el almacén para filtrar los consumibles</p>
+                            </div>
+
                             <div class="mb-4">
                                 <x-input-label for="consumable_id" :value="__('Seleccionar del Catálogo (Opcional)')" />
                                 <select id="consumable_id" name="consumable_id" 
                                         class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 rounded-md shadow-sm"
+                                        x-bind:disabled="!warehouseId"
                                         @change="if($event.target.value) { 
                                             const text = $event.target.options[$event.target.selectedIndex].text;
                                             const parts = text.split(' - ');
@@ -99,8 +115,13 @@
                                         }">
                                     <option value="">-- Dejar vacío para salida manual --</option>
                                     @foreach($consumables as $consumable)
-                                        <option value="{{ $consumable->id }}">
+                                        <option value="{{ $consumable->id }}" 
+                                                data-warehouse="{{ $consumable->location_id }}"
+                                                x-show="warehouseId == '{{ $consumable->location_id }}'">
                                             {{ $consumable->sku }} - {{ $consumable->name }} (Stock: {{ number_format($consumable->current_stock, 2) }} {{ $consumable->unit_of_measure }})
+                                            @if($consumable->specific_location)
+                                                - 📍 {{ $consumable->specific_location }}
+                                            @endif
                                         </option>
                                     @endforeach
                                 </select>

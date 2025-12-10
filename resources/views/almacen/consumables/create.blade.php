@@ -110,14 +110,20 @@
                                 <x-text-input id="unit_cost" class="block mt-1 w-full" type="number" step="0.01" name="unit_cost" :value="old('unit_cost')" placeholder="0.00" />
                             </div>
                             <div>
-                                <x-input-label for="location_id" :value="__('Ubicación en Almacén')" />
+                                <x-input-label for="location_id" :value="__('Almacén / Área')" />
                                 <select id="location_id" name="location_id" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 rounded-md shadow-sm">
-                                    <option value="">-- Sin asignar --</option>
+                                    <option value="">-- Seleccionar Almacén --</option>
                                     @foreach ($locations as $location)
                                         <option value="{{ $location->id }}">{{ $location->code }} - {{ $location->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+
+                        <!-- UBICACIÓN ESPECÍFICA -->
+                        <div class="mb-6">
+                            <x-input-label for="specific_location" :value="__('Ubicación Específica (Opcional)')" />
+                            <x-text-input id="specific_location" class="block mt-1 w-full" type="text" name="specific_location" :value="old('specific_location')" placeholder="Ej: Pasillo 3, Rack A-2" />
                         </div>
 
                         <!-- IMAGEN -->

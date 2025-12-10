@@ -116,6 +116,18 @@
                 <th>Cantidad Retirada:</th>
                 <td>{{ $output->quantity }} (unidades)</td>
             </tr>
+            @if($output->consumable)
+                <tr>
+                    <th>Almacén Origen:</th>
+                    <td>{{ $output->consumable->location?->name ?? 'Sin asignar' }}</td>
+                </tr>
+                @if($output->consumable->specific_location)
+                    <tr>
+                        <th>Ubicación Exacta:</th>
+                        <td>📍 {{ $output->consumable->specific_location }}</td>
+                    </tr>
+                @endif
+            @endif
             <tr>
                 <th>Orden de Trabajo (OT):</th>
                 <td>{{ $output->work_order ?? 'PENDIENTE' }}</td>

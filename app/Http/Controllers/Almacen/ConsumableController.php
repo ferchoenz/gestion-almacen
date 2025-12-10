@@ -100,6 +100,7 @@ class ConsumableController extends Controller
             'max_stock' => 'nullable|numeric|min:0',
             'unit_cost' => 'nullable|numeric|min:0',
             'location_id' => 'nullable|exists:inventory_locations,id',
+            'specific_location' => 'nullable|string|max:255',
             'product_image' => 'nullable|image|max:5120',
             'is_active' => 'nullable|boolean',
         ]);
@@ -171,6 +172,7 @@ class ConsumableController extends Controller
             'max_stock' => 'nullable|numeric|min:0',
             'unit_cost' => 'nullable|numeric|min:0',
             'location_id' => 'nullable|exists:inventory_locations,id',
+            'specific_location' => 'nullable|string|max:255',
             'product_image' => 'nullable|image|max:5120',
             'is_active' => 'nullable|boolean',
         ]);

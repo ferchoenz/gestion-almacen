@@ -164,6 +164,8 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             @if($reception->status == 'COMPLETO')
                                                 <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">COMPLETO</span>
+                                            @elseif($reception->status == 'PENDIENTE_OT')
+                                                <span class="bg-orange-100 text-orange-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-orange-900 dark:text-orange-300">PENDIENTE OT</span>
                                             @else
                                                 <span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">PENDIENTE UBICACIÓN</span>
                                             @endif
