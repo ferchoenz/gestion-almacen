@@ -58,7 +58,7 @@
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Código</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Nombre</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Detalles (Pasillo/Rack/Nivel)</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Descripción</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Terminal</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Estado</th>
                                     <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Acciones</th>
@@ -72,16 +72,9 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                                             {{ $location->name }}
-                                            @if($location->description)
-                                                <p class="text-xs text-gray-400">{{ Str::limit($location->description, 30) }}</p>
-                                            @endif
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                                            <div class="flex gap-2">
-                                                @if($location->aisle) <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs">P: {{ $location->aisle }}</span> @endif
-                                                @if($location->rack) <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs">R: {{ $location->rack }}</span> @endif
-                                                @if($location->level) <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs">N: {{ $location->level }}</span> @endif
-                                            </div>
+                                        <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                            {{ $location->description ? Str::limit($location->description, 50) : '-' }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                                             {{ $location->terminal->name }}

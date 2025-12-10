@@ -130,7 +130,15 @@ class MaterialOutputController extends Controller
         }
 
         $validatedData['user_id'] = $user->id;
-        $validatedData['status'] = $request->filled('work_order') ? 'PENDIENTE_SAP' : 'PENDIENTE_OT';
+        
+        // Status logic based on material type
+        if ($validatedData['material_type'] === 'CONSUMIBLE') {
+            // Consumibles siempre COMPLETO
+            $validatedData['status'] = 'COMPLETO';
+        } else {
+            // SPARE_PART: depende de OT
+            $validatedData['status'] = $request->filled('work_order') ? 'COMPLETO' : 'PENDIENTE_OT';
+        }
 
         $output = MaterialOutput::create($validatedData);
 
@@ -171,9 +179,17 @@ class MaterialOutputController extends Controller
             'sap_confirmation' => ['nullable', 'string', 'max:100'],
         ]);
 
+        // Status logic for updates
         $newStatus = $salida->status;
-        if ($salida->status === 'PENDIENTE_OT' && $request->filled('work_order')) $newStatus = 'PENDIENTE_SAP';
-        if ($request->filled('sap_confirmation')) $newStatus = 'COMPLETO';
+        if ($salida->material_type === 'CONSUMIBLE') {
+            // Consumibles siempre COMPLETO
+            $newStatus = 'COMPLETO';
+        } else {
+            // SPARE_PART: si agrega OT, pasa a COMPLETO
+            if ($salida->status === 'PENDIENTE_OT' && $request->filled('work_order')) {
+                $newStatus = 'COMPLETO';
+            }
+        }
         $validatedData['status'] = $newStatus;
 
         $salida->update($validatedData);

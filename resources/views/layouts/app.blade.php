@@ -33,6 +33,9 @@
             <main>
                 {{ $slot }}
             </main>
+
+            <!-- Toast Notifications -->
+            @include('components.toast-notification')
         </div>
 
         <!-- El slot de scripts que arreglamos antes -->
