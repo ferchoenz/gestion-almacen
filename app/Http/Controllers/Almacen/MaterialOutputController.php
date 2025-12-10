@@ -81,15 +81,16 @@ class MaterialOutputController extends Controller
                         ? Terminal::all() 
                         : Terminal::where('id', $user->terminal_id)->get();
 
-        // TEMPORAL DEBUG: Cargar TODOS los consumibles sin filtros
-        $consumables = \App\Models\Consumable::orderBy('name')->get();
+        // Cargar consumibles con lógica de rol:
+        // - Administrador: Ve TODOS los consumibles activos de TODAS las terminales
+        // - Otros roles: Solo ven consumibles de SU terminal
+        $consumablesQuery = \App\Models\Consumable::where('is_active', true);
         
-        // Filtros originales (comentados para debug):
-        // $consumables = \App\Models\Consumable::where('terminal_id', $user->terminal_id)
-        //                                       ->where('is_active', true)
-        //                                       ->where('current_stock', '>', 0)
-        //                                       ->orderBy('name')
-        //                                       ->get();
+        if ($user->role->name !== 'Administrador') {
+            $consumablesQuery->where('terminal_id', $user->terminal_id);
+        }
+        
+        $consumables = $consumablesQuery->orderBy('name')->get();
 
         return view('almacen.material-outputs.create', compact('terminals', 'consumables'));
     }
