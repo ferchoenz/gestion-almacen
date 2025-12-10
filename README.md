@@ -638,8 +638,8 @@ chmod -R 775 storage bootstrap/cache
 
 ## 👥 Equipo y Soporte
 
-**Desarrollo:** Sistemas TI  
-**Infraestructura actual:** Render + Neon + Google Cloud  
+**Desarrollo:** Luis Fernando Enzastiga Romero  
+**Infraestructura actual:** Render + Neon + Google AI  
 **Infraestructura objetivo:** Microsoft Azure  
 
 ---
