@@ -81,12 +81,15 @@ class MaterialOutputController extends Controller
                         ? Terminal::all() 
                         : Terminal::where('id', $user->terminal_id)->get();
 
-        // Cargar consumibles activos con stock disponible
-        $consumables = \App\Models\Consumable::where('terminal_id', $user->terminal_id)
-                                              ->where('is_active', true)
-                                              ->where('current_stock', '>', 0)
-                                              ->orderBy('name')
-                                              ->get();
+        // TEMPORAL DEBUG: Cargar TODOS los consumibles sin filtros
+        $consumables = \App\Models\Consumable::orderBy('name')->get();
+        
+        // Filtros originales (comentados para debug):
+        // $consumables = \App\Models\Consumable::where('terminal_id', $user->terminal_id)
+        //                                       ->where('is_active', true)
+        //                                       ->where('current_stock', '>', 0)
+        //                                       ->orderBy('name')
+        //                                       ->get();
 
         return view('almacen.material-outputs.create', compact('terminals', 'consumables'));
     }
