@@ -75,18 +75,21 @@ class MaterialReceptionController extends Controller
         $user = Auth::user();
         $terminals = $user->role->name === 'Administrador' ? Terminal::all() : Terminal::where('id', $user->terminal_id)->get();
         
-        // Cargar consumibles con lógica de rol:
-        // - Administrador: Ve TODOS los consumibles activos de TODAS las terminales
-        // - Otros roles: Solo ven consumibles de SU terminal
+        // Cargar consumibles con lógica de rol
         $consumablesQuery = \App\Models\Consumable::where('is_active', true);
-        
         if ($user->role->name !== 'Administrador') {
             $consumablesQuery->where('terminal_id', $user->terminal_id);
         }
-        
         $consumables = $consumablesQuery->orderBy('name')->get();
         
-        return view('almacen.material-receptions.create', compact('terminals', 'consumables'));
+        // Cargar ubicaciones de inventario con lógica de rol
+        $locationsQuery = \App\Models\InventoryLocation::where('is_active', true);
+        if ($user->role->name !== 'Administrador') {
+            $locationsQuery->where('terminal_id', $user->terminal_id);
+        }
+        $inventoryLocations = $locationsQuery->orderBy('code')->get();
+        
+        return view('almacen.material-receptions.create', compact('terminals', 'consumables', 'inventoryLocations'));
     }
 
     // Guarda la nueva recepción
@@ -94,35 +97,36 @@ class MaterialReceptionController extends Controller
     {
         $user = Auth::user();
         
-        // Validación de datos
+        // Validación de datos condicional
         $validatedData = $request->validate([
             'terminal_id' => ['required', $user->role->name === 'Administrador' ? Rule::exists('terminals', 'id') : Rule::in([$user->terminal_id])],
             'material_type' => ['required', Rule::in(['CONSUMIBLE', 'SPARE_PART'])],
-            
-            // NUEVO: consumable_id es opcional, pero si se usa, description puede ser nullable
-            'consumable_id' => ['nullable', 'exists:consumables,id'],
-            'description' => ['nullable', 'required_without:consumable_id', 'string', 'max:255'],
-            
-            'provider' => ['required', 'string', 'max:255'],
-            'purchase_order' => ['required', 'string', 'max:100'],
             'reception_date' => ['required', 'date'],
-            'quantity' => ['required', 'numeric', 'min:0'],
             
-            // SAP es Opcional al crear (nullable)
+            // Campos CONSUMIBLE
+            'consumable_id' => ['nullable', 'exists:consumables,id'],
+            'inventory_location_id' => ['nullable', 'exists:inventory_locations,id'],
+            
+            // Campos SPARE_PART  
+            'item_number' => ['nullable', 'required_if:material_type,SPARE_PART', 'string', 'max:100'],
             'sap_confirmation' => ['nullable', 'string', 'max:100'],
             
-            'item_number' => ['nullable', 'required_if:material_type,SPARE_PART', 'string', 'max:100'],
-            'storage_location' => ['nullable', 'string', 'max:255'],
-            'quality_certificate' => ['nullable', 'boolean'], 
+            // Campos comunes
+            'description' => ['nullable', 'string', 'max:255'],
+            'provider' => ['required', 'string', 'max:255'],
+            'purchase_order' => ['required', 'string', 'max:100'],
+            'quantity' => ['required', 'numeric', 'min:0'],
+            'quality_certificate' => ['nullable', 'boolean'],
 
-            // Validación de Archivos (PDF hasta 10MB)
+            // Archivos (PDF hasta 10MB)
             'invoice_file' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
             'remission_file' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
             'certificate_file' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
+            'work_order_file' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
         ]);
 
-        // Si seleccionó consumible, sincronizar la descripción automáticamente
-        if ($validatedData['consumable_id']) {
+        // Si seleccionó consumible, sincronizar descripción
+        if (!empty($validatedData['consumable_id'])) {
             $consumable = \App\Models\Consumable::find($validatedData['consumable_id']);
             $validatedData['description'] = $consumable->name;
         }
@@ -130,11 +134,16 @@ class MaterialReceptionController extends Controller
         $validatedData['user_id'] = $user->id;
         $validatedData['quality_certificate'] = $request->boolean('quality_certificate');
         
-        // Lógica de Status
-        $isComplete = $request->filled('storage_location') && 
-                      ($validatedData['material_type'] !== 'SPARE_PART' || $request->filled('sap_confirmation'));
-        
-        $validatedData['status'] = $isComplete ? 'COMPLETO' : 'PENDIENTE_UBICACION';
+        // LÓGICA DE STATUS según tipo de material
+        if ($validatedData['material_type'] === 'CONSUMIBLE') {
+            // Consumibles siempre son COMPLETO
+            $validatedData['status'] = 'COMPLETO';
+        } else {
+            // Spare Parts: PENDIENTE_OT si falta OT o SAP
+            $hasWorkOrder = $request->hasFile('work_order_file');
+            $hasSAP = $request->filled('sap_confirmation');
+            $validatedData['status'] = ($hasWorkOrder && $hasSAP) ? 'COMPLETO' : 'PENDIENTE_OT';
+        }
         
         // GUARDADO DE ARCHIVOS (CORREGIDO)
         // Usamos el disco 'public' para facilitar el acceso luego
@@ -146,6 +155,9 @@ class MaterialReceptionController extends Controller
         }
         if ($request->hasFile('certificate_file')) {
             $validatedData['certificate_path'] = $request->file('certificate_file')->store('receptions/certificates', 'public');
+        }
+        if ($request->hasFile('work_order_file')) {
+            $validatedData['work_order_path'] = $request->file('work_order_file')->store('receptions/work_orders', 'public');
         }
 
         $reception = MaterialReception::create($validatedData);
@@ -172,6 +184,7 @@ class MaterialReceptionController extends Controller
             'invoice' => $recepcione->invoice_path,
             'remission' => $recepcione->remission_path,
             'certificate' => $recepcione->certificate_path,
+            'work_order' => $recepcione->work_order_path,
             default => null
         };
 
@@ -190,7 +203,15 @@ class MaterialReceptionController extends Controller
     {
         $user = Auth::user();
         $terminals = $user->role->name === 'Administrador' ? Terminal::all() : Terminal::where('id', $user->terminal_id)->get();
-        return view('almacen.material-receptions.edit', compact('recepcione', 'terminals'));
+        
+        // Cargar ubicaciones de inventario
+        $locationsQuery = \App\Models\InventoryLocation::where('is_active', true);
+        if ($user->role->name !== 'Administrador') {
+            $locationsQuery->where('terminal_id', $user->terminal_id);
+        }
+        $inventoryLocations = $locationsQuery->orderBy('code')->get();
+        
+        return view('almacen.material-receptions.edit', compact('recepcione', 'terminals', 'inventoryLocations'));
     }
 
     // Actualiza la recepción
@@ -200,27 +221,39 @@ class MaterialReceptionController extends Controller
         $validatedData = $request->validate([
             'terminal_id' => ['required', $user->role->name === 'Administrador' ? Rule::exists('terminals', 'id') : Rule::in([$user->terminal_id])],
             'material_type' => ['required', Rule::in(['CONSUMIBLE', 'SPARE_PART'])],
-            'description' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string', 'max:255'],
             'provider' => ['required', 'string', 'max:255'],
             'purchase_order' => ['required', 'string', 'max:100'],
             'reception_date' => ['required', 'date'],
             'quantity' => ['required', 'numeric', 'min:0'],
             'sap_confirmation' => ['nullable', 'string', 'max:100'],
             'item_number' => ['nullable', 'required_if:material_type,SPARE_PART', 'string', 'max:100'],
-            'storage_location' => ['nullable', 'string', 'max:255'],
-            'quality_certificate' => ['nullable', 'boolean'], 
-            // Podrías añadir validación de archivos aquí si permites actualizar
+            'inventory_location_id' => ['nullable', 'exists:inventory_locations,id'],
+            'quality_certificate' => ['nullable', 'boolean'],
+            'work_order_file' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
         ]);
 
-        $validatedData['quality_certificate'] = $request->has('quality_certificate') ? true : false;
+        $validatedData['quality_certificate'] = $request->boolean('quality_certificate');
         
-        // Recalcular status
-        $isComplete = $request->filled('storage_location') && 
-                      ($validatedData['material_type'] !== 'SPARE_PART' || $request->filled('sap_confirmation'));
-        $validatedData['status'] = $isComplete ? 'COMPLETO' : 'PENDIENTE_UBICACION';
+        // Guardar archivo de orden de trabajo si se subió
+        if ($request->hasFile('work_order_file')) {
+            $validatedData['work_order_path'] = $request->file('work_order_file')->store('receptions/work_orders', 'public');
+        }
+        
+        // LÓGICA DE STATUS según tipo de material
+        if ($validatedData['material_type'] === 'CONSUMIBLE') {
+            $validatedData['status'] = 'COMPLETO';
+        } else {
+            // Spare Parts: verificar OT y SAP
+            $hasWorkOrder = $recepcione->work_order_path || $request->hasFile('work_order_file');
+            $hasSAP = $request->filled('sap_confirmation');
+            $validatedData['status'] = ($hasWorkOrder && $hasSAP) ? 'COMPLETO' : 'PENDIENTE_OT';
+        }
 
         $recepcione->update($validatedData);
-        return redirect()->route('material-receptions.index')->with('success', 'Recepción actualizada exitosamente.');
+        
+        $statusMessage = $validatedData['status'] === 'COMPLETO' ? ' Estado actualizado a COMPLETO.' : '';
+        return redirect()->route('material-receptions.index')->with('success', 'Recepción actualizada exitosamente.' . $statusMessage);
     }
 
     // Eliminar (Cancelar) recepción

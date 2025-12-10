@@ -18,7 +18,8 @@ class MaterialReception extends Model
     protected $fillable = [
         'terminal_id',
         'user_id',
-        'consumable_id',  // NUEVO: Para vincular con inventario
+        'consumable_id',
+        'inventory_location_id',  // Para ubicación de almacenamiento
         'material_type',
         'item_number',
         'description',
@@ -35,6 +36,7 @@ class MaterialReception extends Model
         'invoice_path',
         'remission_path',
         'certificate_path',
+        'work_order_path',  // Para orden de trabajo
     ];
 
     /**
@@ -69,5 +71,13 @@ class MaterialReception extends Model
     public function consumable(): BelongsTo
     {
         return $this->belongsTo(\App\Models\Consumable::class);
+    }
+
+    /**
+     * Relación: Una recepción puede tener una ubicación de almacenamiento.
+     */
+    public function inventoryLocation(): BelongsTo
+    {
+        return $this->belongsTo(\App\Models\InventoryLocation::class);
     }
 }

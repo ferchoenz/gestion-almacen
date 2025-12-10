@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex" x-data="{ almacenOpen: false }">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex" x-data="{ almacenOpen: false, hazmatOpen: false }">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
@@ -24,9 +24,9 @@
                     @endif
 
                     <!-- DROPDOWN ALMACÉN -->
-                    @if(in_array(Auth::user()->role?->name, ['Administrador', 'Gerencia', 'Mantenimiento', 'Almacenista', 'Seguridad y Salud']))
+                    @if(in_array(Auth::user()->role?->name, ['Administrador', 'Gerencia', 'Mantenimiento', 'Almacenista']))
                         <div class="relative" @mouseenter="almacenOpen = true" @mouseleave="almacenOpen = false">
-                            <button class="inline-flex items-center px-1 pt-1 pb-1 border-b-2 text-sm font-medium leading-5 transition duration-150 ease-in-out border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 h-16 {{ request()->is('material-*') || request()->is('hazmat*') || request()->is('consumables*') ? 'border-indigo-400 dark:border-indigo-600 text-gray-900 dark:text-gray-100' : '' }}">
+                            <button class="inline-flex items-center px-1 pt-1 pb-1 border-b-2 text-sm font-medium leading-5 transition duration-150 ease-in-out border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 h-16 {{ request()->is('material-*') || request()->is('consumables*') ? 'border-indigo-400 dark:border-indigo-600 text-gray-900 dark:text-gray-100' : '' }}">
                                 📦 Almacén
                                 <svg class="ml-2 -mr-0.5 h-4 w-4 transition-transform duration-200" :class="{ 'rotate-180': almacenOpen }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -74,16 +74,35 @@
                                     </div>
                                 @endif
 
-                                <!-- HAZMAT SECTION -->
-                                @if(in_array(Auth::user()->role?->name, ['Administrador', 'Seguridad y Salud']))
-                                    <div class="py-1">
-                                        <div class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase">Seguridad</div>
-                                        <a href="{{ route('hazmat.index') }}" class="group flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-yellow-50 dark:hover:bg-gray-700 {{ request()->routeIs('hazmat.*') ? 'bg-yellow-100 dark:bg-gray-700 font-semibold' : '' }}">
-                                            <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                                            Materiales Peligrosos
-                                        </a>
-                                    </div>
-                                @endif
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- DROPDOWN HAZMAT -->
+                    @if(in_array(Auth::user()->role?->name, ['Administrador', 'Seguridad y Salud']))
+                        <div class="relative" @mouseenter="hazmatOpen = true" @mouseleave="hazmatOpen = false">
+                            <button class="inline-flex items-center px-1 pt-1 pb-1 border-b-2 text-sm font-medium leading-5 transition duration-150 ease-in-out border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 h-16 {{ request()->is('hazmat*') ? 'border-indigo-400 dark:border-indigo-600 text-gray-900 dark:text-gray-100' : '' }}">
+                                ⚠️ Hazmat
+                                <svg class="ml-2 -mr-0.5 h-4 w-4 transition-transform duration-200" :class="{ 'rotate-180': hazmatOpen }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+
+                            <!-- Dropdown Menu -->
+                            <div x-show="hazmatOpen"
+                                 x-transition:enter="transition ease-out duration-200"
+                                 x-transition:enter-start="opacity-0 scale-95"
+                                 x-transition:enter-end="opacity-100 scale-100"
+                                 x-transition:leave="transition ease-in duration-75"
+                                 x-transition:leave-start="opacity-100 scale-100"
+                                 x-transition:leave-end="opacity-0 scale-95"
+                                 class="absolute left-0 mt-2 w-56 origin-top-left rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-50"
+                                 style="display: none;">
+                                
+                                <a href="{{ route('hazmat.index') }}" class="group flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-yellow-50 dark:hover:bg-gray-700 {{ request()->routeIs('hazmat.*') ? 'bg-yellow-100 dark:bg-gray-700 font-semibold' : '' }}">
+                                    <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                    Listado Maestro
+                                </a>
                             </div>
                         </div>
                     @endif
@@ -135,7 +154,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden" x-data="{ almacenMobileOpen: false }">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden" x-data="{ almacenMobileOpen: false, hazmatMobileOpen: false }">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
@@ -148,9 +167,9 @@
             @endif
 
             <!-- ALMACÉN COLLAPSIBLE MOBILE -->
-            @if(in_array(Auth::user()->role?->name, ['Administrador', 'Gerencia', 'Mantenimiento', 'Almacenista', 'Seguridad y Salud']))
+            @if(in_array(Auth::user()->role?->name, ['Administrador', 'Gerencia', 'Mantenimiento', 'Almacenista']))
                 <div class="border-t border-gray-200 dark:border-gray-700">
-                    <button @click="almacenMobileOpen = !almacenMobileOpen" class="w-full flex items-center justify-between px-4 py-2 text-left text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition {{ request()->is('material-*') || request()->is('hazmat*') || request()->is('consumables*') ? 'bg-indigo-50 dark:bg-gray-700 text-indigo-700 dark:text-indigo-300 border-l-4 border-indigo-500' : '' }}">
+                    <button @click="almacenMobileOpen = !almacenMobileOpen" class="w-full flex items-center justify-between px-4 py-2 text-left text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition {{ request()->is('material-*') || request()->is('consumables*') ? 'bg-indigo-50 dark:bg-gray-700 text-indigo-700 dark:text-indigo-300 border-l-4 border-indigo-500' : '' }}">
                         <span>📦 Almacén</span>
                         <svg class="h-5 w-5 transition-transform duration-200" :class="{ 'rotate-180': almacenMobileOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -187,13 +206,33 @@
                                 📤 Salidas de Material
                             </x-responsive-nav-link>
                         @endif
+                    </div>
+                </div>
+            @endif
 
-                        @if(in_array(Auth::user()->role->name, ['Administrador', 'Seguridad y Salud']))
-                            <div class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase mt-2">Seguridad</div>
-                            <x-responsive-nav-link :href="route('hazmat.index')" :active="request()->routeIs('hazmat.*')">
-                                ⚠️ Materiales Peligrosos
-                            </x-responsive-nav-link>
-                        @endif
+            <!-- HAZMAT COLLAPSIBLE MOBILE -->
+            @if(in_array(Auth::user()->role->name, ['Administrador', 'Seguridad y Salud']))
+                <div class="border-t border-gray-200 dark:border-gray-700">
+                    <button @click="hazmatMobileOpen = !hazmatMobileOpen" class="w-full flex items-center justify-between px-4 py-2 text-left text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition {{ request()->is('hazmat*') ? 'bg-yellow-50 dark:bg-gray-700 text-yellow-700 dark:text-yellow-300 border-l-4 border-yellow-500' : '' }}">
+                        <span>⚠️ Hazmat</span>
+                        <svg class="h-5 w-5 transition-transform duration-200" :class="{ 'rotate-180': hazmatMobileOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div x-show="hazmatMobileOpen"
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 scale-y-95"
+                         x-transition:enter-end="opacity-100 scale-y-100"
+                         x-transition:leave="transition ease-in duration-100"
+                         x-transition:leave-start="opacity-100 scale-y-100"
+                         x-transition:leave-end="opacity-0 scale-y-95"
+                         class="bg-gray-50 dark:bg-gray-900 border-l-2 border-gray-100 dark:border-gray-600"
+                         style="display: none;">
+                        
+                        <x-responsive-nav-link :href="route('hazmat.index')" :active="request()->routeIs('hazmat.*')">
+                            ⚠️ Listado Maestro
+                        </x-responsive-nav-link>
                     </div>
                 </div>
             @endif
