@@ -251,6 +251,7 @@ class ConsumableController extends Controller
             
             return redirect()->route('consumables.index')
                 ->with('success', 'Importación completada correctamente.');
+        } catch (\Exception $e) {
             return back()->with('error', 'Error en la importación: ' . $e->getMessage());
         }
     }
