@@ -1,8 +1,12 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Detalle de Solicitud #') }}{{ $hazmatRequest->id }}
+        </h2>
+    </x-slot>
 
-@section('title', 'Detalle de Solicitud #'.$hazmatRequest->id)
-
-@section('content')
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
     <!-- Header -->
     <div class="md:flex md:items-center md:justify-between mb-6">
@@ -189,5 +193,6 @@
         </div>
     @endif
 
-</div>
-@endsection
+        </div>
+    </div>
+</x-app-layout>

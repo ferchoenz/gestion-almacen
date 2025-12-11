@@ -1,8 +1,12 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Nueva Solicitud de Material Peligroso') }}
+        </h2>
+    </x-slot>
 
-@section('title', 'Nueva Solicitud de Material Peligroso')
-
-@section('content')
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 <div class="max-w-4xl mx-auto py-6">
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
         <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
@@ -133,5 +137,6 @@
             </div>
         </form>
     </div>
-</div>
-@endsection
+        </div>
+    </div>
+</x-app-layout>
