@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
+use App\Imports\ConsumablesImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class ConsumableController extends Controller
 {
     public function index(Request $request)
@@ -217,5 +220,38 @@ class ConsumableController extends Controller
             ->get(['id', 'sku', 'name', 'current_stock', 'unit_of_measure']);
         
         return response()->json($consumables);
+    }
+
+    /**
+     * Muestra la vista de importación masiva.
+     */
+    public function import()
+    {
+        return view('almacen.consumables.import');
+    }
+
+    /**
+     * Procesa el archivo de importación.
+     */
+    public function processImport(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:10240', // Max 10MB
+        ]);
+
+        $user = Auth::user();
+        
+        // Determinar terminal: Admin puede elegir (si se implementara en UI), resto usa la suya.
+        // Por simplicidad en esta fase, usaremos la terminal del usuario actual.
+        $terminalId = $user->terminal_id; 
+
+        try {
+            Excel::import(new ConsumablesImport($terminalId), $request->file('file'));
+            
+            return redirect()->route('consumables.index')
+                ->with('success', 'Importación completada correctamente.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error en la importación: ' . $e->getMessage());
+        }
     }
 }

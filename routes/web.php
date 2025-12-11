@@ -121,6 +121,15 @@ Route::middleware('auth')->group(function () {
          ->name('consumables.labels.batch')
          ->middleware('role:Administrador,Almacenista');
 
+    // Rutas de importación (antes de resource)
+    Route::get('consumables/importar', [\App\Http\Controllers\Almacen\ConsumableController::class, 'import'])
+         ->name('consumables.import')
+         ->middleware('role:Administrador,Almacenista');
+    
+    Route::post('consumables/importar', [\App\Http\Controllers\Almacen\ConsumableController::class, 'processImport'])
+         ->name('consumables.import.process')
+         ->middleware('role:Administrador,Almacenista');
+
     Route::resource('consumables', \App\Http\Controllers\Almacen\ConsumableController::class)
          ->middleware('role:Administrador,Almacenista');
 

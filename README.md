@@ -519,58 +519,7 @@ git push origin main
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Fases de Migración
 
-#### Fase 1: Infraestructura Base (Semana 1-2)
-- [ ] Crear Resource Group en Azure
-- [ ] Provisionar Azure App Service (PHP 8.3, Linux)
-- [ ] Provisionar Azure Database for PostgreSQL Flexible Server
-- [ ] Configurar networking privado (VNet)
-- [ ] Migrar datos de Neon a Azure PostgreSQL
-
-#### Fase 2: Storage y Archivos (Semana 2-3)
-- [ ] Crear Azure Blob Storage Account
-- [ ] Migrar archivos de Render storage a Blob
-- [ ] Configurar Laravel para usar Azure Blob (flysystem-azure)
-- [ ] Actualizar URLs de archivos en base de datos
-
-#### Fase 3: Sustitución de Gemini por Azure AI (Semana 3-4)
-- [ ] Crear Azure AI Document Intelligence
-- [ ] Desarrollar `AzureDocumentService.php` (reemplaza `GeminiService.php`)
-- [ ] Configurar modelo prebuilt para extracción de documentos
-- [ ] Entrenar modelo custom para HDS específicas (opcional)
-- [ ] Probar análisis de HDS con Azure AI
-- [ ] Deprecar `GEMINI_API_KEY`
-
-#### Fase 4: Seguridad y Monitoreo (Semana 4-5)
-- [ ] Configurar Azure Key Vault para secretos
-- [ ] Integrar Application Insights para telemetría
-- [ ] Configurar Log Analytics workspace
-- [ ] Establecer alertas de rendimiento y errores
-- [ ] Configurar Azure Backup para BD
-
-#### Fase 5: Go-Live y Optimización (Semana 5-6)
-- [ ] Configurar dominio personalizado + SSL
-- [ ] Pruebas de carga y rendimiento
-- [ ] Documentar runbooks de operación
-- [ ] Capacitar equipo de TI
-- [ ] Cutover a producción
-
-### Estimación de Costos Azure (Aproximado)
-
-| Servicio | SKU | Costo Mensual (USD) |
-|----------|-----|--------------------:|
-| App Service | B1 (1 core, 1.75 GB) | ~$13 |
-| PostgreSQL Flexible | Burstable B1ms | ~$15 |
-| Blob Storage | LRS, 50 GB | ~$2 |
-| Azure AI Document Intelligence | S0 (1000 pages/mo) | ~$10 |
-| Key Vault | Standard | ~$1 |
-| Application Insights | 5 GB/mo | Free tier |
-| **Total Aproximado** | | **~$41/mes** |
-
-*Nota: Precios aproximados, pueden variar por región y consumo real.*
-
----
 
 ## 🛠️ Comandos Útiles
 
