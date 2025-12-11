@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 use App\Imports\ConsumablesImport;
+use App\Exports\ConsumablesExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ConsumableController extends Controller
@@ -250,8 +251,18 @@ class ConsumableController extends Controller
             
             return redirect()->route('consumables.index')
                 ->with('success', 'Importación completada correctamente.');
-        } catch (\Exception $e) {
             return back()->with('error', 'Error en la importación: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * Exporta los consumibles a Excel.
+     */
+    public function export()
+    {
+        $user = Auth::user();
+        $terminalId = $user->role->name === 'Administrador' ? null : $user->terminal_id;
+        
+        return Excel::download(new ConsumablesExport($terminalId), 'consumibles_inventario.xlsx');
     }
 }

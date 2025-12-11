@@ -76,6 +76,14 @@ Route::middleware('auth')->group(function () {
     // HAZMAT (MATERIALES PELIGROSOS)
     // ============================================================================
     
+    // Solicitudes de Autorización (Workflow)
+    Route::get('hazmat/requests/{hazmatRequest}/pdf', [\App\Http\Controllers\Almacen\HazmatRequestController::class, 'downloadPdf'])
+         ->name('hazmat-requests.pdf');
+    Route::get('hazmat/requests/{hazmatRequest}/hds', [\App\Http\Controllers\Almacen\HazmatRequestController::class, 'viewHds'])
+         ->name('hazmat-requests.hds');
+    Route::resource('hazmat/requests', \App\Http\Controllers\Almacen\HazmatRequestController::class)
+         ->names('hazmat-requests');
+
     Route::post('hazmat/analyze', [HazmatProductController::class, 'analyze'])
          ->name('hazmat.analyze')
          ->middleware('role:Administrador,Seguridad y Salud');
