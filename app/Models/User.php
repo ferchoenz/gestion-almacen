@@ -61,4 +61,16 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Terminal::class);
     }
+    
+    /**
+     * Helpers para roles
+     */
+    public function hasRole(string|array $roles): bool
+    {
+        if (is_string($roles)) {
+            $roles = [$roles];
+        }
+        
+        return $this->role && in_array($this->role->name, $roles);
+    }
 }
