@@ -103,6 +103,14 @@ class HazmatRequestController extends Controller
 
         $isSafety = $user->hasRole(['Administrador', 'Seguridad y Salud']);
 
+        if ($user->hasRole('Administrador')) {
+             // Admin sees all (implicit) -> but check if we need to load relations
+        }
+
+        $hazmatRequest->load(['user', 'terminal']); // Ensure relations are loaded
+
+        $isSafety = $user->hasRole(['Administrador', 'Seguridad y Salud']);
+
         return view('almacen.hazmat.requests.show', compact('hazmatRequest', 'isSafety'));
     }
 
@@ -182,5 +190,28 @@ class HazmatRequestController extends Controller
         if (!Auth::user()->hasRole(['Administrador', 'Seguridad y Salud'])) {
             abort(403, 'No autorizado para revisar solicitudes.');
         }
+    }
+    }
+
+    /**
+     * Eliminar o retirar solicitud.
+     */
+    public function destroy(HazmatRequest $hazmatRequest)
+    {
+        $user = Auth::user();
+
+        // Admin puede eliminar cualquiera
+        // Usuario dueño puede eliminar si está PENDING
+        $canDelete = $user->hasRole('Administrador') || 
+                     ($hazmatRequest->user_id == $user->id && $hazmatRequest->status == 'PENDING');
+
+        if (!$canDelete) {
+            abort(403, 'No tienes permiso para eliminar esta solicitud.');
+        }
+
+        $hazmatRequest->delete();
+
+        return redirect()->route('hazmat-requests.index')
+            ->with('success', 'Solicitud eliminada correctamente.');
     }
 }

@@ -26,6 +26,22 @@
             </div>
         </div>
         <div class="mt-4 flex md:mt-0 md:ml-4 space-x-2">
+            @php
+                $currentUser = auth()->user();
+                $canDelete = $currentUser->hasRole('Administrador') || 
+                             ($hazmatRequest->user_id == $currentUser->id && $hazmatRequest->status == 'PENDING');
+            @endphp
+            
+            @if($canDelete)
+                <form action="{{ route('hazmat-requests.destroy', $hazmatRequest) }}" method="POST" onsubmit="return confirm('¿Estás seguro que deseas eliminar esta solicitud?');" class="inline-block">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                        <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                        {{ $hazmatRequest->status === 'PENDING' ? 'Retirar' : 'Eliminar' }}
+                    </button>
+                </form>
+            @endif
             @if($hazmatRequest->status === 'APPROVED')
                 <a href="{{ route('hazmat-requests.pdf', $hazmatRequest) }}" target="_blank" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
                     <svg class="-ml-1 mr-2 h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
