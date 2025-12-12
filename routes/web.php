@@ -82,7 +82,8 @@ Route::middleware('auth')->group(function () {
     Route::get('hazmat/requests/{hazmatRequest}/hds', [\App\Http\Controllers\Almacen\HazmatRequestController::class, 'viewHds'])
          ->name('hazmat-requests.hds');
     Route::resource('hazmat/requests', \App\Http\Controllers\Almacen\HazmatRequestController::class)
-         ->names('hazmat-requests');
+         ->names('hazmat-requests')
+         ->parameters(['requests' => 'hazmatRequest']);
 
     Route::post('hazmat/analyze', [HazmatProductController::class, 'analyze'])
          ->name('hazmat.analyze')
