@@ -43,7 +43,8 @@ class HazmatRequestController extends Controller
     public function create()
     {
         // Solo usuarios pueden crear solcitudes
-        return view('almacen.hazmat.requests.create');
+        $terminals = Terminal::all();
+        return view('almacen.hazmat.requests.create', compact('terminals'));
     }
 
     public function store(Request $request)
@@ -51,6 +52,7 @@ class HazmatRequestController extends Controller
         $user = Auth::user();
         
         $validated = $request->validate([
+            'terminal_id' => 'required|exists:terminals,id',
             'trade_name' => 'required|string|max:255',
             'chemical_name' => 'required|string|max:255',
             'usage_area' => 'required|string|max:255',
@@ -69,7 +71,7 @@ class HazmatRequestController extends Controller
 
         $hazmatRequest = HazmatRequest::create([
             'user_id' => $user->id,
-            'terminal_id' => $user->terminal_id, // Asume terminal del usuario
+            'terminal_id' => $validated['terminal_id'], // Terminal seleccionada en el formulario
             'status' => 'PENDING',
             'trade_name' => $validated['trade_name'],
             'chemical_name' => $validated['chemical_name'],

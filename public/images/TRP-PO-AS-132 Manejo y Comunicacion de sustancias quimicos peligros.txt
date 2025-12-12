@@ -1,0 +1,1993 @@
+Revisión Actual:
+Proceso:
+
+05
+
+Nombre del
+Documento:
+
+MANEJO DE MATERIALES PELIGROSOS
+Y COMUNICACION DE PELIGROS
+
+Número del
+Documento:
+
+TRP-PO-SS132
+
+Total Paginas:
+
+38
+
+SEGURIDAD Y SALUD
+
+Fecha:
+
+JULIO 2025
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 2 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+INDICE
+1. OBJETIVO ............................................................................................................... 5
+2. ALCANCE ................................................................................................................ 5
+2.1
+
+RESPONSABILIDADES .................................................................................................... 5
+
+3. POLITICAS .............................................................................................................. 7
+4
+
+PROCEDIMIENTO ............................................................................................ 8
+4.1 ADQUISICIÓN DE MATERIALES PELIGROSOS/SUSTANCIAS QUIMICAS ......................... 8
+4.2 APROBACION DE MATERIALES PELIGROSOS NUEVOS Y MUESTRAS........................... 9
+4.3 RECEPCION Y ALMACENAMIENTO DE MATERIALES PELIGROSOS.............................. 10
+
+4.3.1 Requisitos para recepción de materiales peligrosos ....................... 11
+4.3.1.1 Empaque/Contenedores de los Proveedores .............................. 11
+4.3.2 Especificaciones para el almacenamiento de materiales peligrosos.
+............................................................................................................. 12
+4.4 MANEJO Y USO DE MATERIALES PELIGROSOS .............................................................. 14
+
+4.4.1 Especificaciones para el manejo de materiales peligrosos ............. 15
+4.4.1.1 Contenedores provisionales ....................................................... 15
+4.4.1.2 Residuos peligrosos generados ................................................ 16
+4.5 LISTADO MAESTRO DE MATERIALES PELIGROSOS ....................................................... 16
+
+4.5.1 lnventario de materiales Peligrosos ............................................... 17
+4.6 EQUIPOS DE SEGURIDAD .................................................................................................... 18
+
+4.6.1 Equipo de Protección Personal ..................................................... 18
+4.6.2 Regaderas de Seguridad I Estaciones para el lavado de ojos ........ 19
+4.7 MEDIDAS PARA MITIGAR ESCAPES ACCIDENTALES DE MATERIALES/SUSTANCIAS
+QUIMICAS PELIGROSAS............................................................................................................. 20
+
+4.7.1 Ácidos/cáusticos ........................................................................... 20
+4.7.2 lnflamables ................................................................................... 21
+4.7.3 Oxidantes ..................................................................................... 21
+4.7.4 Materiales tóxicos ......................................................................... 21
+4.8 RESPUESTA A EMERGENCIAS ............................................................................................ 21
+4.9 COMUNICACION DE PELIGROS ........................................................................................... 22
+
+4.9.1 Señalamientos y otras formas de advertencia ............................... 22
+4.9.2 Etiquetado dentro de las instalaciones ........................................... 26
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 3 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+4.9.3 Etiquetado de tuberías .................................................................. 28
+4.9.4 Hojas de Datos de Seguridad (HDS) ............................................. 30
+4.10 Información del contratista ............................................................. 32
+5. DEFINICIONES ..................................................................................................... 33
+6. SEGUIMIENTO Y MEDICION ................................................................................ 33
+6.1 AUDITORÍA Y ACATAMIENTO ............................................................................................... 33
+6.2
+
+CAPACITACIÓN ............................................................................................................... 34
+
+7 REFERENCIAS ...................................................................................................... 36
+8. ANEXOS................................................................................................................ 37
+8.1 COMPATIBILIDAD DE SUSTANCIAS QUÍMICAS ................................................................ 37
+8.2 RESTRICCIONES PARA EL ALMACENAMIENTO DE SUSTANCIAS QUÍMICAS ........ 37
+8.3 CONTROL DE CAMBIOS ...................................................................................................... 39
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 4 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+FORMAS REFERENCIADAS EN ESTE PROCEDIMIENTO
+CONTROL#
+
+TITULO DE LA FORMA
+
+TRP-PO-SS-132-F01
+
+Listado Maestro de Materiales Peligrosos
+
+TRP-PO-SS-132-F02
+
+Listado de Materiales Peligrosos en áreas de almacenamiento
+
+TRP-PO-SS-132-F03
+
+Solicitud de autorización de ingreso de materiales peligrosos
+nuevos
+
+TRP-PO-SS-132-F04
+
+Listado de verificación de almacenamiento y manejo de
+materiales Peligrosos
+
+TRP-PO-SS-132-F05
+
+Inspección Semanal del Sistema Lavaojos y Regaderas
+
+TRP-PO-SS-132-F06
+
+Inspección Anual de Lavaojos y Regaderas
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 5 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+1. OBJETIVO
+Establecer los lineamientos generales para un manejo, transporte y almacenamiento seguro de
+materiales químicos peligrosos dentro de la Terminal de Refinados Valle de México, garantizando
+que exista una evaluación adecuada y que los riesgos asociados a los mismos sean
+comunicados de manera clara y oportuna a todos los colaboradores y contratistas involucrados
+en dichas actividades.
+La información contenida en este procedimiento es para apoyar a TRP en cumplir con los
+requisitos para un Programa por escrito sabre Comunicación de Peligros como se especifica en
+la NOM-005-STPS-1998 punto 5.12 Programa Específico de Seguridad e Higiene para el Manejo,
+Transporte y Almacenamiento de Sustancias Químicas Peligrosas, conforme a lo establecido en
+el capítulo 8 y con el estándar 29 CFR 1910.1200, Estándar de Comunicación de Peligro del
+código de regulaciones federales de la OSHA.
+
+2. ALCANCE
+Este procedimiento aplica a todos los colaboradores de TRP y a contratistas que manejen,
+transporten y/o almacenen químicos dentro de las instalaciones de la empresa.
+
+2.1 RESPONSABILIDADES
+TABLA 2.1-1 RESPONSABILIDADES
+Cargo
+RESPONSABILIDADES
+Gerente de Planta
+lmplementar y reforzar este procedimiento.
+Determinar el sistema de administración de las
+HDS que se usara en las instalaciones.
+Establecer un proceso de coordinación del
+contratista asegurándose que el personal del
+contratista este enterado del peligro de
+materiales usados y/o almacenados en las
+instalaciones.
+Líder de Seguridad y Salud
+
+Designar al Champion del Elemento
+Comunicación de Peligros y Manejo
+Químicos.
+
+03
+de
+
+Asegurarse que los empleados estén
+capacitados en la comunicación de peligros y el
+manejo y almacenaje de materiales peligrosos.
+Monitorear
+el
+procedimiento.
+Champion de Comunicación de Peligros
+y Manejo de Químicos
+
+cumplimiento
+
+de
+
+este
+
+Asegurar
+el
+cumplimiento
+de
+los
+requerimientos listados a través del presente
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 6 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+procedimiento.
+Obtener las HDS cuando no se tengan
+disponibles y mantener el sistema de HDS
+actualizado.
+Obtener las HDS cuando no se tengan
+disponibles y mantener el sistema de HDS
+actualizado.
+Asegurarse de solicitar materiales peligrosos
+aprobados y dentro del listado maestro de
+materiales peligrosos antes de su compra, de lo
+contrario, solicitar previamente la aprobación
+del material peligroso/muestra.
+
+Requisitores de materiales peligrosos
+
+Asegurarse que cada producto recibido tenga su
+HDS actualizada (Fecha menor a 3 años)
+Recepción, almacenamiento y etiquetado de
+sustancias peligrosas.
+
+Coordinador de Materiales
+
+Asegurarse del etiquetado
+sustancias peligrosas.
+
+correcto
+
+para
+
+Mantener el inventario de materiales peligrosos
+actualizado.
+Asegurarse de que los contratistas ingresen a la
+Terminal solo materiales peligrosos aprobados y
+dentro del listado maestro de materiales
+peligrosos, de lo contrario, solicitar previamente
+la aprobación del material peligroso/muestra.
+Supervisores/Coordinadores
+contratistas
+
+de
+
+Contar con un listado actualizado de sustancias
+químicas en su área de almacenamiento por
+sitio.
+Contar con hojas de seguridad del fabricante en
+sitio.
+Realizar inspecciones periódicas de las áreas de
+manejo y almacenamiento de materiales
+peligrosos.
+
+Champion Socios Estratégicos
+
+Colaboradores
+
+Difundir
+la
+información de
+este
+procedimiento
+entre los
+Supervisores/Coordinadores de contratistas.
+Cumplir con este procedimiento al manejar,
+transportar o almacenar químicos peligrosos
+dentro de las instalaciones.
+Asegurarse del etiquetado
+sustancias peligrosas.
+
+correcto
+
+para
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 7 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+Contactar a su supervisor o al área de
+Seguridad y Salud o elemento Champion 03
+referente a cualquier cuestión que puedan tener
+relativa al manejo y uso de químicos.
+
+3. POLITICAS
+- GE-20 Política de Seguridad Ocupacional y de Procesos
+- GE-21 Política de Salud Ocupacional y Bienestar
+- GE-M01 Manual de los Principios de Seguridad y Salud
+- GE-M02 Manual del Sistema de Gestión en Seguridad y Salud (SGSS)
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 8 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+4 PROCEDIMIENTO
+4.1 ADQUISICIÓN DE MATERIALES PELIGROSOS/SUSTANCIAS QUIMICAS
+Para poder adquirir una sustancia química peligrosa se debe seguir el siguiente diagrama
+de flujo:
+REQUISITOR
+Necesita adquirir una sustancia química peligrosa
+
+REQUISITOR
+Solicita la aprobación de la
+sustancia siguiendo el punto 4.2
+del presente documento
+
+NO
+
+1.¿La sustancia se
+encuentra dentro del
+listado maestro de
+
+SI
+
+SI
+¿Se requiere incorporar la
+sustancia al inventario del
+
+¿Se aprueba la
+sustancia Química
+
+NO
+NO SE ADQUIERE SUSTANCIA
+QUIMICA PELIGROSA
+
+SI
+
+REQUISITOR
+Solicita el alta del ítem en sistema ERP al Coord.
+Materiales siguiendo el TRP-PO-AS-104
+¨administración de almacenes de materiales¨
+
+Coord. Materiales envia confirmación de
+alta al requisitor
+
+FIN
+
+REQUISITOR genera requisición de compra
+(PR) en sistema ERP
+
+Proveedor contacta a Coord. Materiales para
+agendar entrega (TRP-PO-AS-104)
+
+Recepción del material peligroso (punto 4.3
+del presente documento)
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 9 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+4.2 APROBACION DE MATERIALES PELIGROSOS NUEVOS Y MUESTRAS
+En caso de que se vaya a adquirir una sustancia química peligrosa nueva o muestra de un nuevo
+material peligroso (no incluida dentro del listado maestro de materiales peligrosos), se debe
+seguir el siguiente diagrama de flujo:
+Saaasd
+
+REQUISITOR llena forma TRP-PO-SS 132-F03
+y la envía junto con la HDS de la sustancia
+química peligrosa al Champion de comunicación
+de peligros y al Líder de Seguridad y Salud
+
+REQUISITOR
+Necesita una sustancia química
+peligrosa nueva o muestra (no
+incluida dentro del LISTADO
+MAESTRO DE MATERIALES)
+
+La HDS debe
+cumplir con la
+NOM-018STPS-2015
+
+NO
+
+¿Se aprueba la
+sustancia
+Química peligrosa
+nueva o muestra?
+SI
+SI
+
+¿Es
+muestra?
+
+FIN
+
+CHAMPION 03 Y LIDER DE SEGURIDAD Y
+SALUD Verifican la documentación enviada
+por el requisitor y evalúan la posibilidad de
+utilizar una sustancia química menos
+peligrosa
+
+REQUISITOR adquiere la
+sustancia química peligrosa
+/ muestra
+
+El líder de
+SyS toma
+la decisión
+final
+
+Se incluye sustancia química dentro del Listado Maestro
+de Materiales Peligrosos y se informa al Requisitor que el
+material ha sido aprobado
+
+Si posteriormente la muestra se adquirirá de forma recurrente, el requisitor debe informar al Líder
+de SyS y al Champion 03 vía correo electrónico para agregar la sustancia al Listado Maestro de
+Materiales Peligrosos (TRP-PO-SS-132-F01)
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 10 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+4.3 RECEPCION Y ALMACENAMIENTO DE MATERIALES PELIGROSOS
+Transportista de proveedor llega a material peligroso a TRVM
+
+¿Cumple con los
+requisitos de ingreso a
+la terminal?
+
+SE NIEGA EL ACCESO A
+TRANSPORTISTA Y SE NOTIFICA
+NO
+El material a recibir es a
+granel, se notifica al
+cuarto de control para
+que autorice el ingreso
+siguiendo sus
+respectivas
+Instrucciones de trabajo.
+
+NO
+
+SI
+
+¿El material se entrega
+con recipiente del
+proveedor?
+SI
+
+Se notifica al Coordinador de materiales y
+se le solicita autorización para su ingreso
+
+Se le solicita autorización al
+líder de seguridad y salud
+SI
+
+Coordinador de materiales notifica
+punto de recepción al chofer
+
+Coordinador de
+materiales verifica
+documentos
+requeridos (ver
+4.3.2)
+
+FIN
+
+¿Cumple
+con los
+requisitos de
+recepción?
+
+NO
+No se recibe el
+material y se
+notifica a Compras
+y al requisitor
+
+AREAS DE RECEPCIÓN
+-Almacén HAZMAT
+-Taller de mantenimiento
+-Almacén de limpieza
+
+Coordinador de Materiales recibe la
+mercancía en el punto qué notifico al
+chofer y almacena el material dentro
+del espacio asignado, evitando
+mezclar sustancias incompatibles
+
+AREAS DE
+ALMACENAJE
+-Almacén HAZMAT
+-Taller de mantenimiento
+-Almacén de limpieza
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 11 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+4.3.1 Requisitos para recepción de materiales peligrosos
+Para recibir una sustancia química peligrosa, el Coordinador de Materiales, además de
+validar que está dentro del listado maestro de materiales peligrosos, debe verificar los
+siguientes requisitos:
+a. Que el guardia de protección haya verificado las condiciones del transporte.
+b. Que el guardia haya solicitado el ingreso al Coordinador de Materiales.
+c. Que el chofer traiga la documentación requerida según aplique: orden de compra,
+factura/remisión, hoja de datos de seguridad (HDS), certificado de análisis o calidad.
+d. Que el material no este caducado, dañado o con fugas en el recipiente, y que se
+encuentre etiquetado cumpliendo con la NOM.018-STPS-2015.
+e. lndicar al chofer el punto o área de recepción del material peligroso. Los puntos de
+recepción son: Almacén de Materiales Peligrosos (HAZMAT), Taller de
+Mantenimiento y Almacén de Limpieza.
+f.
+
+Ubicar el material dentro del almacén asignado y con materiales que sean
+compatibles, de acuerdo con lo indicado en la HDS.
+
+4.3.1.1 Empaque/Contenedores de los Proveedores
+Para los químicos que se reciban en empaques/contenedores del proveedor, el etiquetado,
+incluyendo las etiquetas de la SCT, se podrán utilizar coma la primera herramienta de
+cumplimiento para etiquetado de contenedores. Los señalamientos o etiquetas deben
+contener coma mínimo la siguiente información:
+1. ldentidad del (los) químico (s) peligroso (s).
+2. Advertencias apropiadas para riesgos/peligros.
+Los contenedores que no tengan el etiquetado en cumplimiento con la NOM-018-STPS2015 no serán aceptados al proveedor, o en caso de requerir ser aceptados, se deberá
+etiquetar el contenedor o empaque tomando coma base la Hoja de Datos de Seguridad
+(HDS).
+En caso de venir etiquetados en inglés, el coordinador de materiales debe asegurarse de
+colocar la etiqueta en idioma español, y tomando coma base la Hoja de Datos de Seguridad
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 12 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+(HDS).
+
+4.3.1.2 QUÍMICOS EN GRANDES CANTIDADES
+Las instalaciones de TRP que tengan contenedores fijos para almacenaje a granel o
+químicos y/o aceites, deben etiquetar dichos contenedores en cumplimiento con los
+requisitos reguladores locales y estatales:
+a.
+
+Todos los contenedores fijos para almacenaje a granel deben ser
+
+etiquetados con el nombre del producto y lo indicado por la NOM-018-STPS-2015.
+b.
+
+Los Tanques de Almacenamiento de petrolíferos tendrán señalamientos en
+
+el cuerpo del tanque.
+c.
+
+Los químicos y/o aceite almacenado en contenedores estacionarios deben
+
+ser apropiadamente etiquetados con el nombre y conforme a lo indicado en la NOM018STPS-2015.
+
+4.3.2 Especificaciones para el almacenamiento de materiales peligrosos.
+1. Se deben tomar precauciones para asegurar que los materiales no compatibles no
+se almacenen juntas. Por ejemplo, los oxidantes no deben guardarse junta con
+materiales inflamables, ni ácidos enseguida de bases, inflamables cerca de fuentes
+de calor, etc.
+2. Se debe verificar que los gabinetes para almacenar químicos peligrosos cumplan con
+las especificaciones requeridas por la industria, que estén asegurados a la pared y
+que los estantes están nivelados.
+3. Los materiales peligrosos se deben almacenar en el tipo de contenedor adecuado
+con respecto a las especificaciones del proveedor o la HDS.
+4. Todos los materiales líquidos deben guardarse dentro de sistemas de contención
+secundaria.
+a. Esto puede incluir sistemas fijos diseñados para tal fin y/o sistemas portátiles,
+como tarimas de contención.
+5. Todo el material estibado, debe estar equilibrado y bien soportado, así como respetar
+la altura/capacidad de estiba y asegurar que no se deslice o se caiga.
+a. Las estibas deben ser apiladas a una altura que puedan ser alcanzables con el
+equipo disponible.
+b. Se debe tener cuidado al usar tarimas fuertes capaces de soportar el peso. Las
+tarimas defectuosas deben ser retiradas de uso inmediatamente.
+6. Los materiales en peligro de rodar o resbalarse deben ajustarse para prevenir algún
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 13 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+incidente.
+a. El personal debe verificar que los objetos o materiales estibados no se encuentren
+en peligro de caer.
+7. Los materiales inflamables deben almacenarse de acuerdo con el Procedimiento
+Prevención de lncendios TRP-PO-SS-130.
+8. Las áreas de almacenaje deben estar libre de acumulación de materiales que
+constituyan un peligro de tropiezo, de fuego o explosión, o refugio de roedores o
+plaga.
+9. Se deben de tener disponibles kits universales de respuesta a derrames y el personal
+debe estar capacitado para atender una emergencia con estos.
+10. Las zonas donde se manejen almacenen o trasporten sustancias inflamables o
+explosivas, deben conectarse a tierra y estar protegidas con sistema de pararrayos
+de acuerdo con lo especificado en la NOM-022-STPS-2015.
+Para verificar las condiciones del Almacén de Materiales Peligrosos, el Champion del
+Elemento 03, el líder de SyS o quien ellos designen, debe realizar una inspección por
+lo menos una vez cada dos meses mediante el TRP-PO-SS-132-F04 Listado de
+Verificación de Almacenamiento y Manejo de Materiales Peligrosos.
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 14 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+4.4 MANEJO Y USO DE MATERIALES PELIGROSOS
+Usuario Ingreso de sustancias químicas peligrosas
+
+Se inicia la adquisición o compra
+siguiendo el punto 4.1 ¨Adquisición
+de materiales peligrosos o
+sustancias químicas¨ del presente
+documento.
+
+¿Esta
+disponible en el
+inventario?
+
+Coordinador de materiales y Usuario validan y se
+aseguran que el material está en condiciones de uso y
+etiquetado de acuerdo a la NOM-018-STPS-2015
+
+COORDINADOR DE MATERIALES, entrega sustancia
+química peligrosa a usuario, utilizando la herramienta equipo y
+EPP adecuado a la actividad a realizar y sustancia a manejar
+
+USUARIO llena bitácora de entrega de materiales peligrosos
+TRVM-PO-AS-104-F10 y/o salida de material de almacén TRP-POAS-104-F04
+
+USUARIO traslada material peligroso a punto de
+uso, utilizando equipos, herramientas, y EPP
+adecuados al material y cantidad a trasladar
+Puntos de uso
+área de proceso
+Taller de mantenimiento
+Estacionamiento y vialidades
+Oficinas administrativas
+
+FIN
+
+USUARIO hace uso del material peligroso con la
+herramienta, equipo y EPP adecuado a la cantidad
+y sustancia química peligrosa a manejar,
+apoyándose con la información de la HDS.
+
+USUARIO coloca recipiente y/o
+residuos en almacen temporal
+de residuos peligroso (ATRP)
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 15 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+4.4.1 Especificaciones para el manejo de materiales peligrosos
+1. El personal debe conocer las características y peligros del material, especialmente en lo que
+corresponde al Equipo de Protección Personal (EPP) requerido y respuesta de primeros auxilios,
+previo a su recepción y manejo.
+a. Si no están seguros, deben obtener y revisar la Hoja de Datos de Seguridad (HDS).
+b. SoIo los materiales peligrosos que se encuentran en el LISTADO MAESTRO DE
+MATERIALES PELIROSOS TRP-PO-SS-132-F01 en el sitio designado por el líder de
+Seguridad y Salud en el portal de SharePoint pueden ser utilizados en la Terminal.
+2. Las áreas de almacenamiento de materiales peligrosos deben contar en sitio en un lugar
+accesible con un listado impreso de acuerdo con la forma TRP-PO-SS-132- F01 y con las hojas
+de datos de seguridad de cada material. Las hojas de datos de seguridad deben ser impresas
+desde el sitio designado por Seguridad y Salud en el portal de SharePoint.
+3. Para el ingreso de materiales peligrosos nuevos, se debe solicitar la aprobación de acuerdo al
+punto 4.2 del presente documento.
+a. Para referencia en relación con aquellos materiales peligrosos prohibidos ver punto 4.5
+4. El personal debe usar los dispositivos apropiados para levantar y manejar material.
+a. Los bidones o tambos no deben rodarse acostados o sabre sus orillas. Estos deben
+moverse utilizando un remolque o un montacargas.
+5. El personal debe observar las precauciones e instrucciones de manejo como aparecen en el
+empaque del material
+6. El personal se debe referir a las secciones apropiadas de la HDS para información detallada
+sabre algún material en específico.
+a. Se evalúa el ingreso de todo material peligroso con base en sus características y
+posibles riesgos contenidos en su HDS para determinar las cantidades máximas
+permitidas de ingreso.
+4.4.1.1 Contenedores provisionales
+Los contenedores provisionales en donde se trasladan químicos peligrosos que permanezcan
+bajo el exclusivo control del individuo que realiza el traslado y que sean usados dentro del turno
+del individuo, no necesitan etiqueta, aunque deben tener la HDS al alcance durante el uso del
+contenedor.
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 16 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+Los contenedores provisionales que no estén atendidos o a la vista del individuo que traslada el
+material, deben ser etiquetados de acuerdo con los requisitos establecidos en la NOM-018STPS-2015.
+4.4.1.2 Residuos peligrosos generados
+Los residuos peligrosos generados por el uso de las sustancias químicas deben ser dispuestos
+correctamente en el Área Satélite o Almacén de Residuos Peligrosos de la Terminal conforme al
+TRP-PO-AM-106 PROCEDIMIENTO DE ALMACENAJE Y
+
+MANEJO
+
+DE RESIDUOS
+
+PELIGROSOS de tal forma que no entre en conflicto con los requisitos de la STPS, SCT y ASEA.
+El etiquetado de la NOM-018-STPS-2015 no aplica para residuos peligrosos.
+
+4.5 LISTADO MAESTRO DE MATERIALES PELIGROSOS
+En las instalaciones de la Terminal de Refinados Valle de Mexico se debe desarrollar y conservar
+un Listado Maestro de Materiales Peligrosos (TRP-PO-SS-132-F01) para todos los materiales o
+sustancias químicas, que sean o tengan coma ingrediente, una Sustancia Peligrosa.
+Solamente las sustancias químicas peligrosas aprobadas podrán incluirse dentro de este listado
+o las que ya estuvieron en listados previos.
+Para cada área en donde se almacenen materiales peligrosos, debe haber disponible en sitio el
+TRP-PO-SS-132-F02
+
+LISTADO
+
+DE
+
+MATERIALES
+
+PELIGROSOS
+
+EN
+
+AREAS
+
+DE
+
+ALMACENAMIENTO junta con las hojas de datos de seguridad.
+Está prohibido el uso, almacenamiento, o posesión dentro de las instalaciones de TRP de las
+siguientes sustancias peligrosas:
+1. Asbesto.
+2. Arsénico.
+3. Benceno.
+4. Cianuro.
+5. Plomo.
+6. Mercurio.
+7. Bifenilos policlorados (BPC).
+El Listado Maestro de Materiales Peligrosos debe ser:
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 17 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+1. Elaborada a partir del inventario del lugar de trabajo de todos los químicos existentes,
+por la persona responsable del área y/o su designado.
+2. Actualizada cuando sea necesario para incluir nuevos químicos aprobados.
+3. Inspeccionado anualmente por El Champion del Elemento 3 Manejo de Químicos y
+Comunicación de Peligros del SGSS y/o su designado, realizando un barrido de químicos
+para verificar el status y rotación del inventario, comparando el inventario de químicos
+con el inventario HDS (todos deben encontrarse dentro del Listado Maestro)
+Durante la actualización del listado se hará un análisis de riesgos con el Líder de Seguridad y
+usuarios de las sustancias químicas peligrosas, para evaluar aquellas sustancias que puedan
+ser sustituidas por otras menos peligrosas, reducir la exposición y establecer las prácticas de
+trabajo más adecuadas.
+Una copia del Listado Maestro de Materiales Peligrosos debe conservarse en un lugar accesible
+para todos los empleados durante las 24 horas del día los 365 días del ano de manera electrónica
+y física en los lugares designados por el Champion del Elemento 03 en conjunto con el
+Coordinador de Materiales.
+Los contratistas que trabajen en las instalaciones de TRP deben tener acceso al Listado Maestro
+de Materiales Peligrosos.
+4.5.1 lnventario de materiales Peligrosos
+Dentro del TRP-PO-SS-132-F01 LISTADO MAESTRO DE MATERIALES PELIGROSOS y TRPPO-SS-132-F02 LISTADO DE MATERIALES PELIGROSOS EN AREAS DE
+ALMACENAMIENTO, se tendrá información sabre el inventario máximo en sitio.
+Adicional, se tomará un inventario físico mensual en sitio para tener las cantidades exactas en
+cada área de almacenamiento, siendo responsabilidad de cada responsable de área de
+almacenamiento el cumplir con en el TRP-PO-SS-132-F02 LISTADO DE MATERIALES
+PELIGROSOS EN AREAS DE ALMACENAMIENTO, verificando las condiciones de los
+materiales peligrosos, compatibilidad, stock máxima y revisando la caducidad de estos para en
+caso de ser necesario, gestionar su disposición con el Coordinador Ambiental y Entrenamiento
+o su uso con el usuario de dicho material.
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 18 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+4.5.1.1 lnventario de materiales Peligrosos en Almacén HAZMAT
+El lnventario en el almacén de materiales peligrosos (HAZMAT) será controlado por el
+Coordinador de Materiales con base en el procedimiento TRP-PO-AS-104 PROCEDIMIENTO
+DE ADMINISTRACION DE ALMACENES DE MATERIALES donde los materiales peligrosos
+inventariables en el sistema ERP tendrán el mismo trato referente a entradas y salidas del
+Almacén. Para los materiales peligrosos que se consideren consumibles (es decir, no
+inventariables en el sistema ERP) se llevara el registro de salidas en TRP-PO-AS-104-F10
+BITACORA DE ENTREGA DE MATERIALES PELIGROSOS. No importando el trato en el
+sistema ERP del material peligroso mensualmente se tomará un inventario físico en sitio
+cumpliendo con el TRP PO-SS-132-F02 LISTADO DE MATERIALES PELIGROSOS EN AREAS
+DE
+
+ALMACENAMIENTO,
+
+verificando
+
+las
+
+condiciones
+
+de
+
+los
+
+materiales
+
+peligrosos,
+
+compatibilidad, stock máximo y revisando la caducidad de estos para en caso de ser necesario,
+gestionar su disposición con el Coordinador Ambiental y Entrenamiento o su uso con el usuario
+de dicho material.
+
+4.6 EQUIPOS DE SEGURIDAD
+4.6.1 Equipo de Protección Personal
+Todo el personal que maneje químicos peligrosos debe utilizar Equipo de Protección Personal.
+Los requisitos del equipo de protección personal deben basarse en los peligros de los materiales
+y en la exposición de materiales peligrosos.
+Las siguientes medidas de protección personal se deben seguir por el personal de la Terminal y
+por los contratistas que manejan químicos peligrosos en las instalaciones:
+1. Se debe usar protección para los ojos al manejar cualquier químico peligroso.
+2. Se deben usar guantes resistentes a los químicos cuando se manejen de manera directa.
+3. Protector que cubra toda la cara y ropa protectora se debe usar cuando se manejen
+materiales corrosivos o criogénicos.
+4. Se debe de determinar en cada caso el Equipo de Protección Personal a utilizar
+basándose en la evaluación de riesgos de la actividad y las especificaciones que se
+incluyen en la Hoja de datos de Seguridad.
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 19 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+4.6.2 Regaderas de Seguridad I Estaciones para el lavado de ojos
+Las regaderas de seguridad y las estaciones para el lavado de ojos deben estar claramente
+señalizadas, visibles desde todas las direcciones y estar instaladas de acuerdo con el siguiente
+criterio:
+1. Las unidades deben estar en un lugar accesible no más lejos de 10 segundos caminando
+(50 pies (15.2 metros)) del punto más lejos de los químicos peligrosos que pudieran
+causar daño a los ojos.
+2. El acceso no debe requerir pasar a ningún espacio que este separado del sitio de los
+materiales peligrosos, sea por una puerta, aun si la puerta está abierta por rutina.
+3. Las unidades deben estar equipadas con válvulas abiertas para permitir tener las manos
+libres durante el lavado de ojos.
+4. Las regaderas de seguridad deben proporcionar agua corriente a un flujo de 20 gpm (76
+1pm) y las estaciones de lavado de ojos a un mínimo de 0.4 gpm (1.5 1pm).
+5. Las unidades deben estar ubicadas LEJOS de paneles eléctricos y tomacorrientes.
+6. Las unidades deben estar puestas entre 33 pulgadas (83.8cm) y 45 pulgadas (114.3cm)
+del nivel donde está parado el usuario y 6 pulgadas (15.2cm) de la pared más cercana.
+7. La parte de arriba de la regadera debe estar ubicada 2.08 - 2.44 metros (82 - 96 pulgadas)
+del piso y proveer salida de agua con un diámetro mínimo de 20 pulgadas (50.8cm) a 60
+pulgadas (1.52 metros) sobre el piso.
+8. El centro de la salida del agua de la regadera debe estar ubicado cuando menos 16
+pulgadas (40.6cm) de cualquier obstrucción.
+9. El mecanismo de las llaves debe ser del tipo permanecer-abierto y estar accesible a
+personal de todas las estaturas.
+Las unidades deben ser inspeccionadas semanalmente por personal de la planta de acuerdo con
+técnicas de inspección utilizando el formato TRP-PO-SS-132-F05 INSPECCION SEMANAL DEL
+SISTEMA LAVAOJOS Y REGADERAS y conforme al programa de mantenimiento preventive:
+La inspección debe incluir fácil acceso y operación para asegurar de que:
+1. Las unidades estén accesibles (Libre de obstáculos).
+2. El abastecimiento de agua está libre de deshechos.
+3. El flujo de agua empiece a fluir dentro de 1 segundo después de su activación.
+4. La regadera provea un chorro de agua continue para de cubrir el cuerpo complete.
+5. La estación de lavado de ojos lave ambos ojos simultáneamente a baja velocidad.
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 20 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+6. La alarma se active adecuadamente, (si existe).
+7. Al terminar la inspección, el inspector debe poner su inicial en el letrero de la unidad de
+la regadera indicando que esta lista y en servicio para usarse.
+8. Si se encuentran deficiencias durante la inspección, se elaborará una orden de trabajo
+para su reparación y se debe notificar al Champion de Comunicación de Peligros.
+9. Si es necesario poner la unidad fuera de servicio, se debe poner un letrero que diga
+"Fuera de Servicio" y todo el personal debe ser notificado de la indisponibilidad del equipo
+hasta que sea reparado.
+Las unidades deben ser inspeccionadas anualmente por personal capacitado de la planta de
+acuerdo con técnicas de inspección utilizando el formato TRP-PO-SS-132-F06 INSPECCIÓN
+ANUAL DEL SISTEMA LAVAOJOS Y REGADERAS y conforme al programa de mantenimiento
+preventivo, esto para cumplimiento del ANSI Z358.1-2014.
+
+4.7
+MEDIDAS
+PARA
+MITIGAR
+ESCAPES
+MATERIALES/SUSTANCIAS QUIMICAS PELIGROSAS
+
+ACCIDENTALES
+
+DE
+
+Durante una emergencia la exposición de material peligroso puede ser más alta que durante las
+operaciones normales. Estas exposiciones más altas tendrán que ser experimentadas para que
+se tengan acciones adicionales de protección, correctivas de salvamento.
+Bajo tales situaciones, se hará el mayor esfuerzo posible para reducir y mantener la exposición
+debajo de los Límites de Exposición Permisibles (LEP) de sustancias reguladas por la NOM-010STPS-1999 y 29 CFR 1910.1000.
+
+4.7.1 Ácidos/cáusticos
+
+1. Se deben utilizar guantes de neopreno o nitrilo, botas protectoras, y un respirador de cara
+completa o una careta cuando se trabaje cerca de derrames de ácidos.
+
+2. Un respirador purificador de aire con el cartucho apropiado debe utilizarse para derrames
+de ácidos o bases, tales como ácido clorhídrico y amoniaco acuoso.
+
+3. Se deben extremar las precauciones para evitar que los materiales salpiquen.
+4. Se deben tomar medidas para evitar que el material derramado entre en contacto con el
+agua.
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 21 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+5. Si el material está en contacto con el agua o si se detecta olor en el material, se debe
+utilizar un respirador purificador de aire con el cartucho apropiado para gas acido.
+
+6. Los derrames deben absorberse o ser neutralizados con el agente neutralizador
+adecuado.
+
+4.7.2 lnflamables
+1. Las fuentes de ignición deben ser aseguradas lo mejor posible en el área inmediata y en
+dirección del viento.
+2. El uso de herramientas y/o equipo que puede generar chispas debe evitarse.
+
+4.7.3 Oxidantes
+1. Se deben tomar medidas para prevenir que los oxidantes contacten materiales de
+combustión.
+2. Los materiales orgánicos y/o combustibles no deben usarse como absorbentes para
+oxidantes.
+3. Los materiales combustibles porosos que hayan estado en contacto con líquidos
+oxidantes deben disponerse si no es posible la remoción completa del agente oxidante.
+
+4.7.4 Materiales tóxicos
+1. El personal debe evitar toda exposición por contacto o inhalación al material.
+2. El almacenamiento de sustancias tóxicas debe hacerse en recipientes específicos de
+materiales compatibles con la sustancia de que se trate.
+3. Cuando se transporten sustancias tóxicas, se realicen a través de tuberías portátiles,
+estos deben estar cerrados para evitar que su contenido se derrame o fugue.
+
+4.8 RESPUESTA A EMERGENCIAS
+En el almacén de Materiales Peligrosos (HAZMAT) y en las áreas de almacenamiento de
+materiales peligrosos, se debe tener disponible un kit de respuesta a derrames, los
+cuales son inspeccionados mensualmente mediante el TRP-PO-AM-109-F01 INSPECCIONES
+MENSUALES DEL EQUIPO DE RESPUESTA A DERRAMES.
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 22 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+En caso de algún escape accidental de sustancias peligrosas, inicialmente se debe conocer las
+especificaciones del material peligroso consultando su HDS y se deben seguir las siguientes
+pautas generales:
+1. El área inmediata debe ser desalojada y aislada excepto para tratar de mitigar la situación.
+2. Consultar la HDS en caso de que no se sepa
+3. La naturaleza y alcance de las lesiones que resulten del incidente o exposición del escape
+serán determinadas.
+4. El personal expuesto debe ser descontaminado por medio de regaderas de emergencia.
+5. Las lesiones deben ser tratadas.
+6. El escape debe ser contenido para evitar que trascienda a la red de drenajes, a los
+drenajes pluviales, juntas de expansión y/o a la tierra.
+7. El material derramado debe absorberse con materiales absorbentes, arena o tierra.
+8. Los absorbentes contaminados deben ser dispuestos apropiadamente en el Almacén
+Temporal de Residuos Peligrosos siguiendo el procedimiento TRP-PO-AM-106.
+Para mayor información sobre las medidas preventivas durante la transferencia de materiales
+peligrosos ver el punto 4.2 del Plan de Prevención de Derrames, control y contramedidas TRPMP-AM-104.
+
+4.9 COMUNICACION DE PELIGROS
+4.9.1 Señalamientos y otras formas de advertencia
+La etiqueta requerida para las sustancias químicas peligrosas es la que se especifica dentro de
+la NOM-018-STPS-2015, que se basa en el Sistema Globalmente Armonizado de Clasificación
+y Etiquetado de Productos Químicos (SGA).
+La señalización se debe ubicar en lugares visibles del contenedor, anaquel o área del centro de
+trabajo.
+La señalización de sustancias químicas peligrosas y mezclas deberá ubicarse de conformidad
+con los siguientes criterios:
+a. Para una misma sustancia química peligrosa y mezcla, en una estiba por área o por
+recipiente.
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 23 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+b. Para diferentes sustancias químicas peligrosas y mezclas compatibles, en un mismo
+anaquel o estiva en cada uno de los contenedores o en las partes del anaquel que
+contenga la misma sustancia peligrosa.
+c. En todos los contenedores con sustancias químicas peligrosas y mezclas localizados en
+las áreas de proceso.
+d. En los contenedores en los que se trasladen sustancias químicas peligrosas dentro de la
+Terminal.
+e. En los vehículos de transporte terrestre y ferroviario cuando permanezca por más de 72
+horas dentro de la Terminal, complementando con la etiqueta utilizada en transporte.
+La etiqueta se genera a partir de la información que se obtiene de la HDS y contiene al menos
+los siguientes elementos:
+1. identificador del Producto: Es el nombre de la sustancia química y/o sus ingredientes, se
+puede hacer mención del número CAS (Sección 1 y 3 de la HDS)
+2. Palabra de advertencia: Esta palabra puede ser "PELIGRO" o "ATENCION". (Sección 2
+de la HDS)
+3.
+Indicaciones de peligros: Una frase asignada a un tipo de peligro en específico
+que describe la naturaleza de los peligros del producto. También se les llama frases H.
+(Sección 2 de la HDS)
+4. Consejos de prudencia o precaución: Describe las medidas recomendadas para prevenir
+o minimizar los efectos adverses resultantes de la exposición al producto. También se les
+llama frases P. (Sección 2 de la HDS)
+5. Datos del proveedor o fabricante: Nombre, dirección, teléfono u otra información relevante
+del proveedor o fabricante del producto. (Sección 1 de la HDS)
+6. Pictogramas: Símbolos utilizados para representar diferentes peligros del producto.
+(Sección 2 de la HDS)
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 24 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+4.9.1.1 Ejemplo de Etiqueta de acuerdo al SGA
+
+4.9.1.2 Pictogramas de/ SGA
+Peligros físicos
+
+Gases
+comburentes
+(categoría 1)
+Líquidos
+comburentes
+(categorías
+1 al 3)
+Solidos
+comburentes
+(categorías
+1 al 3)
+
+Gases inflamables
+(categoría 1)
+
+Explosivos (inestable y
+divisiones 1.1 al 1.4)
+
+Aerosoles (categorías 1
+y 2)
+
+Sustancias y mezclas
+que reaccionan
+espontáneamente (tipo
+Ay B)
+
+Líquidos inflamables
+(categorías
+1 al 3)
+Solidos inflamables
+(categorías 1 y 2)
+Sustancias y
+mezclas que
+reaccionan
+
+Peróxidos orgánicos
+(tipo A y B)
+
+Gases a presión
+(comprimido,
+licuado,
+licuado
+refrigerado y
+disuelto)
+
+Sustancias y
+mezclas
+corrosivas
+para los
+metales
+(categoría 1)
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 25 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+espontáneamente
+(tipos B al F)
+
+líquidos piroforicos
+(categoría 1)
+Solidos pirofóricos
+(categoría 1)
+Sustancias y
+mezclas que
+experimentan
+calentamiento
+espontaneo
+(categorías 1 y 2)
+Sustancias y mezclas
+que en contacto con el
+agua, desprenden
+gases inflamables
+(categorías 1 al 3)
+peróxidos orgánicos
+(tipos B al F)
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 26 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+Peligros para la salud
+
+Toxicidad
+aguda por
+ingestión,
+(categorías 1 al
+3)
+Toxicidad
+aguda por vía
+cutánea
+(categoría 4)
+Toxicidad
+aguda por
+inhalación,
+(categorías 1 al
+3)
+
+Sensibilización respiratoria
+(categorías 1, 1A* y
+1B*)
+Mutagenicidad en
+células germinales
+(categorías 1 [tanto 1A
+como 1BJ y 2)
+
+Corrosión/irri
+tación
+cutánea
+(categoría 1)
+
+Lesiones
+oculares
+graves/
+Carcinogenicidad (categorías 1 irritación
+ocular
+[tanto 1A como
+(categoría 1)
+1BJ y 2)
+Toxicidad para la reproducción
+(categorías 1)
+[tanto 1A como 1BJ y 2)
+Toxicidad sistémica
+especifica de órganos
+blanco (exposición única)
+(categorías 1 y 2)
+Toxicidad sistémica
+especifica de órganos blanco
+(exposiciones repetidas)
+(categorías 1 y 2)
+
+Toxicidad aguda por ingestión
+(categoría 4)
+Toxicidad aguda por vía
+cutánea (categoría 4)
+Toxicidad aguda por
+inhalación (categoría 4)
+Corrosión/irritación cutánea
+(categoría 2)
+Lesiones oculares
+graves/irritación ocular
+(categoría 2/2A)
+Sensibilización cutánea
+(categorías 1, 1A* y
+1B')
+Lesiones oculares graves
+(categoría 2A)
+Toxicidad especifica de
+órganos blanco
+(exposición (mica)
+(categorías 3)
+
+Peligro por aspiración
+(categorías 1 y 2)
+
+4.9.2 Etiquetado dentro de las instalaciones
+Los contenedores provisionales, contenedores secundarios y/o contenedores que no tengan
+etiqueta serán etiquetados por el personal designado en la Terminal conforme a los requisitos de
+la NOM-018-STPS-2015 que se basa en el Sistema Globalmente Armonizado, es decir, cada
+usuario es responsable de que el químico o material peligroso que se va a utilizar o que este
+dentro de su área de trabajo este etiquetado.
+La Hoja de Datos de Seguridad (HDS) será la fuente de información para generar las etiquetas.
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 27 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+Aunque no se requiere que las etiquetas incluyan todas las advertencias de peligro que vienen
+en la Hoja de Seguridad de Material Peligroso (HDS), las instalaciones de la Terminal de
+Refinados Valle de México hará lo posible de incluir la mayor información sabre peligro.
+Los tanques que almacenen sustancias químicas deben estar rotulados con el nombre de la
+sustancia química almacenada, así coma indicar la capacidad máxima de almacenamiento, la
+cual no debe ser mayor al 90% de su capacidad.
+Cuando se elabore una etiqueta dentro de la terminal, el coordinador de materiales debe
+guardarla en el sitio electrónico que el designe y comunicarlo al personal para su posible uso
+posterior.
+4.9.2.1 Proceso de etiquetado de materiales peligrosos en la recepción
+
+NO
+
+Coordinador de materiales recibe material peligroso (debe
+contar con EPP necesario previo a la manipulación
+
+NO
+
+¿Se decide
+recibirlo?
+
+¿El material esta
+correctamente
+etiquetado?
+
+SI
+Coordinador de materiales revisa
+la HDS y genera la etiqueta para
+colocarla en el material peligroso.
+
+Se retira el proveedor con el material
+peligroso.
+
+El material peligroso se almacena en la
+ubicación asignada.
+
+FIN
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 28 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+4.9.2.2 Proceso de etiquetado de materiales peligrosos antes de su uso
+USUARIO necesita un material peligroso del inventario
+(debe contar con EPP necesario previo a la
+manipulación)
+NO
+USUARIO descarga
+etiqueta desde
+Sharepoint y la coloca
+en el material
+peligroso.
+
+¿El material esta
+correctamente
+etiquetado?
+
+SI
+
+EL USUARIO se lleva el material al área
+donde será utilizado
+
+FIN
+
+4.9.3 Etiquetado de tuberías
+Las tuberías dentro de la TRP deben ser identificadas con:
+1. El color de seguridad que le corresponda de acuerdo con la tabla 4.8.3-1.
+Color
+Rojo
+
+Significado
+
+ldentificación de fluidos para el combate de incendio
+conducidos por tubería
+
+Amarillo
+
+ldentificación de fluidos peligrosos conducidos por tubería
+
+Verde
+
+ldentificación de fluidos de bajo riesgo conducidos por tubería
+
+a. El color de seguridad debe aplicarse en cualquiera de las formas siguientes:
+Pintar la tubería a todo lo largo y cubrir toda la circunferencia con el color de
+seguridad correspondiente.
+Pintar la tubería con bandas de identificación de 100mm de ancho como mínima
+debiendo cubrir dota la circunferencia de la tubería, incrementándolas en proporción
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 29 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+al diámetro exterior de la tubería de acuerdo con la tabla 4.8.3-2 identificación de
+tuberías
+Colocar etiquetas indelebles con las dimensiones mínimas que se indican en la tabla
+4.8.3-2 para las bandas de identificación; las etiquetas del color de seguridad deben
+cubrir toda la circunferencia de la tubería.
+La disposición del color amarillo para la identificación de fluidos peligrosos se permite mediante
+bandas con franjas diagonales amarillas y negras a 45°. El color amarillo de seguridad debe
+cubrir por lo menos el 50% de la superficie total de la banda de identificación.
+Diámetro exterior de tubo o
+cubrimiento (mm)
+
+Ancho mínimo de la banda de
+identificación (mm)
+
+Hasta 38
+
+100
+
+Mas de 38 hasta 51
+
+200
+
+Mas de 51 hasta 150
+
+300
+
+Mas de 150 hasta 250
+
+600
+
+Mas de 250
+
+800
+
+2. La dirección del flujo debe indicarse con una flecha adyacente a las bandas de
+identificación o a la información complementaria según corresponda. La longitud de la flecha
+será igual o mayor a la altura de las letras de las leyendas con relación al diámetro de la
+tubería.
+3. En las tuberías que exista flujo en ambos sentidos se identificara con una flecha apuntando
+en ambas direcciones.
+4. La flecha de la dirección del flujo se pintará directamente sobre la tubería, en color blanco
+o negro para contrastar claramente con el color de la misma.
+5. lndicar información complementaria mediante las siguientes alternativas:
+a. Señales de seguridad e higiene
+b. Uso de leyendas que indiquen el riesgo del fluido:
+TOXICO
+
+REACTIVO
+
+INFLAMABLE
+
+RIESGO BIOLOGICO
+
+EXPLOSIVO
+
+ALTA TEMPERATURA
+
+IRRITANTE
+
+BAJA TEMPERATURA
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 30 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+CORROSIVO
+
+ALTA PRESION
+
+c. Utilizar señalización para indicar riesgos por sustancias químicas de conformidad con la
+NOM-018-STPS-2015.
+d. Nombre completo de la sustancia.
+e. Cualquier combinación de los incisos anteriores.
+
+4.9.4 Hojas de Datos de Seguridad (HDS)
+Una Hoja de Datos de Seguridad (HDS) es una compilación de información acerca del químico
+o producto, que pudo haber sido obtenido de un vendedor, proveedor o fabricante del químico o
+producto.
+La HDS incluye propiedades físicas y químicas, información sobre compatibilidad química y
+toxicidad, equipo de protección personal recomendado, precauciones especiales de manejo, tipo
+de peligros asociados con el químico o producto, información acerca de síntomas debido a una
+sobre exposición, información de emergencia, procedimientos de primeros auxilios y
+procedimientos de fugas o derrames.
+Las HDS para materiales dentro de las instalaciones en México deben estar en español y cumplir
+con la NOM-018-STPS-2015.
+Es responsabilidad del proveedor o fabricante facilitar la hoja de datos de seguridad.
+La HDS, de acuerdo con lo establecido con la NOM-018-STPS-2015, se compone de 16
+secciones, que son las siguientes:
+SECCION 1. Identificación de la sustancia química peligrosa o mezcla y del proveedor o
+fabricante.
+SECCION 2. Identificación de los peligros.
+SECCION 3. Composición/información sobre los componentes.
+SECCION 4. Primeros auxilios.
+SECCION 5. Medidas contra incendios.
+SECCION 6. Medidas que deben tomarse en caso de derrame accidental o fuga
+accidental.
+SECCION 7. Manejo y almacenamiento.
+SECCION 8. Controles de exposición/protección personal.
+SECCION 9. Propiedades físicas y químicas.
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 31 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+SECCION 10. Estabilidad y reactividad.
+SECCION 11. Información toxicológica.
+SECCION 12. Información ecotoxicológica.
+SECCION 13. Información relativa a la eliminación de los productos.
+SECCION 14. Información relativa al transporte.
+SECCION 15. Información reglamentaria.
+SECCION 16. Otras informaciones incluidas las relativas a la preparación y actualización
+de las hojas de datos de seguridad.
+4.9.4.1 Actualización de las HDS
+Las HDS nuevas al recibirse se deben comparar con las actuales HDS. Debe haber una
+comparación de documentos para revisar si existen discrepancias o cambios en la información.
+Si la nueva Hoja de Seguridad contiene información actualizada o adicional, la Hoja de Seguridad
+revisada reemplazara la actual Hoja de Seguridad conservada dentro del Sistema de HDS.
+Las Hojas informativas reemplazadas, así como Hojas informativas para materiales que no están
+en uso o almacenados en las instalaciones se deben conservar en el archivo por 30 años.
+Las instalaciones de TRP deben revisar su sistema de HDS cada año.
+Las HDS deben ser iguales a la actual Lista Maestra de Químicos para verificar la integridad del
+sistema.
+Las HDS que muestre tener más de 3 años de elaboración/actualización, requiere que el lugar
+de trabajo confirme con el vendedor/proveedor que la HDS es la última versión disponible y
+actualizada.
+4.9.4.2 Administración de las HDS
+Se mantienen las HDS accesibles para todo el personal 24/7, impresas en el almacén de
+materiales peligrosos, en la oficina del operador Líder y en los puntos de uso o almacenamiento
+junto con el Listado de Materiales peligrosos en áreas de almacenamiento; así como de manera
+digital en SharePoint de la Terminal desde el portal de SSYP, sección Hojas de Datos de
+Seguridad:
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 32 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+Todo el personal de las instalaciones debe estar informado de cómo acceder a las HDS como
+parte de su entrenamiento en Comunicación de Peligros.
+
+4.10 Información del contratista
+Los Contratistas que presenten ofertas de trabajo en las instalaciones de TRP deben incluir
+una lista de químicos peligrosos que pretenden usar en el desarrollo de sus actividades.
+Antes de permitirle a un contratista que realice el trabajo dentro de las instalaciones, deben
+participar en la Orientación de Seguridad del Contratista. La orientación provee una
+perspectiva general sobre los químicos peligrosos presentes en el trabajo y el sistema de
+etiquetado de la Terminal, la disponibilidad de las HDS, así como que acciones tomar en
+caso de emergencia. La orientación también instruye al contratista a quien contactar para
+información adicional referente a peligros químicos específicos.
+A cada contratista se le solicitara su firma de que ha participado en la Orientación de
+Seguridad y se le dio la oportunidad de hacer preguntas específicas relativas a la seguridad
+de la Terminal previo a iniciar el trabajo dentro de las instalaciones.
+Si el contratista debe realizar trabajo que resulte en una exposición potencial a un químico
+en exceso sobre el TLV del material, la Gerencia de Planta se asegurara que el Supervisor
+del Contratista este debidamente informado al respecto de:
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 33 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+1. El tipo y naturaleza de peligros presentes.
+2. Las precauciones requeridas que se deben tomar para prevenir o minimizar la
+exposición.
+3. La disponibilidad de una copia de la HDS del material.
+4. Que el material peligroso que utilicen este etiquetado de acuerdo con lo que se
+establece en la NOM-018-STPS-2015.
+5. Que acciones deben tomarse en una emergencia.
+6. Quien puede ser contactado para información adicional.
+7. Sera responsabilidad del Supervisor/Coordinador del Contratista informar a su personal
+de esta información.
+
+5. DEFINICIONES
+Sustancia química peligrosa: Es aquella que por sus propiedades físicas y químicas presenta
+la posibilidad de afectar la salud de las personas expuestas, de inflamarse o reaccionar de
+manera especial o de causar daños materiales a las instalaciones, al ser manejada, transportada,
+almacenada o procesada.
+Hoja de Datos de Seguridad (HDS): contiene información de las condiciones de seguridad e
+higiene necesarias para el manejo de las sustancias químicas peligrosas, que sirve coma base
+para programas escritos de comunicación de peligros y riesgos en el centro de trabajo.
+SGA: Sistema Globalmente Armonizado.
+TRP: Terminal de Refinados Valle de México
+TLV: Valores Umite Umbral de exposición a ciertas sustancias.
+
+6. SEGUIMIENTO Y MEDICION
+Los registros generados y la documentación química se deben guardar en los archives durante
+al menos 5 años.
+
+6.1 AUDITORÍA Y ACATAMIENTO
+Este procedimiento debe ser auditado de conformidad con los Procedimientos de Auditoria de
+TRP u otros lineamientos obligatorios de acuerdo con su nivel de aplicación al Corporativo,
+Unidad de Negocios o instalaciones.
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 34 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+Este procedimiento debe estar bajo un programa de observación e inspección u otro
+procedimiento delineado por el Corporativo, unidad de Negocios o instalaciones para ayudar en
+su implementación y mejora continua.
+Todo colaborador de TRP con el entrenamiento y capacidad para identificar violaciones o
+desviaciones no autorizadas a este procedimiento que pongan en riesgo la salud y seguridad del
+personal deberá reportar el incidente para facilitar la acción correctiva inmediata y/o investigación
+de acuerdo con la siguiente lista de prioridad para notificaciones:
+1. Supervisor inmediato de la persona involucrada.
+2. Líder de Seguridad y Salud
+3. La Línea de Ética de Gaseoductos Servicios Corporativos S.A. de C.V. anunciada en las
+instalaciones o lugar de trabajo.
+Todo colaborador de TRP que se determine, previa a investigación, que cometió una violación
+intencional a este Procedimiento, será sujeto a las acciones disciplinarias coma lo establece el
+Procedimiento Progresivo de Disciplina del Corporativo.
+Para evaluar que se está cumpliendo con el programa de Comunicación de Peligros y Manejo de
+Materiales Peligrosos, se realiza una autoevaluación al menos una vez al año durante el último
+cuarto del año calendario a través de la forma TRP-PO-SS-132-F04 LISTADO DE
+VERIFICACION DE ALMACENAMIENTO Y MANEJO DE MATERIALES PELIGROSOS, en dos
+áreas o puntos de almacenaje y/o uso de sustancias químicas peligrosas. Aquí participaran el
+Champion de Manejo de Químicos y Comunicación de Peligros con el Líder de Seguridad con
+una
+
+persona
+
+del
+
+área
+
+a
+
+evaluar
+
+(Coordinador
+
+de
+
+Materiales/Supervisor
+
+de
+
+mantenimiento/Responsable de área). En este proceso, se incluirá la identificación de los
+procesos débiles o faltantes o los problemas que existen en la organización con respecto a su
+ejecución, cuando aplique. Si se identifican oportunidades de mejora, es necesario establecer un
+plan de acciones correctivas con metas y calendarización.
+
+6.2
+
+CAPACITACIÓN
+
+El Programa de Capacitación es aplicable a todos los colaboradores de TRP quienes, en sus
+actividades normales de trabajo, pudieran estar expuestos a sustancias de químicos peligrosos
+en el área de trabajo.
+La capacitación será impartida por personal competente.
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 35 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+Si la capacitación se da por medio de la computadora o por video, el Gerente de Planta se
+asegurará que hay personal calificado para el entrenamiento y se encuentre accesible a los
+colaboradores durante la capacitación para proporcionarles la oportunidad de una discusión
+interactiva durante el entrenamiento y aclarar las preguntas que pudieran surgir.
+El programa de capacitación requiere que todos los colaboradores afectados entiendan el
+Programa de Comunicación de Peligros.
+El Personal asignado a papeles específicos en el Plan de Respuesta a Emergencias de la
+Terminal estará capacitado en las responsabilidades de su papel especifico en el Sistema.
+(Referirse al Plan de Emergencia de la Terminal y/o Plan de medidas de control y prevención de
+derrames).
+Los colaboradores serán informados de peligros asociados con exposiciones rutinarias y no
+rutinarias a químicos peligrosos.
+Un colaborador nuevo recibirá capacitación de acuerdo con este programa previo a que inicie su
+trabajo en áreas donde hay posibilidad de exposición a químicos peligrosos.
+Cuando un colaborador puede estar expuesto a sustancias peligrosas en el curso de un trabajo
+no rutinario, recibirá capacitación de esa sustancia peligrosa y en las acciones necesarias en
+caso de exposición.
+Cuando una sustancia se introduce dentro del área de trabajo, los colaboradores que resulten
+afectados recibirán capacitación de esa sustancia peligrosa, y en su manejo seguro.
+El programa de capacitación debe incluir todos los elementos requeridos por la NOM-018- STPS2015 y 29 CFR 1910.1200, Comunicación de Peligros. Este material será incorporado dentro de
+un documento escrito de capacitación. El programa de capacitación debe incluir los siguientes
+puntos:
+1. Hojas de Datos de Seguridad (HDS) para todos los químicos peligrosos en el lugar de
+trabajo.
+2. Lista de todos los químicos peligrosos en el lugar de trabajo.
+3. Peligros físicos y químicos de materiales.
+4. Métodos adecuados de almacenaje y manejo de acuerdo con la HDS y el Procedimiento.
+5. Acciones que se deben tomar si sucede una fuga o derrame de materiales peligrosos.
+Todos los colaboradores deben tener instrucciones sobe uso y operación de las estaciones de
+emergencia de lavado de ojos y regaderas dentro de las instalaciones.
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 36 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+Los colaboradores designados a realizar inspecciones en las estaciones de lavado de ojos y
+regaderas deben estar capacitados bajo técnicas de inspección.
+El re- entrenamiento se debe dar a los colaboradores cuando sea necesario para que estos
+tengan siempre en mente el conocimiento adquirido durante su capacitación inicial.
+
+7 REFERENCIAS
+Norma Oficial Mexicana NOM-005-STPS-1998, Condiciones de Seguridad e Higiene en
+los centros de trabajo para el manejo, transporte y almacenamiento de sustancias
+químicas peligrosas.
+NORMA Oficial Mexicana NOM-018-STPS-2015, Sistema para la identificación y
+comunicación de peligros y riesgos por sustancias químicas peligrosas en los centros de
+trabajo.
+Norma Oficial Mexicana NOM-022-STPS-2015, Electricidad Estática en los centros de
+Trabajo- Condiciones de Seguridad e Higiene.
+Norma Oficial Mexicana NOM-026-STPS-2008, Colores y señales de seguridad e higiene,
+e identificación de riesgos por fluidos conducidos en tuberías.
+ISO 45001:2018, Sistemas de Gestión de la Seguridad y la Salud en el Trabajo.
+OSHA 29 CFR 1910.1200-Comunicacion de Peligro
+OSHA 29 CFR 1910.1020 -Acceso a Exposición del Colaborador y Registros Médicos.
+OSHA 29CFR 1910.1201 - Retención de Marcación PUNTEADA, Letreros y Rótulos.
+EPA 40CFR 112.3 - Prevención de Derrames, Control, y Planes de Contra medidas.
+EPA 40CFR 265: Subparte C - Conservación de Recurses y 256.56: Acta de
+Recuperación Plan de Contingencia.
+NFPA 704: Sistema Estándar para identificación de Peligro en Materiales para Respuesta
+de Emergencia.
+TRP-MI-GT-101 Manual Del Sistema De Gestión Integral NOM-006-ASEA-2017,
+Especificaciones y criterios técnicos de seguridad industrial, seguridad operativa y
+protección al medio ambiente para el diseño, construcción, pre-arranque, operación,
+mantenimiento, cierre y desmantelamiento de las instalaciones terrestres de
+almacenamiento de petrolíferos y petróleo, excepto para gas licuado de petróleo
+ISO 9001:2015 Sistemas de Gestión de la Calidad
+ISO 14001:2015 Sistemas de Gestión Ambiental
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 37 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+ISO 45001:2018 Sistemas de Gestión de la Seguridad y la Salud en el Trabajo
+ISO 10012:2003 Sistema de Gestión de las Mediciones
+
+8. ANEXOS
+8.1 COMPATIBILIDAD DE SUSTANCIAS QUÍMICAS
+
+8.2 RESTRICCIONES PARA EL ALMACENAMIENTO DE SUSTANCIAS
+QUÍMICAS
+(1) Consideraciones generales:
+En un mismo lugar, anaquel, estante o gabinete sóIo podrán almacenarse sustancias
+químicas de la misma clase o categoría o de riesgo inferior (siempre que sean
+compatibles), procurando agrupar aquellos que contengan productos de la misma
+clase;
+Aunque dos sustancias químicas tengan el mismo pictograma, no significa que
+almacenarlas juntas sea seguro, ya que un mismo pictograma puede representar
+distintas clases de peligro, incompatibles entre sí. Siempre se debe comprobar la
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 38 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+compatibilidad especifica entre las distintas clases y categorías dentro de una misma
+clase de sustancias químicas, para lo cual se deberá consultar las hojas de dates de
+seguridad;
+No podrán almacenarse en la misma estiba o anaquel, estante o gabinete sustancias
+químicas diferentes que presenten posibles reacciones peligrosas. Cuando se almacenen
+líquidos de diferentes clases o categorías en una misma estiba o anaquel, estante o
+gabinete, se considerará todo el conjunto coma un líquido de la clase o categoría más
+peligrosa;
+No se almacenarán juntos en la misma estiba, anaquel, estante o gabinete sustancias
+químicas que puedan reaccionar entre sí, a no ser que exista una barrera física que evite
+su contacto en caso de accidente (separación mediante barda, distancia, armarios de
+seguridad, etc.);
+No podrán estar en el misma estiba, anaquel, estante o gabinete, recipientes que
+contengan sustancias químicas que por sus características puedan variar otros
+recipientes y producir reacciones peligrosas;
+No estará permitido el almacenamiento conjunto de sustancias químicas que requieran
+agentes extintores incompatibles con alguna de ellas, y v En caso de que una sustancia
+química presente varias clases de peligro, será almacenada tomando en cuenta las
+condiciones más restrictivas.
+(2) Los almacenamientos de peróxidos orgánicos deben ser exclusivos para este fin, no
+permitiéndose el almacenamiento de otros productos químicos ni la realización de
+operaciones de trasvase, formulación o de otro tipo;
+(3) Los líquidos corrosives que, además, sean inflamables o combustibles, podrán almacenarse
+junta con otros líquidos inflamables o combustibles siempre que exista entre ellos una barrera
+física que evite su contacto en caso de accidentes (separación mediante barda, distancia,
+armarios de seguridad, etc.);
+(4) Los líquidos corrosives que no sean inflamables ni combustibles podrán almacenarse dentro
+de la misma área que las líquidos inflamables y combustibles, siempre que el contenedor
+soporte la corrosión, y
+(5) Se podrán almacenar cilindros llenos de gases inflamables y otros gases (inertes, oxidantes,
+tóxicos, corrosives, etc.) siempre que se disponga de las separaciones físicas (mediante
+bardas, distancias, etc.).
+
+TRP-PO-SS-132
+
+NO. DE PAGINA:
+Página 39 de 39
+
+MANEJO DE MATERIALES
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+REV.
+05
+
+8.3 CONTROL DE CAMBIOS
+Nombre del
+Documento
+
+CONTROL DE CAMBIOS
+
+Documento en
+revisión
+
+TRP-PO-SS-132 MANEJO DE MATERIALES
+
+Revisión
+
+5
+
+Fecha:
+
+JULIO 2025
+
+Total de Paginas
+
+39
+
+MOCA No.
+
+NA
+
+Revisado por:
+
+Monserrat lcelo
+
+Aprobado por:
+
+Francisco Aguirre
+
+Fecha:
+
+JULIO 2025
+
+Fecha:
+
+JULIO 2025
+
+Resumen de Cambios:
+Sin Cambios Rev.3
+Resumen de Cambios
+
+PELIGROSOS Y COMUNICACION DE
+PELIGROS
+
+

@@ -28,6 +28,17 @@
                     <h4 class="text-base font-bold text-gray-800 mb-4">Datos del Material Peligroso</h4>
 
                     <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                        <!-- Terminal -->
+                        <div class="sm:col-span-3">
+                            <label class="block text-sm font-medium text-gray-700">Terminal *</label>
+                            <select name="terminal_id" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <option value="">Seleccione una terminal</option>
+                                @foreach($terminals as $terminal)
+                                    <option value="{{ $terminal->id }}">{{ $terminal->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <!-- Fecha Ingreso (Estimada) -->
                         <div class="sm:col-span-3">
                             <label class="block text-sm font-medium text-gray-700">Fecha de Ingreso Estimada</label>
