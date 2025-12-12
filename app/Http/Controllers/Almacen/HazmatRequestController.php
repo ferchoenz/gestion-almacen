@@ -191,7 +191,6 @@ class HazmatRequestController extends Controller
             abort(403, 'No autorizado para revisar solicitudes.');
         }
     }
-    }
 
     /**
      * Eliminar o retirar solicitud.
