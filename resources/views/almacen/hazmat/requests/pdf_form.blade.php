@@ -91,7 +91,7 @@
         <tr>
             <td style="width: 30%; height: 40px;">Solicitante:</td>
             <td>
-                {{ $r->user->name }}<br>
+                {{ optional($r->user)->name ?? 'Usuario Eliminado' }}<br>
                 <span style="font-size: 8pt; color: gray;">Firma Digital (Usuario Sistema)</span>
             </td>
         </tr>

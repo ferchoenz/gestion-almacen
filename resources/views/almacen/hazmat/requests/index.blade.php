@@ -61,8 +61,8 @@
                                     {{ $request->created_at->format('d/m/Y') }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $request->user->name }}</div>
-                                    <div class="text-sm text-gray-500">{{ $request->terminal->name }}</div>
+                                    <div class="text-sm font-medium text-gray-900">{{ optional($request->user)->name ?? 'Usuario Eliminado' }}</div>
+                                    <div class="text-sm text-gray-500">{{ optional($request->terminal)->name ?? 'Terminal Eliminada' }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">{{ $request->trade_name }}</div>

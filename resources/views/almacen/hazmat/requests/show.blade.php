@@ -21,7 +21,7 @@
                     </span>
                 </div>
                 <div class="mt-2 flex items-center text-sm text-gray-500">
-                    Solicitado por: {{ $hazmatRequest->user->name }}
+                    Solicitado por: {{ optional($hazmatRequest->user)->name ?? 'Usuario Eliminado' }}
                 </div>
             </div>
         </div>
